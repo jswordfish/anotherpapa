@@ -1,0 +1,9 @@
+package com.infrasofttech.omning.transaction;
+
+import com.infrasofttech.dao.basic.JPADAO;
+import com.infrasofttech.domain.entities.transaction.ScreenMapper;
+
+public interface IScreenMapperDAO extends JPADAO<ScreenMapper, Long> {
+
+}
+

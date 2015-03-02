@@ -1,0 +1,117 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	<groupId>com.infrasofttech</groupId>
+    <artifactId>domainEntities</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <parent>
+		<artifactId>
+            OMNI_NG
+        </artifactId>
+		<groupId>
+            com.infrasofttech
+        </groupId>
+		<version>
+            1.0.0
+        </version>
+	</parent>
+    
+    <name>domainEntities</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     
+    </properties>
+
+<distributionManagement>
+ 
+</distributionManagement>
+
+<!-- download artifacts from this repo -->
+<repositories>
+ 
+</repositories>
+
+<!-- download plugins from this repo -->
+<pluginRepositories>
+ 
+</pluginRepositories>
+    
+    <dependencies>
+    
+     	<dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+        </dependency>
+
+		<dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>commons</artifactId>
+            <version>${version}</version>
+        </dependency>
+        
+        
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+          
+        
+         <dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+		</dependency>
+		
+		
+	      
+	      <dependency>
+	         <groupId>org.slf4j</groupId>
+	         <artifactId>slf4j-log4j12</artifactId>
+	    </dependency>
+	    
+     	<dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+             
+       	</dependency>
+    
+    </dependencies>
+    
+    <build>
+        <plugins>
+<!--             <plugin>    -->
+<!--                 <groupId>org.codehaus.mojo</groupId>    -->
+<!--                 <artifactId>hibernate3-maven-plugin</artifactId>    -->
+                   
+<!--                 <configuration>      -->
+<!--                     <components>        -->
+<!--                         <component>          -->
+<!--                             <name>hbm2ddl</name>          -->
+<!--                             <implementation>annotationconfiguration</implementation>        -->
+<!--                         </component>      -->
+<!--                     </components>      -->
+<!--                     <componentProperties>        -->
+<!--                         <export>false</export>        -->
+<!--                         <update>false</update>     -->
+<!--                         <drop>true</drop>        -->
+<!--                         <configurationfile>src/main/resources/hibernate.cfg.xml</configurationfile>        -->
+<!--                         <outputfilename>travelERP.ddl</outputfilename>      -->
+<!--                     </componentProperties>    -->
+<!--                 </configuration> -->
+                
+                
+                <!--  <dependencies>
+                    <dependency>
+                        <groupId>org.apache.derby</groupId>
+                        <artifactId>derbyclient</artifactId>      
+                        <version>10.5.3.0_1</version>
+                    </dependency>
+                </dependencies>-->
+<!--             </plugin>  -->
+        </plugins>
+    </build> 
+    
+</project>

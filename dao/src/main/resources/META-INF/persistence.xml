@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence  version="2.0"
+			  xmlns="http://java.sun.com/xml/ns/persistence"
+ 			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 			  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence	http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="OMNI_NG"
+		transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+			<class>com.infrasofttech.domain.entities.CustomerMst</class>
+			<class>com.infrasofttech.domain.entities.UserMst</class>
+			<class>com.infrasofttech.domain.entities.RoleMst</class>
+			<class>com.infrasofttech.domain.entities.MenuMst</class>
+			<class>com.infrasofttech.domain.entities.SectionMst</class>
+			
+			<class>com.infrasofttech.domain.entities.UserBranchMap</class>
+			<class>com.infrasofttech.domain.entities.UserBranch_RoleMap</class>
+			
+			<class>com.infrasofttech.domain.entities.RoleMenuActionAccess</class>
+			
+			<class>com.infrasofttech.domain.entities.TenantMst</class>
+			<class>com.infrasofttech.domain.entities.TenantGrpMst</class>
+			<class>com.infrasofttech.domain.entities.LookupCode</class>
+			<class>com.infrasofttech.domain.entities.LookupValue</class>
+			<class>com.infrasofttech.domain.entities.HolidayMst</class>
+			<class>com.infrasofttech.domain.entities.BranchMst</class>
+			<class>com.infrasofttech.domain.entities.BatchMst</class>
+			<class>com.infrasofttech.domain.entities.ProductMst</class>
+			<class>com.infrasofttech.domain.entities.AccountMgmtMst</class>
+			<class>com.infrasofttech.domain.entities.CustomerBusinessDtls</class>
+			<class>com.infrasofttech.domain.entities.CustomerEmploymentDtls</class>
+			<class>com.infrasofttech.domain.entities.CustomerAsset</class>
+			<class>com.infrasofttech.domain.entities.CustomerKYCDocs</class>
+			<class>com.infrasofttech.domain.entities.CustomerKYCFamily</class>
+			<class>com.infrasofttech.domain.entities.AuthEvent</class>
+			<class>com.infrasofttech.domain.entities.AuthMatrix</class>
+			<class>com.infrasofttech.domain.entities.AuthMatrixSlab</class>
+			<class>com.infrasofttech.domain.entities.AuthMatrixSlabUser</class>
+			<class>com.infrasofttech.domain.entities.AuthProcess</class>
+			<class>com.infrasofttech.domain.entities.AuthProcessDtls</class>
+			<class>com.infrasofttech.domain.entities.LanguageMst</class>
+			<class>com.infrasofttech.domain.entities.ModuleMst</class>
+			<class>com.infrasofttech.domain.entities.ActivityMst</class>
+			<class>com.infrasofttech.domain.entities.ActivityStatusMst</class>
+			
+			<class>com.infrasofttech.domain.entities.CountryMst</class>
+			<class>com.infrasofttech.domain.entities.CurrencyMst</class>
+			<class>com.infrasofttech.domain.entities.StateMst</class>
+			<class>com.infrasofttech.domain.entities.DistrictMst</class>
+			<class>com.infrasofttech.domain.entities.MunicipalityMst</class>
+			<class>com.infrasofttech.domain.entities.VillageMst</class>
+			<class>com.infrasofttech.domain.entities.LocationMst</class>
+			
+			<class>com.infrasofttech.domain.entities.EmailConfig</class>
+			<class>com.infrasofttech.domain.entities.PrdAcNumberConfig</class>
+			<class>com.infrasofttech.domain.entities.ParamCheckingAc</class>
+			<class>com.infrasofttech.domain.entities.ParamLoanAc</class>
+			<class>com.infrasofttech.domain.entities.FinancialYear</class>
+			<class>com.infrasofttech.domain.entities.DeDupConfig</class>
+		<!--  	<class>com.infrasofttech.domain.entities.CustomerParameter</class> -->
+			
+			<class>com.infrasofttech.domain.entities.AppConfig</class>
+			<class>com.infrasofttech.domain.entities.ProductNameAddress</class>
+			<class>com.infrasofttech.domain.entities.PrdAcNoMst</class>
+			<class>com.infrasofttech.domain.entities.HolidayBranchMap</class>
+			<class>com.infrasofttech.domain.entities.GLMst</class>
+			<class>com.infrasofttech.domain.entities.CropTypeParam</class>
+			
+			
+			<class>com.infrasofttech.domain.entities.transaction.Screen</class>
+			<class>com.infrasofttech.domain.entities.transaction.ScreenElement</class>
+			<class>com.infrasofttech.domain.entities.transaction.ScreenRow</class>
+			<class>com.infrasofttech.domain.entities.transaction.ScreenMapper</class>
+			
+			<class>com.infrasofttech.domain.entities.transaction.runtime.ScreenElementTransaction</class>
+			<class>com.infrasofttech.domain.entities.transaction.runtime.ScreenRowTransaction</class>
+			<class>com.infrasofttech.domain.entities.transaction.runtime.ScreenTransaction</class>
+			
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.search.autoregister_listeners"
+				value="true" />
+			<property name="hibernate.cache.use_second_level_cache"
+				value="false" />
+			<property name="hibernate.search.indexing_strategy" value="manual" />
+			<property name="hibernate.search.default.directory_provider"
+				value="org.hibernate.search.store.FSDirectoryProvider" />
+			<property name="hibernate.search.default.indexBase" value="C:\\omniNG_Indexes" />
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

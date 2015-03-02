@@ -1,0 +1,1272 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+
+	<package name="SysMst" extends="struts-default">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+  <!-- <action name="moduleBasedProduct" class="com.infrasofttech.omning.action.ProductCodeByModuleAction">
+			<result name="SUCCESS" type="json">PrdAcNumberConfigCURD.jsp</result>
+		</action> -->
+		<!-- Login Actions :: START -->
+		<action name="LoginPage" class="com.infrasofttech.omning.action.LoginAction"
+			method="execute">
+			<result name="success" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">loginPage.tiles</result>
+			<result name="input" type="tiles">loginPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="ValidateLoginUser"
+			class="com.infrasofttech.omning.action.ValidateLoginUserAction"
+			method="execute">
+			<result name="success" type="tiles">loginPagePwd.tiles</result>
+			<result name="failure" type="tiles">loginPage.tiles</result>
+			<result name="input" type="tiles">loginPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="ValidateLoginPwd"
+			class="com.infrasofttech.omning.action.ValidateLoginPwdAction"
+			method="execute">
+			<result name="success" type="tiles">successHome.tiles</result>
+			<result name="failure" type="tiles">loginPage.tiles</result>
+			<result name="input" type="tiles">loginPagePwd.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="ChangePassword" type="chain">ChangePassword</result>
+		</action>
+		<action name="HomePage" class="com.infrasofttech.omning.action.HomePageAction"
+			method="execute">
+			<result name="success" type="tiles">homePage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">homePage.tiles</result>
+			<result name="input" type="tiles">changePassword.tiles</result>
+		</action>
+		<action name="LogoutPage" class="com.infrasofttech.omning.action.LogoutAction"
+			method="execute">
+			<result name="success" type="tiles">logoutPage.tiles</result>
+			<result name="failure" type="tiles">logoutPage.tiles</result>
+			<result name="login" type="tiles">logoutPage.tiles</result>
+		</action>
+		<action name="locale" class="com.infrasofttech.omning.action.Locale"
+			method="execute">
+			<result name="success" type="tiles">loginPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<!-- Login Actions :: END -->
+
+		<!-- User Mgmt Action Entries :: START -->
+		<action name="userList" class="com.infrasofttech.omning.action.UserListAction"
+			method="execute">
+			<result name="success" type="tiles">userMgmt.tiles</result>
+			<result name="input" type="tiles">userMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="userAdd" class="com.infrasofttech.omning.action.UserAddAction"
+			method="execute">
+			<result name="success" type="tiles">userAdd.tiles</result>
+			<result name="input" type="tiles">userAdd.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="userAddSave" class="com.infrasofttech.omning.action.UserSaveAction"
+			method="execute">
+			<result name="success" type="tiles">userAddSave.tiles</result>
+			<result name="input" type="tiles">userAddSave.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="userEdit" class="com.infrasofttech.omning.action.UserEditAction"
+			method="execute">
+			<result name="success" type="tiles">userEdit.tiles</result>
+			<result name="input" type="tiles">userEdit.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="userEditUpdate" class="com.infrasofttech.omning.action.UserUpdateAction"
+			method="execute">
+			<result name="success" type="redirectAction">/userList.action</result>
+			<result name="input" type="tiles">userEdit.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="verifyUser" class="com.infrasofttech.omning.action.VerifyUser"
+			method="execute1">
+			<!-- <result name="success" type="tiles">userAdd.tiles</result> <result 
+				name="input" type="tiles">userAdd.tiles</result> <result name="failure" type="tiles">errPage.tiles</result> 
+				<result name="login" type="tiles">loginPage.tiles</result> -->
+		</action>
+		<action name="userDisable"
+			class="com.infrasofttech.omning.action.UserDisableAction" method="execute">
+			<result name="success" type="redirectAction">/userList.action</result>
+			<result name="input" type="redirectAction">/userList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="showDisable"
+			class="com.infrasofttech.omning.action.UserShowDisableAction" method="execute">
+			<result name="success" type="tiles">userDisable.tiles</result>
+			<result name="input" type="redirectAction">/userList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="userEnable" class="com.infrasofttech.omning.action.UserEnableAction"
+			method="execute">
+			<result name="success" type="redirectAction">/userList.action</result>
+			<result name="input" type="redirectAction">/showDisable.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="changePassword"
+			class="com.infrasofttech.omning.action.ChangePasswordAction" method="execute">
+			<result name="success" type="tiles">changePassword.tiles</result>
+			<result name="input" type="tiles">HomePage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="changePasswordSave"
+			class="com.infrasofttech.omning.action.ChangePasswordSaveAction"
+			method="execute">
+			<result name="success" type="tiles">changePasswordSave.tiles</result>
+			<result name="input" type="tiles">changePassword.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="changePasswordSaveOK"
+			class="com.infrasofttech.omning.action.ChangePasswordSaveOkAction"
+			method="execute">
+			<result name="success" type="tiles">successHome.tiles</result>
+			<result name="input" type="tiles">successHome.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="resetPassword"
+			class="com.infrasofttech.omning.action.ResetPasswordAction" method="execute">
+			<result name="success" type="tiles">resetPassword.tiles</result>
+			<result name="input" type="tiles">HomePage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="resetPasswordSave"
+			class="com.infrasofttech.omning.action.ResetPasswordSaveAction"
+			method="execute">
+			<result name="success" type="tiles">resetPasswordSave.tiles</result>
+			<result name="input" type="tiles">resetPassword.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="resetPasswordSaveOK"
+			class="com.infrasofttech.omning.action.ResetPasswordSaveOkAction"
+			method="execute">
+			<result name="success" type="tiles">successHome.tiles</result>
+			<result name="input" type="tiles">successHome.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="unlockUser" class="com.infrasofttech.omning.action.UnlockUserAction"
+			method="execute">
+			<result name="success" type="tiles">unlockUser.tiles</result>
+			<result name="input" type="tiles">HomePage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="unlockUserSave"
+			class="com.infrasofttech.omning.action.UnlockUserSaveAction" method="execute">
+			<result name="success" type="tiles">unlockUserSave.tiles</result>
+			<result name="input" type="tiles">unlockUser.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="unlockUserSaveOK"
+			class="com.infrasofttech.omning.action.UnlockUserSaveOkAction"
+			method="execute">
+			<result name="success" type="tiles">successHome.tiles</result>
+			<result name="input" type="tiles">successHome.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<!-- User Mgmt Action Entries :: END -->
+
+		<!-- Branch Mgmt Action Entries :: START -->
+		<action name="branchList" class="com.infrasofttech.omning.action.BranchListAction"
+			method="execute">
+			<result name="success" type="tiles">branchMgmt.tiles</result>
+			<result name="input" type="tiles">branchMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="branchAdd" class="com.infrasofttech.omning.action.BranchAddAction"
+			method="execute">
+			<result name="success" type="tiles">branchAdd.tiles</result>
+			<result name="input" type="tiles">branchMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="branchAddSave"
+			class="com.infrasofttech.omning.action.BranchAddSaveAction" method="execute">
+			<result name="success" type="redirectAction">/branchList.action</result>
+			<result name="input" type="tiles">branchAdd.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="branchEdit" class="com.infrasofttech.omning.action.BranchEditAction"
+			method="execute">
+			<result name="success" type="tiles">branchEdit.tiles</result>
+			<result name="input" type="tiles">branchMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="branchEditUpdate"
+			class="com.infrasofttech.omning.action.BranchEditUpdateAction"
+			method="execute">
+			<result name="success" type="redirectAction">/branchList.action</result>
+			<result name="input" type="tiles">branchEdit.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="branchDisableList"
+			class="com.infrasofttech.omning.action.BranchDisableListAction"
+			method="execute">
+			<result name="success" type="tiles">branchDisableList.tiles</result>
+			<result name="input" type="tiles">branchMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="branchEnable"
+			class="com.infrasofttech.omning.action.BranchEnableAction" method="execute">
+			<result name="success" type="redirectAction">/branchList.action</result>
+			<result name="input" type="tiles">branchMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="branchSearch"
+			class="com.infrasofttech.omning.action.BranchSearchAction" method="execute">
+			<result name="success" type="tiles">branchMgmtDisable.tiles</result>
+			<result name="input" type="tiles">branchMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="branchDisable"
+			class="com.infrasofttech.omning.action.BranchDisableAction" method="execute">
+			<result name="success" type="redirectAction">/branchList.action</result>
+			<result name="input" type="tiles">branchMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<!-- Product Mgmt. Action Entries :: START -->
+		<action name="productList"
+			class="com.infrasofttech.omning.action.ProductListAction" method="execute">
+			<result name="success" type="tiles">productList.tiles</result>
+			<result name="input" type="tiles">productList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="productCRUD"
+			class="com.infrasofttech.omning.action.ProductCRUDAction" method="execute">
+			<result name="success" type="tiles">productCRUD.tiles</result>
+			<result name="input" type="tiles">productList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="productSave"
+			class="com.infrasofttech.omning.action.ProductSaveAction" method="execute">
+			<result name="success" type="redirectAction">productList</result>
+			<result name="input" type="tiles">productCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="productDisable"
+			class="com.infrasofttech.omning.action.ProductDisableAction" method="execute">
+			<result name="success" type="redirectAction">/productList.action</result>
+			<result name="input" type="redirectAction">productList</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="productEnable"
+			class="com.infrasofttech.omning.action.ProductEnableAction" method="execute">
+			<result name="success" type="redirectAction">/productList.action</result>
+			<result name="input" type="redirectAction">/productList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="productViewDisable"
+			class="com.infrasofttech.omning.action.ProductViewDisableAction" method="execute">
+			<result name="success" type="tiles">productDisabledList.tiles</result>
+			<result name="input" type="redirectAction">/productList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="productViewEnable"
+			class="com.infrasofttech.omning.action.ProductListAction" method="execute">
+			<result name="success" type="redirectAction">/productList.action</result>
+			<result name="input" type="redirectAction">/productViewDisable.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="productBackToList"
+			class="com.infrasofttech.omning.action.ProductListAction" method="execute">
+			<result name="success" type="redirectAction">productList</result>
+			<result name="input" type="redirectAction">productCRUD</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		
+		<action name="customerList"
+			class="com.infrasofttech.omning.action.CustomerListAction" method="execute">
+			<result name="success" type="tiles">customerList.tiles</result>
+			<result name="input" type="tiles">customerList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="customerCRUD"
+			class="com.infrasofttech.omning.action.CustomerCRUDAction" method="execute">
+			<result name="success" type="tiles">customerCRUD.tiles</result>
+			<result name="input" type="redirectAction">/customerList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="kyc"
+			class="com.infrasofttech.omning.action.CustomerKYCAction" method="execute">
+			<result name="success" type="tiles">customerKYC.tiles</result>
+			<result name="input" type="redirectAction">/kyc.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="addKycDoc"
+			class="com.infrasofttech.omning.action.AddCustomerKYCAction" method="execute">
+			<result name="success" type="tiles">addCustomerKYCDoc.tiles</result>
+			<result name="input" type="tiles">customerKYC.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="savekyc"
+			class="com.infrasofttech.omning.action.SaveCustomerKYCAction" method="execute">
+			<result name="success" type="redirectAction">/kyc.action</result>
+			<result name="input" type="tiles">addCustomerKYCDoc.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="kycFamily"
+			class="com.infrasofttech.omning.action.CustomerKYCFamilyAction"
+			method="execute">
+			<result name="success" type="tiles">customerKYCFamily.tiles</result>
+			<result name="input" type="redirectAction">/kycFamily.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="addKycFamily"
+			class="com.infrasofttech.omning.action.AddCustomerKYCFamilyAction"
+			method="execute">
+			<result name="success" type="tiles">addCustomerKYCFamily.tiles
+			</result>
+			<result name="input" type="tiles">customerKYCFamily.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="savekycFamily"
+			class="com.infrasofttech.omning.action.SaveCustomerKYCFamilyAction"
+			method="execute">
+			<result name="success" type="redirectAction">/kycFamily.action</result>
+			<result name="input" type="tiles">addCustomerKYCFamily.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="customerAddress"
+			class="com.infrasofttech.omning.action.CustomerAddressAction" method="execute">
+			<result name="success" type="tiles">customerAddress.tiles</result>
+			<result name="input" type="redirectAction">/customerAddress.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="addCustomerAddress"
+			class="com.infrasofttech.omning.action.AddCustomerAddressAction"
+			method="execute">
+			<result name="success" type="tiles">addCustomerAddress.tiles</result>
+			<result name="input" type="tiles">customerAddress.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="saveCustomerAddress"
+			class="com.infrasofttech.omning.action.SaveCustomerAddressAction"
+			method="execute">
+			<result name="success" type="redirectAction">/customerAddress.action</result>
+			<result name="input" type="tiles">addCustomerAddress.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="customerBusiness"
+			class="com.infrasofttech.omning.action.CustomerBusinessAction"
+			method="execute">
+			<result name="success" type="tiles">customerBusiness.tiles</result>
+			<result name="input" type="redirectAction">/customerBusiness.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="addCustomerBusiness"
+			class="com.infrasofttech.omning.action.AddCustomerBusinessAction"
+			method="execute">
+			<result name="success" type="tiles">addCustomerBusiness.tiles</result>
+			<result name="input" type="tiles">customerBusiness.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="saveCustomerBusiness"
+			class="com.infrasofttech.omning.action.SaveCustomerBusinessAction"
+			method="execute">
+			<result name="success" type="redirectAction">/customerBusiness.action</result>
+			<result name="input" type="tiles">addCustomerBusiness.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="customerAsset"
+			class="com.infrasofttech.omning.action.CustomerAssetAction" method="execute">
+			<result name="success" type="tiles">customerAsset.tiles</result>
+			<result name="input" type="redirectAction">/customerAsset.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="addCustomerAsset"
+			class="com.infrasofttech.omning.action.AddCustomerAssetAction"
+			method="execute">
+			<result name="success" type="tiles">addCustomerAsset.tiles</result>
+			<result name="input" type="tiles">customerAsset.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="saveCustomerAsset"
+			class="com.infrasofttech.omning.action.SaveCustomerAssetAction"
+			method="execute">
+			<result name="success" type="redirectAction">/customerAsset.action</result>
+			<result name="input" type="tiles">addCustomerAsset.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="customerEmployment"
+			class="com.infrasofttech.omning.action.CustomerEmploymentAction"
+			method="execute">
+			<result name="success" type="tiles">customerEmployment.tiles</result>
+			<result name="input" type="redirectAction">/customerEmployment.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="addCustomerEmployment"
+			class="com.infrasofttech.omning.action.AddCustomerEmploymentAction"
+			method="execute">
+			<result name="success" type="tiles">addCustomerEmployment.tiles
+			</result>
+			<result name="input" type="tiles">customerEmployment.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="saveCustomerEmployment"
+			class="com.infrasofttech.omning.action.SaveCustomerEmploymentAction"
+			method="execute">
+			<result name="success" type="redirectAction">/customerEmployment.action
+			</result>
+			<result name="input" type="tiles">addCustomerEmployment.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+
+
+
+
+		<!-- Customer Mgmt. Action Entries :: START -->
+		<!-- <action name="customerList" class="com.infrasofttech.omning.action.CustomerListAction" 
+			method="execute"> <result name="success" type="tiles">customerList.tiles</result> 
+			<result name="input" type="tiles">customerList.tiles</result> <result name="failure" 
+			type="tiles">errPage.tiles</result> <result name="login" type="tiles">loginPage.tiles</result> 
+			</action> <action name="customerCRUD" class="com.infrasofttech.omning.action.CustomerCRUDAction" 
+			method="execute"> <result name="success" type="tiles">customerCRUD.tiles</result> 
+			<result name="input" type="tiles">customerList.tiles</result> <result name="failure" 
+			type="tiles">errPage.tiles</result> <result name="login" type="tiles">loginPage.tiles</result> 
+			</action> <action name="customerSave" class="com.infrasofttech.omning.action.CustomerSaveAction" 
+			method="execute"> <result name="success" type="redirectAction">/customerList.action</result> 
+			<result name="input" type="tiles">customerCRUD.tiles</result> <result name="failure" 
+			type="tiles">errPage.tiles</result> <result name="login" type="tiles">loginPage.tiles</result> 
+			</action> -->
+			
+		<!-- Role Mgmt. Action Entries :: START -->
+		
+		<action name="roleList" class="com.infrasofttech.omning.action.RoleListAction"
+			method="execute">
+			<result name="success" type="tiles">RoleMgmt.tiles</result>
+			<result name="input" type="tiles">RoleMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="roleAdd" class="com.infrasofttech.omning.action.RoleAddAction"
+			method="execute">
+			<result name="success" type="tiles">roleMstAdd.tiles</result>
+			<result name="input" type="tiles">RoleMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="roleAddSave"
+			class="com.infrasofttech.omning.action.RoleAddSaveAction" method="execute">
+			<result name="success" type="redirectAction">/roleMenuAdd.action</result>
+			<result name="input" type="tiles">RoleMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="roleMenuAdd"
+			class="com.infrasofttech.omning.action.RoleMenuAddAction" method="execute">
+			<result name="success" type="tiles">roleMenuMapAdd.tiles</result>
+			<result name="input" type="tiles">roleMstAdd.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="addMenuToRoleAction"
+			class="com.infrasofttech.omning.action.AddMenuToRoleAction" method="execute">
+			<result name="success" type="redirectAction">/roleList.action</result>
+			<result name="input" type="tiles">roleMenuMapAdd.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="roleDisable"
+			class="com.infrasofttech.omning.action.RoleDisableAction" method="execute">
+			<result name="success" type="redirectAction">roleList</result>
+			<result name="input" type="tiles">RoleMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="roleEnable"
+			class="com.infrasofttech.omning.action.RoleEnableAction" method="execute">
+			<result name="success" type="redirectAction">roleList</result>
+			<result name="input" type="redirectAction">roleList</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="roleViewDisable"
+			class="com.infrasofttech.omning.action.RoleViewDisableAction" method="execute">
+			<result name="success" type="tiles">roleDisabledList.tiles</result>
+			<result name="input" type="redirectAction">roleList</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="roleViewEnable"
+			class="com.infrasofttech.omning.action.RoleListAction" method="execute">
+			<result name="success" type="redirectAction">roleList</result>
+			<result name="input" type="redirectAction">roleViewDisable</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="roleBackToList"
+			class="com.infrasofttech.omning.action.RoleListAction" method="execute">
+			<result name="success" type="redirectAction">roleList</result>
+			<result name="input" type="redirectAction">roleAdd</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<!-- Role Mgmt. Action Entries :: END -->
+		
+		<!-- Params Checking Account Mgmt. Action Entries :: START -->
+		<action name="paramChkList"
+			class="com.infrasofttech.omning.action.ParamChkAcListAction" method="execute">
+			<result name="success" type="tiles">paramChckAccntList.tiles</result>
+			<result name="input" type="tiles">paramChckAccntList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="paramChkDisable"
+			class="com.infrasofttech.omning.action.ParamChkDisableAction" method="execute">
+			<result name="success" type="redirectAction">/paramChkList.action</result>
+			<result name="input" type="redirectAction">/paramChkList.action</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+		<action name="paramChkEnable"
+			class="com.infrasofttech.omning.action.ParamChkEnableAction" method="execute">
+			<result name="success" type="redirectAction">/paramChkDisableList.action</result>
+			<result name="input" type="redirectAction">/paramChkDisableList.action</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+		<action name="paramChkDisableList"
+			class="com.infrasofttech.omning.action.ParamChkDisableListAction"
+			method="execute">
+			<result name="success" type="tiles">paramChkDisableList.tiles</result>
+			<result name="input" type="tiles">paramChkDisableList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="paramChkCRUD"
+			class="com.infrasofttech.omning.action.ParamCheckingCRUDAction"
+			method="execute">
+			<result name="success" type="tiles">paramChkCRUD.tiles</result>
+			<result name="input" type="tiles">paramChkCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="paramChkSave"
+			class="com.infrasofttech.omning.action.ParamCheckingAcSaveAction"
+			method="execute">
+			<result name="success" type="redirectAction">/paramChkList.action</result>
+			<result name="input" type="redirectAction">/paramChkList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+
+		<!-- Params Loan Account Mgmt. Action Entries :: START -->
+		<action name="paramLoanList"
+			class="com.infrasofttech.omning.action.ParamLoanAcListAction" method="execute">
+			<result name="success" type="tiles">paramLoanAcList.tiles</result>
+			<result name="input" type="tiles">paramLoanAcList.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+		<action name="paramloanDisableList"
+			class="com.infrasofttech.omning.action.ParamLoanAcDisableList"
+			method="execute">
+			<result name="success" type="tiles">paramLoanAcDisableList.tiles
+			</result>
+			<result name="input" type="tiles">paramLoanAcDisableList.tiles
+			</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+		<action name="paramloanAcDisable"
+			class="com.infrasofttech.omning.action.ParamLoanAcDisableAction"
+			method="execute">
+			<result name="success" type="redirectAction">/paramLoanList.action</result>
+			<result name="input" type="redirectAction">/paramLoanList.action</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+		<action name="paramLoanAcEnable"
+			class="com.infrasofttech.omning.action.ParamLoanAcEnableAction"
+			method="execute">
+			<result name="success" type="redirectAction">/paramloanDisableList.action</result>
+			<result name="input" type="redirectAction">/paramloanDisableList.action</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+		<action name="paramLoanAcSave"
+			class="com.infrasofttech.omning.action.ParamLoanAcSaveAction" method="execute">
+			<result name="success" type="redirectAction">/paramLoanList.action</result>
+			<result name="input" type="redirectAction">/paramLoanList.action</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+
+		<action name="paramloanAcCRUD"
+			class="com.infrasofttech.omning.action.ParamLoanAcCRUDAction" method="execute">
+			<result name="success" type="tiles">paramLoanAcCRUD.tiles</result>
+			<result name="input" type="tiles">paramLoanAcCRUD.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+		<action name="customerphoto"
+			class="com.infrasofttech.omning.action.CustomerSignPhotoMgmtAction" method="execute">
+			<result name="success" type="tiles">customerphoto.tiles</result>
+			<result name="input" type="tiles">customerphoto.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+		<action name="customerphotoview"
+			class="com.infrasofttech.omning.action.CustomerSignPhotoViewAction" method="execute">
+			<result name="success" type="tiles">customerphotoview.tiles</result>
+			<result name="input" type="tiles">customerphotoview.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+		</action>
+
+		<!-- Account Configuration Action Entries :: START -->
+		<action name="prdAcConfigList"
+			class="com.infrasofttech.omning.action.PrdAcNumberConfigListAction"
+			method="execute">
+			<result name="success" type="tiles">PrdAcNumberConfigList.tiles
+			</result>
+			<result name="input" type="tiles">PrdAcNumberConfigList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="PrdAcNumberConfigCURD"
+			class="com.infrasofttech.omning.action.PrdAcNumberConfigCURDAction"
+			method="execute">
+			<result name="success" type="tiles">PrdAcNumberConfigCURD.tiles
+			</result>
+			<result name="input" type="tiles">PrdAcNumberConfigCURD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="PrdAcNumberSave"
+			class="com.infrasofttech.omning.action.PrdAcNumberConfigSaveAction"
+			method="execute">
+			<result name="success" type="chain">prdAcConfigList</result>
+			<result name="input" type="tiles">PrdAcNumberConfigCURD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcConfigAdd"
+			class="com.infrasofttech.omning.action.PrdAcConfigAddAction" method="execute">
+			<result name="success" type="tiles">PrdAcConfigAdd.tiles</result>
+			<result name="input" type="tiles">PrdAcConfigMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcNoConfigDisableList"
+			class="com.infrasofttech.omning.action.PrdAcNumberConfigDisableListAction" method="execute">
+			<result name="success" type="tiles">prdAcNoConfigDisableList.tiles</result>
+			<result name="input" type="tiles">PrdAcConfigMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcNoConfigDisable"
+			class="com.infrasofttech.omning.action.PrdAcNumberConfigDisableAction"
+			method="execute">
+			<result name="success" type="redirectAction">/prdAcConfigList.action</result>
+			<result name="input" type="tiles">PrdAcConfigMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcNoConfigEnable"
+			class="com.infrasofttech.omning.action.PrdAcNumberConfigEnableAction"
+			method="execute">
+			<result name="success" type="redirectAction">/prdAcNoConfigDisableList.action
+			</result>
+			<result name="input" type="tiles">PrdAcConfigMgmt.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<!-- Product Account (PrdAcNo) Configuration Action Entries :: START -->
+
+		<!-- AppConfig :: START -->
+
+		<action name="appConfigList"
+			class="com.infrasofttech.omning.action.AppConfigListAction" method="execute">
+			<result name="success" type="tiles">appConfigList.tiles</result>
+			<result name="input" type="tiles">successHome.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="appConfigCRUD"
+			class="com.infrasofttech.omning.action.AppConfigCRUDAction" method="execute">
+			<result name="success" type="tiles">appConfigCRUD.tiles</result>
+			<result name="input" type="tiles">appConfigList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="appConfigSave"
+			class="com.infrasofttech.omning.action.AppConfigSaveAction" method="execute">
+			<result name="success" type="redirectAction">/appConfigList.action</result>
+			<result name="input" type="tiles">appConfigCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="appConfigDisable"
+			class="com.infrasofttech.omning.action.AppConfigDisableAction" method="execute">
+			<result name="success" type="redirectAction">/appConfigList.action</result>
+			<result name="input" type="redirectAction">/appConfigList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="appConfigEnable"
+			class="com.infrasofttech.omning.action.AppConfigEnableAction" method="execute">
+			<result name="success" type="redirectAction">/appConfigList.action</result>
+			<result name="input" type="redirectAction">/appConfigList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="appConfigViewDisable"
+			class="com.infrasofttech.omning.action.AppConfigViewDisableAction" method="execute">
+			<result name="success" type="tiles">appConfigDisabledList.tiles</result>
+			<result name="input" type="redirectAction">/appConfigList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="appConfigViewEnable"
+			class="com.infrasofttech.omning.action.AppConfigListAction" method="execute">
+			<result name="success" type="redirectAction">/appConfigList.action</result>
+			<result name="input" type="redirectAction">/appConfigViewDisable.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="appConfigBackToList"
+			class="com.infrasofttech.omning.action.AppConfigListAction" method="execute">
+			<result name="success" type="redirectAction">appConfigList</result>
+			<result name="input" type="redirectAction">appConfigCRUD</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<!-- AppConfig :: END -->
+
+
+		<!-- Holiday Master Action Entries :: START -->
+		<action name="holidayList"
+			class="com.infrasofttech.omning.action.HolidayListAction" method="execute">
+			<result name="success" type="tiles">holidayList.tiles</result>
+			<result name="input" type="tiles">holidayList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="holidayCRUD"
+			class="com.infrasofttech.omning.action.HolidayCRUDAction" method="execute">
+			<result name="success" type="tiles">holidayCRUD.tiles</result>
+			<result name="input" type="tiles">holidayList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="holidaySave"
+			class="com.infrasofttech.omning.action.HolidaySaveAction" method="execute">
+			<result name="success" type="redirectAction">/holidayList.action</result>
+			<result name="input" type="tiles">holidayCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="holidayDisable"
+			class="com.infrasofttech.omning.action.HolidayDisableAction" method="execute">
+			<result name="success" type="redirectAction">/holidayList.action</result>
+			<result name="input" type="redirectAction">/holidayList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="holidayEnable"
+			class="com.infrasofttech.omning.action.HolidayEnableAction" method="execute">
+			<result name="success" type="redirectAction">/holidayList.action</result>
+			<result name="input" type="redirectAction">/holidayList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="showHolidayDisable"
+			class="com.infrasofttech.omning.action.HolidayDisableListAction"
+			method="execute">
+			<result name="success" type="tiles">showHolidayDisable.tiles</result>
+			<result name="input" type="redirectAction">/holidayList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<!-- END -->
+
+		<!-- DeDupConfig entries::Start -->
+		
+		<action name="deDupConfigCRUD"
+			class="com.infrasofttech.omning.action.DeDupConfigCRUDAction" method="execute">
+			<result name="success" type="tiles">deDupConfigCRUD.tiles</result>
+			<result name="input" type="tiles">homePage.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="deDupConfigSave"
+			class="com.infrasofttech.omning.action.DeDupConfigSaveAction" method="execute">
+			<result name="success" type="tiles">homePage.tiles</result>
+			<result name="input" type="tiles">deDupConfigCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<!-- End -->
+
+
+
+		<!-- Holiday Branch Map Action Entries :: START -->
+		<action name="holidayBranchMapList"
+			class="com.infrasofttech.omning.action.HolidayBranchMapListAction"
+			method="execute">
+			<result name="success" type="tiles">holidayBranchMapList.tiles
+			</result>
+			<result name="input" type="tiles">holidayBranchMapList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="holidayBranchMapCRUD"
+			class="com.infrasofttech.omning.action.HolidayBranchMapCRUDAction"
+			method="execute">
+			<result name="success" type="tiles">holidayBranchMapCRUD.tiles
+			</result>
+			<result name="input" type="tiles">holidayBranchMapList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="holidayBranchMapSave"
+			class="com.infrasofttech.omning.action.HolidayBranchMapSaveAction"
+			method="execute">
+			<result name="success" type="redirectAction">/holidayBranchMapList.action
+			</result>
+			<result name="input" type="tiles">holidayBranchMapCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="holidayBranchMapDisable"
+			class="com.infrasofttech.omning.action.HolidayBranchMapDisableAction" method="execute">
+			<result name="success" type="redirectAction">/holidayBranchMapList.action</result>
+			<result name="input" type="redirectAction">/holidayBranchMapList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="holidayBranchMapEnable"
+			class="com.infrasofttech.omning.action.HolidayBranchMapEnableAction" method="execute">
+			<result name="success" type="redirectAction">/holidayBranchMapList.action</result>
+			<result name="input" type="redirectAction">/holidayBranchMapList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="showHolidayBranchMapDisable"
+			class="com.infrasofttech.omning.action.HolidayBranchMapDisableListAction" method="execute">
+			<result name="success" type="tiles">showHolidayBranchMapDisable.tiles</result>
+			<result name="input" type="redirectAction">/holidayBranchMapList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<!-- END -->
+
+		<!-- Account Mgmt. Action Entries :: START -->
+		<action name="prdAcNoList"
+			class="com.infrasofttech.omning.action.PrdAcNoListAction" method="execute">
+			<result name="success" type="tiles">prdAcNoList.tiles</result>
+			<result name="input" type="tiles">prdAcNoList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcNoCRUD"
+			class="com.infrasofttech.omning.action.PrdAcNoCRUDAction" method="execute">
+			<result name="success" type="tiles">prdAcNoCRUD.tiles</result>
+			<result name="input" type="tiles">prdAcNoList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcNoSave"
+			class="com.infrasofttech.omning.action.PrdAcNoSaveAction" method="execute">
+			<result name="success" type="redirectAction">/prdAcNoList.action</result>
+			<result name="input" type="tiles">prdAcNoCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcNoDisableList"
+			class="com.infrasofttech.omning.action.PrdAcNoDisableListAction"
+			method="execute">
+			<result name="success" type="tiles">prdAcNoDisableList.tiles</result>
+			<result name="input" type="tiles">prdAcNoList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcNoMstDisable"
+			class="com.infrasofttech.omning.action.PrdAcNoMstDisableAction"
+			method="execute">
+			<result name="success" type="redirectAction">/prdAcNoList.action</result>
+			<result name="input" type="tiles">prdAcNoList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="prdAcNoEnable"
+			class="com.infrasofttech.omning.action.PrdAcNoEnableAction" method="execute">
+			<result name="success" type="redirectAction">/prdAcNoDisableList.action
+			</result>
+			<result name="input" type="tiles">prdAcNoList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<!-- AuthMatrix Action Entries :: START -->
+		<action name="authMatrixList"
+			class="com.infrasofttech.omning.action.AuthMatrixListAction">
+			<result name="success" type="tiles">authMatrixList.tiles</result>
+			<result name="input" type="tiles">authMatrixList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="authMatrixCRUD"
+			class="com.infrasofttech.omning.action.AuthMatrixCRUDAction">
+			<result name="success" type="tiles">authMatrixCRUD.tiles</result>
+			<result name="input" type="tiles">authMatrixCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="authMatrixSave"
+			class="com.infrasofttech.omning.action.AuthMatrixSaveAction" method="execute">
+			<result name="success" type="chain">authMatrixSlabCRUD
+			</result>
+			<result name="input" type="tiles">authMatrixCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="authMatrixSlabCRUD"
+			class="com.infrasofttech.omning.action.AuthMatrixSlabCRUDAction">
+			<result name="success" type="tiles">authMatrixSlabCRUD.tiles</result>
+			<result name="input" type="tiles">authMatrixSlabCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="authMatrixSlabSave"
+			class="com.infrasofttech.omning.action.AuthMatrixSlabSaveAction"
+			method="execute">
+			<result name="success" type="tiles">authMatrixSlabCRUD.tiles</result>
+			<result name="input" type="tiles">authMatrixSlabCRUD</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="lookupCRUD" class="com.infrasofttech.omning.action.LookupCRUDAction"
+			method="execute">
+			<result name="success" type="tiles">lookupCRUD.tiles</result>
+			<result name="input" type="tiles">lookupCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="lookupSave" class="com.infrasofttech.omning.action.LookupSaveAction"
+			method="execute">
+			<result name="success" type="redirectAction">/lookupList</result>
+			<result name="input" type="tiles">lookupCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="lookupList" class="com.infrasofttech.omning.action.LookupListAction">
+			<result name="success" type="tiles">lookupList.tiles</result>
+			<result name="input" type="tiles">lookupList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<!-- Auth Menu Mapping :: Start -->
+		
+		<action name="authMenuMapCRUD"
+			class="com.infrasofttech.omning.action.AuthMenuMapCRUDAction" method="execute">
+			<result name="success" type="tiles">authMenuMapCRUD.tiles</result>
+			<result name="input" type="tiles">successHome.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		<action name="authMenuMapSave"
+			class="com.infrasofttech.omning.action.AuthMenuMapSaveAction" method="execute">
+			<result name="success" type="redirectAction">authMenuMapCRUD</result>
+			<result name="input" type="tiles">authMenuMapCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+	<!-- Auth Menu Mapping :: End -->
+
+		<action name="tenantGrpList"
+			class="com.infrasofttech.omning.action.TenantGrpMstListAction"
+			method="execute">
+			<result name="success" type="tiles">tenantGrpList.tiles</result>
+			<result name="input" type="tiles">tenantGrpList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="tenantGrpCRUD"
+			class="com.infrasofttech.omning.action.TenantGrpMstCRUDAction"
+			method="execute">
+			<result name="success" type="tiles">tenantGrpCRUD.tiles</result>
+			<result name="input" type="tiles">tenantGrpList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="tenantGrpSave"
+			class="com.infrasofttech.omning.action.TenantGrpMstSaveAction"
+			method="execute">
+			<result name="success" type="redirectAction">/tenantGrpList</result>
+			<result name="input" type="tiles">tenantGrpCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+
+		
+		<action name="GLMstList"
+			class="com.infrasofttech.omning.action.GLMstListAction" method="execute">
+			<result name="success" type="tiles">GLMstList.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="GLMstCRUD" class="com.infrasofttech.omning.action.GLMstCRUDAction"
+			method="execute">
+			<result name="success" type="tiles">GLMstCRUD.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="GLMstSave" class="com.infrasofttech.omning.action.GLMstSaveAction"
+			method="execute">
+			<result name="success" type="chain">GLMstList</result>
+			<result name="input" type="tiles">GLMstCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="GLMstDisable"
+			class="com.infrasofttech.omning.action.GLMstDisableAction" method="execute">
+			<result name="success" type="chain">GLMstList</result>
+			<result name="input" type="chain">GLMstList</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="GLMstDisableList"
+			class="com.infrasofttech.omning.action.GLMstDisableListAction" method="execute">
+			<result name="success" type="tiles">GLMstDisableList.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="GLMstEnable"
+			class="com.infrasofttech.omning.action.GLMstEnableAction" method="execute">
+			<result name="success" type="chain">GLMstList</result>
+			<result name="input" type="chain">GLMstList</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="verifyGLCode"
+			class="com.infrasofttech.omning.action.VerifyGLCode" method="execute1">
+			
+		</action>
+
+		
+		<action name="txn"
+			class="com.infrasofttech.omning.action.transaction.TxnClientConfigCRUDAction" method="execute">
+			<result name="success" type="tiles">txnClientConfigSave.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="txnAddRow"
+			class="com.infrasofttech.omning.action.transaction.AddScreenRow" method="execute">
+			<result name="success" type="tiles">txnClientConfigSave.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="txnDeleteRow"
+			class="com.infrasofttech.omning.action.transaction.DeleteScreenRow" method="execute">
+			<result name="success" type="tiles">txnClientConfigSave.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="txnSaveOrUpdateScreenMapper"
+			class="com.infrasofttech.omning.action.transaction.SaveOrUpdateScreenMapper" method="execute">
+			<result name="success" type="tiles">txnScreenMappers.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		
+		
+		<action name="txnDeleteScreenMapper"
+			class="com.infrasofttech.omning.action.transaction.DeleteScreenMapper" method="execute">
+			<result name="success" type="tiles">txnScreenMappers.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="txnEditScreenMapper"
+			class="com.infrasofttech.omning.action.transaction.EditScreenMapper" method="execute">
+			<result name="success" type="tiles">txnClientConfigSave.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		
+
+	
+
+
+
+
+<!-- CropType Param :: START -->
+
+		<action name="cropTypeList"
+			class="com.infrasofttech.omning.action.CropTypeParamListAction" method="execute">
+			<result name="success" type="tiles">cropTypeParamList.tiles</result>
+			<result name="input" type="tiles">successHome.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="cropTypeCRUD"
+			class="com.infrasofttech.omning.action.CropTypeParamCRUDAction" method="execute">
+			<result name="success" type="tiles">cropTypeParamCRUD.tiles</result>
+			<result name="input" type="tiles">cropTypeParamList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="cropTypeSave"
+			class="com.infrasofttech.omning.action.CropTypeParamSaveAction" method="execute">
+			<result name="success" type="redirectAction">/cropTypeList.action</result>
+			<result name="input" type="tiles">cropTypeParamCRUD.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="cropTypeEnable"
+			class="com.infrasofttech.omning.action.CropTypeParamEnableAction" method="execute">
+			<result name="success" type="redirectAction">/cropTypeDisableList.action</result>
+			<result name="input" type="redirectAction">/cropTypeDisableList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="cropTypeDisableList"
+			class="com.infrasofttech.omning.action.CropTypeParamViewDisableAction" method="execute">
+			<result name="success" type="tiles">cropTypeDisableList.tiles</result>
+			<result name="input" type="redirectAction">/cropTypeList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		<action name="cropTypeDisable"
+			class="com.infrasofttech.omning.action.CropTypeParamDisableAction" method="execute">
+			<result name="success" type="redirectAction">/cropTypeList.action</result>
+			<result name="input" type="redirectAction">/cropTypeList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>	
+		
+		<action name="CropTypeViewEnable"
+			class="com.infrasofttech.omning.action.CropTypeParamListAction" method="execute">
+			<result name="success" type="redirectAction">/cropTypeList.action</result>
+			<result name="input" type="redirectAction">/cropTypeDisableList.action</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="CropTypeBackToList"
+			class="com.infrasofttech.omning.action.CropTypeParamListAction" method="execute">
+			<result name="success" type="redirectAction">cropTypeList</result>
+			<result name="input" type="redirectAction">cropTypeCRUD</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action> 
+		
+		<!-- CropType Param :: END -->
+
+
+
+
+	</package>
+</struts>

@@ -1,0 +1,1149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="baseLayout" template="/views/tiles_tmpl/BaseLayout.jsp">
+		<put-attribute name="title"
+			value="PACS - Primary Agriculture Credit Society" />
+		<put-attribute name="header" value="/views/tiles_tmpl/header.jsp" />
+		<put-attribute name="mainmenu"
+			value="/views/tiles_tmpl/MenuHome_Blank.jsp" />
+		<put-attribute name="maininfo" value="/views/tiles_tmpl/MainInfo.jsp" />
+		<put-attribute name="body" value="/views/tiles_tmpl/body.jsp" />
+		<put-attribute name="auditInfo" value="/views/tiles_tmpl/auditInfo1.jsp" />
+		<put-attribute name="footer" value="/views/tiles_tmpl/footer.jsp" />
+	</definition>
+
+	<!-- Generic definitions ::Start -->
+	<definition name="loginPage.tiles" extends="baseLayout">
+		<put-attribute name="mainmenu"
+			value="/views/tiles_tmpl/MenuHome_Blank.jsp" />
+		<put-attribute name="maininfo"
+			value="/views/tiles_tmpl/MainInfo_Blank.jsp" />
+		<put-attribute name="auditInfo"
+			value="/views/tiles_tmpl/AuditInfo_Blank.jsp" />
+		<put-attribute name="body" value="/views/login.jsp" />
+	</definition>
+	<definition name="logoutPage.tiles" extends="baseLayout">
+		<put-attribute name="mainmenu"
+			value="/views/tiles_tmpl/MenuHome_Blank.jsp" />
+		<put-attribute name="maininfo"
+			value="/views/tiles_tmpl/MainInfo_Blank.jsp" />
+		<put-attribute name="auditInfo"
+			value="/views/tiles_tmpl/AuditInfo_Blank.jsp" />
+		<put-attribute name="body" value="/views/Logout.jsp" />
+	</definition>
+
+	<!-- New Login Style :: Start :: by Mahesh Laddha -->
+	<definition name="loginPagePwd.tiles" extends="baseLayout">
+		<put-attribute name="mainmenu"
+			value="/views/tiles_tmpl/MenuHome_Blank.jsp" />
+		<put-attribute name="maininfo"
+			value="/views/tiles_tmpl/MainInfo_Blank.jsp" />
+		<put-attribute name="auditInfo"
+			value="/views/tiles_tmpl/AuditInfo_Blank.jsp" />
+		<put-attribute name="body" value="/views/LoginPwd.jsp" />
+	</definition>
+	<!-- New Login Style :: End -->
+	<definition name="successHome.tiles" extends="baseLayout">
+		<put-attribute name="mainmenu"
+			value="/views/tiles_tmpl/MenuHome_Blank.jsp" />
+		<put-attribute name="maininfo" value="/views/tiles_tmpl/MainInfo.jsp" />
+		<put-attribute name="body" value="/views/SuccessHome.jsp" />
+		<put-attribute name="auditInfo"
+			value="/views/tiles_tmpl/AuditInfo_Blank.jsp" />
+	</definition>
+
+	<!-- Added by Mahesh Laddha :: START -->
+	<definition name="userAddSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserSaveForward.jsp" />
+	</definition>
+	<!-- Added by Mahesh Laddha :: END -->
+
+	<definition name="homePage.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/SuccessHome.jsp" />
+	</definition>
+	<definition name="logout.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/index.jsp" />
+	</definition>
+	<definition name="failHome.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/ErrorLogin.jsp" />
+	</definition>
+	<definition name="errPage.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ErrorPage.jsp" />
+	</definition>
+	<definition name="successHome1.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/SuccessHome1.jsp" />
+	</definition>
+	<!-- Generic definitions ::End -->
+
+	<definition name="entityAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/EntityAdd.jsp" />
+	</definition>
+	<definition name="entitySave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/EntitySave.jsp" />
+	</definition>
+
+
+	<definition name="userTypeAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserTypeAdd.jsp" />
+	</definition>
+	<definition name="userTypeSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserTypeSave.jsp" />
+	</definition>
+
+	<!-- User Mgmt Tiles Entries :: By Chandrasekhar on 09Oct14 1410 -->
+	<definition name="userMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserMgmt.jsp" />
+	</definition>
+	<definition name="userAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserAdd.jsp" />
+	</definition>
+	<definition name="userAdd1.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserAdd1.jsp" />
+	</definition>
+
+	<definition name="userEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserEdit.jsp" />
+	</definition>
+	<definition name="userDisable.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserDisable.jsp" />
+	</definition>
+	<definition name="userListSearch.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UserListSearch.jsp" />
+	</definition>
+	<!-- User Mgmt Tiles Entries ::End -->
+
+	<!-- Tiles Entries :: By Chandrasekhar on 10Oct14 1450 -->
+
+	<!-- Masters -->
+
+	<!-- <definition name="pacsMemberRegistration.tiles" extends="baseLayout"> 
+		<put-attribute name="body" value="/views/PacsMemberRegistration.jsp" /> </definition> -->
+	<!-- Tiles entries added by chandra sekhar for Customer Module on 19th DEC 
+		2014 -->
+
+	<definition name="accountMgmtSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AccountMgmt.jsp" />
+	</definition>
+
+	<definition name="accountMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AccountMgmt.jsp" />
+	</definition>
+
+	<definition name="accountMgmtAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AccountMgmtSave.jsp" />
+	</definition>
+
+
+
+	<definition name="pacsDownloadMemberList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PacsDownloadMemberList.jsp" />
+	</definition>
+	<definition name="pacsDownloadLoanTxn.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PacsDownloadLoanTxn.jsp" />
+	</definition>
+
+
+	<!-- Transactions -->
+
+	<definition name="loanAccountMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanAccountMgmt.jsp" />
+	</definition>
+	<definition name="loanDisbursement.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanDisbursement.jsp" />
+	</definition>
+
+	<definition name="loanRecovery.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanRecovery.jsp" />
+	</definition>
+	<definition name="loanTransfer.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanTransfer.jsp" />
+	</definition>
+	<definition name="loanClosure.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanClosure.jsp" />
+	</definition>
+	<definition name="loanDrawalMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanDrawalMgmt.jsp" />
+	</definition>
+	<definition name="loanDrawalAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanDrawalAdd.jsp" />
+	</definition>
+	<definition name="loanApproval.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanApproval.jsp" />
+	</definition>
+
+	<definition name="loanRepayment.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanRepayment.jsp" />
+	</definition>
+
+	<!-- Configure -->
+
+	<definition name="loanType.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanType.jsp" />
+	</definition>
+	<definition name="addloanType.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddLoanType.jsp" />
+	</definition>
+	<definition name="memberType.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MemberType.jsp" />
+	</definition>
+
+	<definition name="loanParameters.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanParameters.jsp" />
+	</definition>
+	<definition name="loanTypePurposeMap.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanTypePurposeMap.jsp" />
+	</definition>
+	<definition name="loanTypePurposeMapAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanTypePurposeMapAdd.jsp" />
+	</definition>
+	<definition name="invtVendorMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/InvtVendorMgmt.jsp" />
+	</definition>
+	<definition name="cropSeasonParamMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CropSeasonParamMgmt.jsp" />
+	</definition>
+	<definition name="cropSeasonParamAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CropSeasonParamAdd.jsp" />
+	</definition>
+	<definition name="cropInsuPremiumMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CropInsuPremiumMgmt.jsp" />
+	</definition>
+	<definition name="cropInsuPremiumAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CropInsuPremiumAdd.jsp" />
+	</definition>
+	<definition name="perAccidentInsuCropLoanMgmt.tiles"
+		extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/PerAccidentInsuCropLoanMgmt.jsp" />
+	</definition>
+	<definition name="perAccidentInsuCropLoanAdd.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/PerAccidentInsuCropLoanAdd.jsp" />
+	</definition>
+
+	<definition name="loanLimitMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanLimitMgmt.jsp" />
+	</definition>
+	<definition name="loanLimitAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanLimitAdd.jsp" />
+	</definition>
+
+
+
+	<!-- Tiles Entries ::End -->
+
+	<!-- Assign Password ::10oct14 -->
+	<definition name="assignUserPwd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AssignUserPwd.jsp" />
+	</definition>
+	<!-- Assign Password ::end -->
+
+	<!-- Entry Mgmt ::- 10oct14 -->
+	<definition name="entry.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/Entry.jsp" />
+	</definition>
+	<!-- Entry Mgmt ::end -->
+
+	<!-- Disable Mgmt ::- 10oct14 -->
+	<definition name="disable.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/Disable.jsp" />
+	</definition>
+	<!-- Disable Mgmt ::end -->
+
+	<!-- Cash Entry Mgmt ::- 10oct14 -->
+	<definition name="cashEntryMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CashEntryMgmt.jsp" />
+	</definition>
+	<!-- CAsh Entry Mgmt ::end -->
+
+	<!-- Transfer Entry Mgmt ::- 10oct14 -->
+	<definition name="transferEntryMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TransferEntryMgmt.jsp" />
+	</definition>
+	<!-- TransferEntry Mgmt ::end -->
+
+	<!-- PAramChckAccntMgmt ::- 10oct14 -->
+
+	<definition name="paramChckAccntList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamCheckingAcList.jsp" />
+	</definition>
+	<definition name="paramChkCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamCheckingAcCRUD.jsp" />
+	</definition>
+	<definition name="paramChkDisableList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamChkDisableList.jsp" />
+	</definition>
+
+	<!--PAramChckAccntMgmt::end -->
+
+	<!-- PAramLoanAccntMgmt ::- 10oct14 -->
+	<definition name="paramLoanAcCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/paramLoanAcCRUD.jsp" />
+	</definition>
+	<definition name="paramLoanAcList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamLoanAcList.jsp" />
+	</definition>
+	<definition name="paramLoanAcDisableList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamLoanAcDisableList.jsp" />
+	</definition>
+	<definition name="customerphoto.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerSignPhotoView.jsp" />
+	</definition>
+	<definition name="customerphotoview.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerSignPhotoSave.jsp" />
+	</definition>
+	<!--PAramLaonAccntMgmt::end -->
+
+	<!-- PAramTDMgmt ::- 10oct14 -->
+	<definition name="paramTDMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamTDMgmt.jsp" />
+	</definition>
+	<definition name="paramTDAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamTDAdd.jsp" />
+	</definition>
+	<definition name="paramTDEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamTDEdit.jsp" />
+	</definition>
+	<definition name="paramTDListSearch.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ParamTDListSearch.jsp" />
+	</definition>
+	<!--PAramTDMgmt::end -->
+
+	<!-- PAramTDMgmt ::- 10oct14 -->
+	<definition name="tDProdIntMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TDProdIntMgmt.jsp" />
+	</definition>
+	<definition name="tDProdIntAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TDProdIntAdd.jsp" />
+	</definition>
+	<definition name="tDProdIntEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TDProdIntEdit.jsp" />
+	</definition>
+	<definition name="tDProdIntListSearch.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TDProdIntListSearch.jsp" />
+	</definition>
+	<!--PAramTDMgmt::end -->
+
+	<!-- IntOffsetMstMgmt ::- 10oct14 -->
+	<definition name="intOffsetMstMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/IntOffsetMstMgmt.jsp" />
+	</definition>
+	<definition name="intOffsetMstAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/IntOffsetMstAdd.jsp" />
+	</definition>
+	<definition name="intOffsetMstEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/IntOffsetMstEdit.jsp" />
+	</definition>
+	<definition name="intOffsetMstListSearch.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/IntOffsetMstListSearch.jsp" />
+	</definition>
+	<!--IntOffsetMst::end -->
+
+	<!-- MapPurpCodeGLMgmt::- 10oct14 -->
+	<definition name="mapPurpCodeGLMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MapPurpCodeGLMgmt.jsp" />
+	</definition>
+	<definition name="mapPurpCodeGLAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MapPurpCodeGLAdd.jsp" />
+	</definition>
+	<definition name="mapPurpCodeGLEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MapPurpCodeGLEdit.jsp" />
+	</definition>
+	<definition name="mapPurpCodeGLListSearch.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MapPurpCodeGLListSearch.jsp" />
+	</definition>
+	<!--MapPurpCodeGLMgmt::end -->
+
+	<!-- loanIntSlabMgmt ::- 10oct14 -->
+	<definition name="loanIntSlabMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanIntSlabMgmt.jsp" />
+	</definition>
+	<definition name="loanIntSlabAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanIntSlabAdd.jsp" />
+	</definition>
+	<definition name="loanIntSlabEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanIntSlabEdit.jsp" />
+	</definition>
+	<definition name="loanIntSlabListSearch.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanIntSlabListSearch.jsp" />
+	</definition>
+	<!--loanIntSlabMgmt::end -->
+
+	<!-- SharePercentMstMgmt ::- 13oct14 -->
+	<definition name="sharePercentMstMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/SharePercentMstMgmt.jsp" />
+	</definition>
+	<definition name="sharePercentMstAd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/SharePercentMstAd.jsp" />
+	</definition>
+	<definition name="sharePercentMstEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/SharePercentMstEdit.jsp" />
+	</definition>
+	<definition name="sharePercentMstListSearch.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/SharePercentMstListSearch.jsp" />
+	</definition>
+	<!-- sharePercentMstAd ::end -->
+
+	<!-- CustParams ::- 13oct14 -->
+	<definition name="custParams.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustParams.jsp" />
+	</definition>
+	<!-- CustParams ::- 10oct14 -->
+
+
+	<!-- -:: start 05nov,14 -->
+
+	<!-- passbook print ::start -->
+	<definition name="passbookPrinting.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PassbookPrinting.jsp" />
+	</definition>
+
+	<!-- passbook print:: end -->
+	<!-- td interest calc::start05 nov,14 -->
+	<definition name="tDInterestCalc.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TDInterestCalc.jsp" />
+	</definition>
+	<!-- td interest calc:end -->
+
+	<!-- NPA ProvisionProcess start::05nov,2014 -->
+	<definition name="nPAProvisionProcess.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/NPAProvisionProcess.jsp" />
+	</definition>
+	<!-- NPA Provision Process:: end -->
+	<!-- ReceiptPrinting:start:05nov,14 -->
+	<definition name="receiptPrinting.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ReceiptPrinting.jsp" />
+	</definition>
+	<!-- ReceiptPrinting::end -->
+	<!--CDODAcntLimitMst::start 06nov,14 -->
+	<definition name="cDODAcntLimitMst.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CDODAcntLimitMst.jsp" />
+	</definition>
+	<!-- CDODAcntLimitMst::end -->
+	<!-- adhoclimitmst::06Nov14 -->
+	<definition name="adhocLimitMst.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AdhocLimitMst.jsp" />
+	</definition>
+	<!-- adhoclimitmst::end -->
+	<!-- CDODReviewDetlMst::06Nov14 -->
+	<definition name="cDODReviewDetlMst.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CDODReviewDetlMst.jsp" />
+	</definition>
+	<!-- CDODReviewDetlMst::end -->
+
+	<!-- DrawingPwrRegisterMst::start 07Nov14 -->
+	<definition name="drawingPwrRegisterMst.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/DrawingPwrRegisterMst.jsp" />
+	</definition>
+	<!-- DrawingPwrRegisterMst::end -->
+	<!-- DrawingPwrRegisterShares::start 07Nov14 -->
+	<definition name="drawingPwrRegisterShares.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/DrawingPwrRegisterShares.jsp" />
+	</definition>
+	<!-- DrawingPwrRegisterShares::end -->
+
+	<!-- FolioChargesMaster::start 10Nov14 -->
+	<definition name="folioChargesMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/FolioChargesMaster.jsp" />
+	</definition>
+	<!--FolioChargesMaster::end -->
+
+	<!-- ServiceChargesMaster::start 10Nov14 -->
+	<definition name="serviceChargesMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ServiceChargesMaster.jsp" />
+	</definition>
+	<!--ServiceChargesMaster::end -->
+
+
+	<!-- Nazneen::End -->
+
+
+
+
+	<definition name="lookupDirAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LookupDirAdd.jsp" />
+	</definition>
+	<definition name="lookupDirSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LookupDirSave.jsp" />
+	</definition>
+
+	<definition name="placeMstAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PlaceMstAdd.jsp" />
+	</definition>
+	<definition name="placeMstSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PlaceMstSave.jsp" />
+	</definition>
+
+	<definition name="prdMstAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdMstAdd.jsp" />
+	</definition>
+	<definition name="prdMstSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdMstSave.jsp" />
+	</definition>
+
+	<definition name="custMstAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustMstAdd.jsp" />
+	</definition>
+	<definition name="custMstSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustMstSave.jsp" />
+	</definition>
+
+	<definition name="custBusiAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustBusiAdd.jsp" />
+	</definition>
+	<definition name="custBusiSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustBusiSave.jsp" />
+	</definition>
+
+	<definition name="custBusiDtlsAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustBusiDtlsAdd.jsp" />
+	</definition>
+	<definition name="custBusiDtlsSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustBusiDtlsSave.jsp" />
+	</definition>
+
+	<definition name="custReqAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustReqAdd.jsp" />
+	</definition>
+	<definition name="custReqSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustReqSave.jsp" />
+	</definition>
+
+	<definition name="acctMstAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AcctMstAdd.jsp" />
+	</definition>
+	<definition name="acctMstSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AcctMstSave.jsp" />
+	</definition>
+
+	<definition name="acctNomineeAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AcctNomineeAdd.jsp" />
+	</definition>
+	<definition name="acctNomineeSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AcctNomineeSave.jsp" />
+	</definition>
+
+	<definition name="acctAddrAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AcctAddrAdd.jsp" />
+	</definition>
+	<definition name="acctAddrSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AcctAddrSave.jsp" />
+	</definition>
+
+	<definition name="areaMstAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AreaMstAdd.jsp" />
+	</definition>
+	<definition name="areaMstSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AreaMstSave.jsp" />
+	</definition>
+
+	<!-- Mahender::Start -->
+	<definition name="lookupCode.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LookupCodeList.jsp" />
+	</definition>
+
+	<definition name="addLookupCode.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LookupCodes.jsp" />
+	</definition>
+
+	<definition name="lookupValue.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddLookupValue.jsp" />
+	</definition>
+
+	<definition name="countryMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CountryMaster.jsp" />
+	</definition>
+
+	<definition name="stateMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/StateMaster.jsp" />
+	</definition>
+
+
+	<definition name="AddStateSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/StateMaster.jsp" />
+	</definition>
+
+
+	<definition name="districtMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/DistrictMaster.jsp" />
+	</definition>
+
+	<definition name="addCountryMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddCountryMaster.jsp" />
+	</definition>
+
+	<definition name="addCountrySave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CountryMaster.jsp" />
+	</definition>
+
+
+	<definition name="addStateMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddStateMaster.jsp" />
+	</definition>
+
+	<definition name="addDistrictMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddDistrictMaster.jsp" />
+	</definition>
+
+	<definition name="addDistrictSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/DistrictMaster.jsp" />
+	</definition>
+
+	<definition name="subDivisionMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/SubDivisionMaster.jsp" />
+	</definition>
+
+	<definition name="muncipleMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MuncipleMaster.jsp" />
+	</definition>
+
+	<definition name="AddMuncipleSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MuncipleMaster.jsp" />
+	</definition>
+
+	<definition name="villageMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/VillageMaster.jsp" />
+	</definition>
+
+	<definition name="assignNewPassword.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AssignNewPassword.jsp" />
+	</definition>
+
+	<definition name="addSubDivisionMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddSubDivisionMaster.jsp" />
+	</definition>
+
+	<definition name="addMuncipleMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddMuncipleMaster.jsp" />
+	</definition>
+
+	<definition name="addVillageMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddVillageMaster.jsp" />
+	</definition>
+
+	<definition name="addVillageSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/VillageMaster.jsp" />
+	</definition>
+
+	<definition name="addLookupValue.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddLookupValue.jsp" />
+	</definition>
+
+	<definition name="receiptOpen.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ReceiptOpen.jsp" />
+	</definition>
+
+	<definition name="cancelBeforeFunding.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CancelBeforeFunding.jsp" />
+	</definition>
+
+	<definition name="tDDataEntry.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TDDataEntry.jsp" />
+	</definition>
+
+	<definition name="addDeposit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddDeposit.jsp" />
+	</definition>
+
+	<definition name="addTdDataEntry.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddTdDataEntry.jsp" />
+	</definition>
+
+	<definition name="addCancelBeforeFunding.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddCancelBeforeFunding.jsp" />
+	</definition>
+
+	<definition name="customerMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerMaster.jsp" />
+	</definition>
+
+	<definition name="customerInformation.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerInformation.jsp" />
+	</definition>
+
+	<definition name="customerLevelAccountDetails.tiles"
+		extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/CustomerLevelAccountDetails.jsp" />
+	</definition>
+
+	<definition name="customerNumberModification.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/CustomerNumberModification.jsp" />
+	</definition>
+
+	<definition name="accountNameAddressUpdation.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/AccountNameAddressUpdation.jsp" />
+	</definition>
+
+	<definition name="receiptLevelNameUpdation.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/ReceiptLevelNameUpdation.jsp" />
+	</definition>
+
+	<definition name="groupCustomerLinkMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/GroupCustomerLinkMaster.jsp" />
+	</definition>
+
+	<definition name="markasInoperative.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MarkasInoperative.jsp" />
+	</definition>
+
+	<definition name="welcomeKitParameter.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/WelcomeKitParameter.jsp" />
+	</definition>
+
+	<definition name="welcomeKitwithAtmAndChqbk.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/WelcomeKitwithAtmAndChqbk.jsp" />
+	</definition>
+
+	<definition name="customerUpdationWelcomeKit.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/CustomerUpdationWelcomeKit.jsp" />
+	</definition>
+
+	<definition name="loanNonUtilizationCharges.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/LoanNonUtilizationCharges.jsp" />
+	</definition>
+
+	<definition name="loanInspectionCharges.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanInspectionCharges.jsp" />
+	</definition>
+
+	<definition name="remittanceChargesMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RemittanceChargesMaster.jsp" />
+	</definition>
+
+	<definition name="duplicatePassbookChgsMaster.tiles"
+		extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/DuplicatePassbookChgsMaster.jsp" />
+	</definition>
+
+	<definition name="duplicateStatementChgsMaster.tiles"
+		extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/DuplicateStatementChgsMaster.jsp" />
+	</definition>
+
+	<definition name="serviceTaxAndCessMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ServiceTaxAndCessMaster.jsp" />
+	</definition>
+
+	<definition name="scheduleChargesMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ScheduleChargesMaster.jsp" />
+	</definition>
+
+	<definition name="minimumBalanceChargesList.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/MinimumBalanceChargesList.jsp" />
+	</definition>
+
+	<definition name="serviceTaxAndCessMasterList.tiles"
+		extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/ServiceTaxAndCessMasterList.jsp" />
+	</definition>
+
+	<definition name="loanNonUtilizationChargesList.tiles"
+		extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/LoanNonUtilizationChargesList.jsp" />
+	</definition>
+
+	<definition name="advocateDetailsList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AdvocateDetailsList.jsp" />
+	</definition>
+	<!-- Mahender::End -->
+
+	<!-- Tiles Entries :: By Chandra sekhar on 5th Nov 2014 -->
+	<definition name="savingsInterest.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/SavingsInterest.jsp" />
+	</definition>
+	<definition name="loanInterestApplication.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanInterestApplication.jsp" />
+	</definition>
+
+	<!-- Started here on 6th Nov, 2014 at 11:30am -->
+
+	<definition name="accountCodeinterchangeforLoanAccounts.tiles"
+		extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/AccountCodeinterchangeforLoanAccounts.jsp" />
+	</definition>
+	<definition name="loanSecurityLink.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanSecurityLink.jsp" />
+	</definition>
+
+	<definition name="insurancePolicy.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/InsurancePolicy.jsp" />
+	</definition>
+
+	<!-- Tiles Entries :: By Chandra sekhar on 7th Nov 2014 -->
+
+	<definition name="loanPDCMaintenance.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanPDCMaintenance.jsp" />
+	</definition>
+	<definition name="loanTermDuration.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanTermDuration.jsp" />
+	</definition>
+	<definition name="advocateDetails.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AdvocateDetails.jsp" />
+	</definition>
+	<definition name="loanSuritySeason.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanSuritySeason.jsp" />
+	</definition>
+	<definition name="minimumBalanceCharges.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/MinimumBalanceCharges.jsp" />
+	</definition>
+	<definition name="earlyClosureCharges.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/EarlyClosureCharges.jsp" />
+	</definition>
+	<definition name="loanBasicDetails.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LoanBasicDetails.jsp" />
+	</definition>
+	<!-- List entries done by chandra sekhar on 13th Nov 2014 -->
+	<definition name="savingsInterestList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/SavingsInterestList.jsp" />
+	</definition>
+	<definition name="loanInterestApplicationList.tiles"
+		extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/LoanInterestApplicationList.jsp" />
+	</definition>
+	<definition name="tDInterestCalcList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TDInterestCalcList.jsp" />
+	</definition>
+	<definition name="customerMasterList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerMasterList.jsp" />
+	</definition>
+	<definition name="nPAProvisionProcessList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/NPAProvisionProcessList.jsp" />
+	</definition>
+	<definition name="cDODAcntLimitMstList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CDODAcntLimitMstList.jsp" />
+	</definition>
+	<definition name="adhocLimitMstList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AdhocLimitMstList.jsp" />
+	</definition>
+	<definition name="cDODReviewDetlMstList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CDODReviewDetlMstList.jsp" />
+	</definition>
+	<definition name="insurancePolicyList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/InsurancePolicyList.jsp" />
+	</definition>
+	<definition name="drawingPwrRegisterMstList.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/DrawingPwrRegisterMstList.jsp" />
+	</definition>
+	<definition name="displayDashboard.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/DisplayDashboard.jsp" />
+	</definition>
+	<definition name="purposeCodeMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PurposeCodeMaster.jsp" />
+	</definition>
+	<definition name="addPurposeCodeMaster.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AddPurposeCodeMaster.jsp" />
+	</definition>
+	<definition name="addPurposeCodeSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PurposeCodeMaster.jsp" />
+	</definition>
+	<definition name="purposeCodeDetails.tiles" extends="baseLayout">
+		<put-attribute name="body"
+			value="/views/PurposeCodeProductMaster.jsp" />
+	</definition>
+
+	<!-- AuthMatrix Tiles -->
+	<definition name="authMatrixList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AuthMatrixList.jsp"></put-attribute>
+	</definition>
+	<definition name="authMatrixCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AuthMatrixCRUD.jsp"></put-attribute>
+	</definition>
+	<definition name="authMatrixSlabCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AuthMatrixSlabCRUD.jsp"></put-attribute>
+	</definition>
+
+
+	<definition name="PrdAcNumberConfig.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNumberConfig.jsp" />
+	</definition>
+	<definition name="PrdAcNumberConfig.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNumberConfig.jsp" />
+	</definition>
+	<definition name="PrdAcNumberConfigEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNumberConfigEdit.jsp" />
+	</definition>
+	<definition name="PrdAcNumberConfigList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNumberConfigList.jsp" />
+	</definition>
+		<definition name="prdAcNoConfigDisableList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNumberConfigDisableList.jsp" />
+	</definition>
+
+	<!-- Create New Role -->
+
+	<definition name="RoleMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RoleMenuMgmt.jsp" />
+	</definition>
+
+	<definition name="RoleMenuAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RoleMenuAdd.jsp" />
+	</definition>
+
+	<definition name="RoleMenuMap.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RoleMenuMap.jsp" />
+	</definition>
+	<definition name="roleDisabledList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RoleDisabledList.jsp" />
+	</definition>
+	<!-- Application Configuration :: Mahesh Laddha -->
+	<!-- AppConfig Tiles Definition -->
+
+	<definition name="appConfigList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AppConfigList.jsp" />
+	</definition>
+	<definition name="appConfigCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AppConfigCRUD.jsp" />
+	</definition>
+	<definition name="appConfigDisabledList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AppConfigDisabledList.jsp" />
+	</definition>
+
+<!-- CropType Tiles Definition -->
+
+	<definition name="cropTypeParamList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CropTypeParamList.jsp" />
+	</definition>
+	<definition name="cropTypeParamCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CropTypeParamCRUD.jsp" />
+	</definition>
+	<definition name="cropTypeDisableList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CropTypeParamDisableList.jsp" />
+	</definition>
+
+
+
+
+	<!-- Holiday Master :: Mahesh Laddha -->
+	<definition name="holidayList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/HolidayList.jsp" />
+	</definition>
+	<definition name="holidayCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/HolidayCRUD.jsp" />
+	</definition>
+	<definition name="showHolidayDisable.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/HolidayDisable.jsp" />
+	</definition>
+	<definition name="holidayBranchMapList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/HolidayBranchMapList.jsp" />
+	</definition>
+	<definition name="holidayBranchMapCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/HolidayBranchMapCRUD.jsp" />
+	</definition>
+	
+	<definition name="showHolidayBranchMapDisable.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/HolidayBranchMapDisable.jsp" />
+	</definition>	
+	
+
+	<definition name="roleMstAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RoleMstAdd.jsp" />
+	</definition>
+	<definition name="roleMstSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RoleMstSave.jsp" />
+	</definition>
+	<definition name="roleAddSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RoleSaveForward.jsp" />
+	</definition>
+	<definition name="roleMenuMapAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/RoleMenuAdd.jsp" />
+	</definition>
+
+	<!-- Branch Tiles Definitions -->
+	<definition name="branchMgmt.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchMgmt.jsp" />
+	</definition>
+	<definition name="branchAdd.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchAdd.jsp" />
+	</definition>
+	<definition name="branchAddSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchAddSave.jsp" />
+	</definition>
+	<definition name="branchEdit.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchEdit.jsp" />
+	</definition>
+	<definition name="branchEditUpdate.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchEditUpdate.jsp" />
+	</definition>
+	<definition name="branchDisable.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchDisable.jsp" />
+	</definition>
+	<definition name="branchEnable.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchEnable.jsp" />
+	</definition>
+	<definition name="branchAuthorize.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchAuthorize.jsp" />
+	</definition>
+	<definition name="branchReject.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchReject.jsp" />
+	</definition>
+	<definition name="branchMgmtDisable.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchMgmtDisable.jsp" />
+	</definition>
+	<definition name="branchDisableList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/BranchDisableList.jsp" />
+	</definition>
+	<!-- Change Branch Tiles Definition -->
+	<definition name="changeBranchShow.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ChangeBranch.jsp" />
+	</definition>
+
+	<!-- Product Master Tiles Definition -->
+	<definition name="productList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ProductList.jsp" />
+	</definition>
+	<definition name="productCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ProductCRUD.jsp" />
+	</definition>
+	<definition name="productDisabledList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ProductDisableList.jsp" />
+	</definition>
+	<!-- Product Master Tiles Definition -->
+	<definition name="prdAcNoList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNoList.jsp" />
+	</definition>
+	<definition name="prdAcNoCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNoCRUD.jsp" />
+	</definition>
+<definition name="prdAcNoDisableList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNoDisableList.jsp" />
+	</definition>
+	<definition name="changePassword.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ChangePassword.jsp" />
+	</definition>
+	<definition name="changePasswordSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ChangePasswordSave.jsp" />
+	</definition>
+
+	<definition name="resetPassword.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ResetPassword.jsp" />
+	</definition>
+	<definition name="resetPasswordSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/ResetPasswordSave.jsp" />
+	</definition>
+
+	<definition name="unlockUser.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UnlockUser.jsp" />
+	</definition>
+	<definition name="unlockUserSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/UnlockUserSave.jsp" />
+	</definition>
+
+	<definition name="PrdAcNumberConfigCURD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/PrdAcNumberConfigCURD.jsp" />
+	</definition>
+
+	<!-- customer mst -->
+	<definition name="customerList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerMaster.jsp" />
+	</definition>
+	<definition name="customerCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerCRUD.jsp" />
+	</definition>
+	
+	<definition name="customerKYC.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerKYC.jsp" />
+	</definition>
+	<definition name="addCustomerKYCDoc.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/addCustomerKYCDoc.jsp" />
+	</definition>
+
+	<definition name="customerKYCFamily.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerKYCFamily.jsp" />
+	</definition>
+	<definition name="addCustomerKYCFamily.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/addCustomerKYCFamily.jsp" />
+	</definition>
+
+	<definition name="customerAddress.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerAddress.jsp" />
+	</definition>
+	<definition name="addCustomerAddress.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/addCustomerAddress.jsp" />
+	</definition>
+	
+	<definition name="customerBusiness.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerBusiness.jsp" />
+	</definition>
+	<definition name="addCustomerBusiness.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/addCustomerBusiness.jsp" />
+	</definition>
+
+	<definition name="customerAsset.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerAsset.jsp" />
+	</definition>
+	<definition name="addCustomerAsset.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/addCustomerAsset.jsp" />
+	</definition>
+
+	<definition name="customerEmployment.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/CustomerEmployment.jsp" />
+	</definition>
+	<definition name="addCustomerEmployment.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/addCustomerEmployment.jsp" />
+	</definition>
+
+	<!-- End for customer Master -->
+
+	<definition name="lookupList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LookupList.jsp" />
+	</definition>
+	<definition name="lookupCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/LookupCRUD.jsp" />
+	</definition>
+
+	<definition name="authMenuMapCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/AuthMenuMapCRUD.jsp" />
+	</definition>
+
+	<definition name="tenantGrpList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TenantGrpMstList.jsp" />
+	</definition>
+	<definition name="tenantGrpCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/TenantGrpMstCRUD.jsp" />
+	</definition>
+	
+	
+	<!-- GL Master Tiles Definition -->
+	<definition name="GLMstList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/GLMstList.jsp" />
+	</definition>
+	<definition name="GLMstCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/GLMstCRUD.jsp" />
+	</definition>
+	<definition name="GLMstDisableList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/GLMstDisableList.jsp" />
+	</definition>
+	<definition name="deDupConfigCRUD.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/DeDupConfigCRUD.jsp" />
+	</definition>
+
+	<!-- Transaction Tiles Definition -->
+	<definition name="txnClientConfigSave.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/transaction/TxnClientConfigurator.jsp" />
+	</definition>
+	
+	<definition name="txnScreenMappers.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/transaction/TxnScreenMappers.jsp" />
+	</definition>
+
+</tiles-definitions>

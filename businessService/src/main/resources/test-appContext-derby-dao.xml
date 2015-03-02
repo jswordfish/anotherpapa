@@ -1,0 +1,201 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+ xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:task="http://www.springframework.org/schema/task"
+ xsi:schemaLocation="
+   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+>
+
+ <context:component-scan base-package="com" />
+ <context:component-scan base-package="com.jpaSample.dao" />
+	<context:component-scan base-package="com.jpaSample.service" />
+	<context:component-scan base-package="com.jpaSample.dto" />
+
+<tx:annotation-driven  />
+
+<bean id="wcJndiTemplate" class="org.springframework.jndi.JndiTemplate">
+	    <property name="environment">
+	        <props>
+	            <prop key="java.naming.factory.initial">org.jnp.interfaces.NamingContextFactory</prop>
+	            <!-- <prop key="java.naming.provider.url">jnp://in00152:5400</prop> -->
+	            <prop key="java.naming.provider.url">jnp://rvaidya:5400</prop>
+	            <prop key="java.naming.factory.url.pkgs">org.apache.naming</prop>
+	<!--             <prop key="jnp.disableDiscovery">true</prop> -->
+	        </props>
+	    </property>
+	</bean>
+	
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <!-- <property name="jndiName" value="jdbc_EDM"/> -->
+    <property name="resourceRef" value="false"/>
+    <property name="jndiTemplate" ref="wcJndiTemplate" />
+    <property name="jndiName" value="jdbc_EDM_derby" />
+</bean>
+ 
+ <bean id="jpaTemplate" class="org.springframework.orm.jpa.JpaTemplate"> 
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
+</bean>
+
+ <bean id="entityManagerFactory"
+  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+  <property name="persistenceXmlLocation" value="META-INF/persistence_test.xml" />
+  <property name="persistenceUnitName" value="EDMPersistenceUnit" />
+  	<property name="jpaDialect">
+    <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+	</property>
+  <property name="dataSource" ref="dataSource" />
+  <property name="jpaVendorAdapter"> 
+       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"> 
+<!--            <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" /> -->
+<!--            <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" /> -->
+            <property name="databasePlatform" value="org.hibernate.dialect.DerbyDialect" /> 
+           <!-- <property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect"/> -->
+            <property name="showSql" value="true" /> 
+           <property name="generateDdl" value="true" />
+          
+       </bean> 
+  </property>
+ <property name="jpaProperties">
+		<props>
+		<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+		<prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>
+		<prop key="hibernate.transaction.flush_before_completion">true</prop>
+		<prop key="hibernate.transaction.auto_close_session">true</prop>
+		
+		</props>
+  </property>
+ </bean>
+ 
+
+  <!--  <bean id="developmentDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
+	<property name="url" value="jdbc:derby://localhost:1527/db6;create=true" />
+	<property name="username" value="me" /> 
+    <property name="password" value="mine" />
+
+  </bean>   -->
+
+  
+ <!--  Bitronix Transaction Manager embedded configuration -->
+    <bean id="btmConfig" factory-method="getConfiguration"
+        class="bitronix.tm.TransactionManagerServices">
+        <property name="serverId" value="spring-btm" />
+        <property name="journal" value="null" />
+    </bean>
+
+    <!-- create BTM transaction manager -->
+    <bean id="BitronixTransactionManager" factory-method="getTransactionManager"
+        class="bitronix.tm.TransactionManagerServices" depends-on="btmConfig,dataSource"
+        destroy-method="shutdown" />
+
+    <bean id="transactionManager"
+        class="org.springframework.transaction.jta.JtaTransactionManager">
+        <property name="transactionManager" ref="BitronixTransactionManager" />
+        <property name="userTransaction" ref="BitronixTransactionManager" />
+        <property name="allowCustomIsolationLevels" value="true" />
+    </bean>
+
+<!-- <bean id="transactionManager" -->
+<!-- 		class="org.springframework.orm.jpa.JpaTransactionManager"> -->
+<!-- 		<property name="entityManagerFactory" -->
+<!-- 			ref="entityManagerFactory" /> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+<!-- 	</bean> -->
+
+
+
+
+<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  -->
+<!--     <property name="driverClassName" value="com.mysql.jdbc.Driver" />   -->
+<!--     <property name="url" value="jdbc:mysql://inpoc01:3306/EDM" />  -->
+<!--     <property name="username" value="gs_edm" />  -->
+<!--     <property name="password" value="gs_edm" /> -->
+<!-- </bean> -->
+
+<bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+       <property name="quartzProperties">
+        <props>
+            <prop key="org.quartz.scheduler.instanceName">FileLoadWeb</prop>
+            
+            <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+            <prop key="org.quartz.threadPool.threadCount">40</prop>
+            <prop key="org.quartz.threadPool.threadPriority">5</prop>
+            <prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+            <prop key="org.quartz.jobStore.class">org.springframework.scheduling.quartz.LocalDataSourceJobStore</prop>
+            <prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.StdJDBCDelegate</prop>
+            <prop key="org.quartz.jobStore.tablePrefix">QUARTZ_FILELOAD_</prop>
+            <!-- <prop key="org.quartz.jobStore.tablePrefix">qrtz_</prop> -->
+            <prop key="org.quartz.jobStore.isClustered">true</prop>
+            <!--  <<prop key="org.quartz.jobStore.dontSetAutoCommitFalse">false</prop>
+            <prop key="org.quartz.scheduler.wrapJobExecutionInUserTransaction">true</prop>-->
+        </props>
+    </property>
+    </bean>
+    
+    <bean id="schedulerProperties"
+      class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	  <property name="locations">
+	    <list>
+	      <value>classpath*:schedulerFactory.properties</value>
+	    </list>
+	  </property>
+	</bean>
+	
+	<bean id="dataLoaderConnection"
+      class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	  <property name="locations">
+	    <list>
+	      <value>classpath*:dataLoaderConnection.properties</value>
+	    </list>
+	  </property>
+	</bean>
+	
+	<bean id="testProperties"
+      class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	  <property name="locations">
+	    <list>
+	      <value>classpath*:test.properties</value>
+	    </list>
+	  </property>
+	</bean>
+	
+	<bean id="urlConnection"
+      class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	  <property name="locations">
+	    <list>
+	      <value>classpath*:appURLS.properties</value>
+	    </list>
+	  </property>
+	</bean>
+
+	
+	<bean id="jobRepository" class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean"
+		p:dataSource-ref="dataSource" p:transactionManager-ref="transactionManager" />
+        <task:executor id="jobLauncherTaskExecutor" pool-size="6" rejection-policy="ABORT" />
+        
+        <bean id="jobRegistry" class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
+        
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+		<property name="taskExecutor" ref="jobLauncherTaskExecutor" />
+	</bean>
+                
+	<bean id="jobService" class="org.springframework.batch.admin.service.SimpleJobServiceFactoryBean">
+		<property name="jobRepository" ref="jobRepository" />
+		<property name="jobLauncher" ref="jobLauncher" />
+		<property name="jobLocator" ref="jobRegistry" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+
+</beans>

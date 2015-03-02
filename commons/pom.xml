@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.infrasofttech</groupId>
+    <artifactId>commons</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    
+    <parent>
+		<artifactId>
+            OMNI_NG
+        </artifactId>
+		<groupId>
+            com.infrasofttech
+        </groupId>
+		<version>
+            1.0.0
+        </version>
+	</parent>
+    <name>commons</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+	<distributionManagement>
+ <!-- Publish the versioned releases here -->
+ 
+</distributionManagement>
+
+<!-- download artifacts from this repo -->
+<repositories>
+ 
+</repositories>
+
+<!-- download plugins from this repo -->
+<pluginRepositories>
+ 
+</pluginRepositories>
+
+    <dependencies>
+    
+    	<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+		</dependency>
+      
+        <!-- <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-hibernate3</artifactId>    
+        </dependency> -->
+        
+         <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+        </dependency>
+        
+         <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+         </dependency>
+            
+       <!--  <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-dao</artifactId>
+        </dependency> -->
+        
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>    
+        </dependency>
+        
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>    
+        </dependency>
+            
+		<dependency>
+		      <groupId>junit</groupId>
+		      <artifactId>junit</artifactId>
+		 </dependency>
+		 
+		 <dependency>
+	         <groupId>org.slf4j</groupId>
+	         <artifactId>slf4j-log4j12</artifactId>
+	    </dependency>
+	    
+     	<dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+       	</dependency>
+       
+	    <dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
+     
+        <!-- End per4j support -->
+    </dependencies>
+</project>

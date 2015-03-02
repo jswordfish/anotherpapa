@@ -1,0 +1,510 @@
+/* @charset "utf-8";
+
+@
+taglib prefix ="s" uri ="/struts-tags"; */
+	/* CSS Document */ 
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+}
+
+.pageTitle{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #CC0000;
+	font: bold;
+	background-color: #FFFFFF;
+	
+}
+.menu {
+	font-family: verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #ffffff;
+}
+
+.menu a:link {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.menu a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.rbd {
+	border-right: 1px solid #ff0000;
+}
+
+.head1 {
+	font-size: 14px;
+	font-weight: bold;
+	background-color: #cae2ff;
+	border: 1px solid #cdd0d1;
+}
+
+.allbd {
+	border: 1px solid #ccc;
+	width: 900px;
+}
+
+.allbdsmall {
+	border: 1px solid #999;
+	width: 500px;
+}
+
+.w120 {
+	width: 220px;
+}
+
+.tabselected {
+	background-color: #ffffff;
+	color: #03C;
+}
+
+.tableheading {
+	background-color: #4f81bd;
+	font-weight: bold;
+	color: #ffffff;
+	border-radius: 3px;
+	
+}
+
+.tableheading a:link {
+	color: #ffffff;
+}
+
+.tableheading a:visited {
+	color: #ffffff;
+}
+
+.topbar {
+	background-image: url(../images/banner.jpg);
+	height: 100px;
+	background-repeat: no-repeat;
+	background-position: right;
+	background-color: #0037cc;
+}
+
+.pfmenus {
+	font-size: 12px;
+	color: #ffffff;
+	border: 1px solid #b9b8b8;
+	text-align: center;
+}
+
+.pfmenus a:link {
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+
+.pfmenus a:visited {
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+
+.datatdbg {
+	background-color: #d0d8e8;
+}
+
+.datatdbg1 {
+	background-color: #e9edf4;
+}
+
+#omniform {
+	margin: auto;
+	position: relative;
+	font-family: arial, Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	line-height: 24px;
+ 	font-weight: normal; 
+	color: #000000;
+	text-decoration: none;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	border: 1px solid #999;
+	border: inset 1px solid #333;
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	width:100%;
+}
+
+#omnimenuform {
+	margin: auto;
+	position: relative;
+	font-family: arial, Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	line-height: 24px;
+	color: #000000;
+	text-decoration: none;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	border: 1px solid #999;
+	border: inset 1px solid #333;
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	width:100%;
+}
+
+.errorDiv{
+	width: 150px;
+	border: 1px solid #999;
+	font-size: 13px;
+	color: #FF0000;
+	font-family: Calibri;
+	font-weight: normal;
+	border: 1px solid #CACACA;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+	text-align: center;
+	align: center;
+	
+}
+input {
+	width: 150px;
+	
+	font-size: 13px;
+	border: none;
+	font-family: Calibri;
+	font-weight: normal;
+	border: 1px solid #000000;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+	text-align: left;
+}
+
+.smallTxtLeftAlign {
+	background-color: #ffffff;
+	color: #000000;
+	font-size: 13px;
+	font-family: Calibri;
+	width: 50px;
+	font-weight: normal;
+	border: 1px solid #000000;
+	border-radius: 3px;
+	padding: 1px;
+	text-align: left;
+}
+
+.mediumTxtLeftAlign {
+	
+	color: #000000;
+	font-size: 13px;
+	border: 1px solid #000000;
+	font-family: Calibri;
+	font-style: normal;
+	width: 100px;
+	font-weight: normal;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+	text-align: left;
+}
+
+.smallTxtRightAlign {
+	background-color: #ffffff;
+	color: #000000;
+	font-size: 13px;
+	font-family: Calibri;
+	width: 50px;
+	font-weight: normal;
+	border: 1px solid #000000;
+	border-radius: 3px;
+	padding: 1px;
+	text-align: right;
+}
+
+.mediumTxtRightAlign {
+	background-color: #ffffff;
+	border: 1px solid #999;
+	color: #000000;
+	font-size: 13px;
+	font-family: Calibri;
+	width: 100px;
+	font-weight: normal;
+	border: none;
+	border: 1px solid #000000;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+	text-align: right;
+}
+
+.largeTxtRightAlign {
+	width: 150px;
+	border: 1px solid #999;
+	font-family: Calibri;
+	border: none;
+	font-size: 13px;
+	border: 1px solid #CACACA;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+	text-align: right;
+}
+
+.largeTxtLeftAlign {
+	width: 175px;
+	border: 1px solid #000000;
+	font-family: Calibri;
+	font-size: 13px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+	text-align: left;
+}
+
+.verySmallTxtLeft {
+	background-color: #ffffff;
+	border: none;
+	color: #000000;
+	font-size: 13px;
+	font-family: Calibri;
+	width: 30px;
+	font-weight: normal;
+	border: 1px solid #CACACA;
+	border-radius: 3px;
+	padding: 1px;
+	text-align: left;
+}
+
+.veryLargeTxtLeft {
+	background-color: #ffffff;
+	
+	color: #000000;
+	font-size: 14px;
+	font-family: Calibri;
+	width: 250px;
+	font-weight: normal;
+	border: 1px solid #000000;
+	border-radius: 3px;
+	padding: 1px;
+	text-align: left;
+}
+
+select {
+	width: 175px;
+	color: #000000;
+	font-size: 14px;
+	font-family: Calibri;
+	border: 1px solid #000000;
+	font-weight: normal;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+}
+
+.mediumselect {
+	width: 100px;
+	color: #000000;
+	font-size: 14px;
+	font-family: Calibri;
+	border: 1px solid #000000;
+	font-weight: normal;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+}
+
+.smallselect {
+	width: 80px;
+	color: #000000;
+	font-size: 14px;
+	font-family: Calibri;
+	border: 1px solid #000000;
+	font-weight: normal;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+	
+}
+.multiSelect {
+	width: 150px;
+	color: #000000;
+	font-size: 14px;
+	font-family: Calibri;
+	border: 1px solid #000000;
+	font-weight: normal;
+	height: 60px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+	
+}
+
+
+.button {
+	width: 75px;
+	
+	font-size: 12px;
+	font-family: Calibri;
+	font-style: normal;
+	font-weight: bold;
+	height: 24px;
+	border: 1p solid #0000;
+	border-radius: 3px;
+	text-align: center;
+	color: #000000;
+	background-color:#DBDBDB;
+}
+/* .button[disabled=true]
+{
+	background-color: #FFFFFF;
+} */
+.bigbtn {
+	width: 150px;
+	
+	color: #000000;
+	font-size: 12px;
+	font-family: Calibri;
+	font-style: normal;
+	height: 24px;
+	font-weight: bold;
+	border-radius: 3px;
+	border: 1p solid #0000;
+	text-align: center;
+	background-color:#DBDBDB;
+}
+
+.smallbtn {
+	width: 50px;
+	
+	color: #000000;
+	font-weight: bold;
+	font-family: Calibri;
+	height: 24px;
+	font-size: 12px;
+	border-radius: 3px;
+	border: 1p solid #0000;
+	text-align: center;
+	background-color:#DBDBDB;
+}
+
+.label {
+	font-size: 13px;
+	height: 18px;
+	color: #0000FF;
+	font-family: Calibri;
+	font-weight: normal;
+	background-color: #ffffff;
+	padding: 1px;
+	text-align: left;
+}
+
+textarea {
+	color: #000000;
+	font-size: 13px;
+	font-family: Calibri;
+	border: 1px solid #999;
+	font-weight: normal;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding: 1px;
+}
+
+.radiobutton {
+	width: 2px;
+	border: 0px;
+	height: 2px;
+} 
+
+.myinputcheckbox {
+	width: 15px;
+	height: 8px;
+	border: 0px;
+}
+
+.errMsg2{
+	
+	color: #00FF00;
+}
+
+.errMsg1{
+	color: #FF0000;
+}
+.trList{
+	border-bottom: 1px solid #DBDBDB;
+}
+
+
+
+.topmenu	ul { 
+ 		font-family: Calibri; 
+ 		font-size: 14px; 
+ 		font: bold; 
+ 		padding: 0px 15px; 
+		list-style: none; 
+ 		position: relative; 
+ 		display: table-cell; 
+ 		
+ 		z-index:99;
+ 	} 
+	
+.topmenu	ul li { 
+ 		float: left; 
+ 		font-family: Calibri; 
+ 		font-size: 14px; 
+ 		color: #CC0000; 
+ 	} 
+	
+.topmenu	ul li:hover a { 
+ 		position: relative; 
+ 		color: #0000AF; 
+ 		
+ 	} 
+ 	
+.topmenu ul li a { 
+ 		display: block; padding: 1px 2px; 
+ 		color: #CC0000; text-decoration: none; 
+ 		font-size:14px;
+ 		
+ 	} 
+	
+.topmenu	ul ul { 
+ 		background: #000000F; padding: 0; 
+ 		position: absolute; top: 100%; 
+ 		display: none; 
+ 		height: 20px; 
+ 	} 
+	
+.topmenu	ul ul li { 
+ 		float: none;  
+ 		border-left: 1px solid #AAAAAF; 
+ 		border-right: 1px solid #AAAAAF; 
+ 		border-bottom: 1px solid #AAAAAF; 
+ 		position: relative; 
+/*  		background: #DDDDEF;  */
+ 		background: #FFFFFF;
+ 	
+ 	} 
+	
+.topmenu	ul ul li a { 
+ 	   width: 16em; 
+ 		padding: 0px 30px; 
+ 		color: #FFFFFF; 
+ 		font: bold; 
+ 	} 
+	
+.topmenu	ul ul li a:hover { 
+ 		background: #0000EF; 
+ 		color: #FFFFFF; 
+ 		font: bold; 
+ 	} 
+
+.topmenu	ul li:hover > ul { 
+ 		display: block; 
+ 		background: #DDDDEF; 
+ 	} 
+	
+.topmenu	ul ul ul { 
+ 		position: absolute; left: 100%; top:0; 
+ 	} 

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence  version="2.0"
+			  xmlns="http://java.sun.com/xml/ns/persistence"
+ 			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 			  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence		http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<!-- Only for test cases -->
+	<persistence-unit name="EDMPersistenceUnit"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<class>com.cron.entities.GSCron</class>
+		<class>com.domain.jpa.entities.GSUser</class>
+		<class>com.domain.jpa.entities.GSVendor</class>
+		<class> com.domain.jpa.entities.GSVendorDefaults</class>
+
+		<class> com.domain.jpa.entities.GSEntityMetaData</class>
+		<class> com.domain.jpa.entities.GSEntityType</class>
+		<class> com.domain.jpa.entities.GSEntityTypeConfiguration</class>
+		<class> com.domain.jpa.entities.GSFeed</class>
+		<class> com.domain.jpa.entities.GSFeedDefaults</class>
+		<class> com.domain.jpa.entities.GSFeedFTPDefaults</class>
+		<class> com.domain.jpa.entities.GSFeedJVMParameters</class>
+		<class> com.domain.jpa.entities.GSFileMetaData</class>
+		<class> com.domain.jpa.entities.GSRecord</class>
+		<class> com.domain.jpa.entities.GSRecordType</class>
+		<class> com.domain.jpa.entities.GSRecordTypeConfiguration</class>
+
+		<class>com.infrastructure.entities.GSAbstractJob</class>
+		<class>com.infrastructure.entities.GSFileDownloadJobData</class>
+		<class>com.infrastructure.entities.GSJobData</class>
+		<class>com.infrastructure.entities.GSTrigger</class>
+		<class>com.jobs.GSFileDownloadJob</class>
+		<class>com.jobs.GSFileDownloadWorkFlowJob</class>
+    <class>com.jobs.GSFeedProcessWorkFlowJob</class>
+    
+		<class>com.infrastructure.entities.GSFileTrace</class>
+		<class>com.translation.entities.GSTranslationTable</class>
+		<class>com.jbpm.data.GSJBPMFileDldAndProcWfData</class>
+
+
+    <class>com.domainjpa.securitymaster.GSAssetBackedSecurity</class>
+	<class>com.domainjpa.securitymaster.GSBusinessEntityBase</class>
+	<class>com.domainjpa.securitymaster.GSCertificateCharacteristics</class>
+	<class>com.domainjpa.securitymaster.GSCommonStock</class>
+	<class>com.domainjpa.securitymaster.GSCommonStockStatistics</class>
+	<class>com.domainjpa.securitymaster.GSCustodian</class>
+	<class>com.domainjpa.securitymaster.GSDealer</class>
+	<class>com.domainjpa.securitymaster.GSDebtInstrument</class><!-- 
+		Only for test cases -->
+	<class>com.domainjpa.securitymaster.GSDepository</class>
+	<class>com.domainjpa.securitymaster.GSDepositoryReceipt</class>
+	<class>com.domainjpa.securitymaster.GSDerivative</class>
+	<class>com.domainjpa.securitymaster.GSDerivativeSchedule</class>
+	<class>com.domainjpa.securitymaster.GSDerivativeScheduleDiscreteDateTime</class>
+	<class>com.domainjpa.securitymaster.GSDocumentDefinition</class>
+	<!-- <class>com.domainjpa.securitymaster.GSEarningPerShareStatistics</class> -->
+	<class>com.domainjpa.securitymaster.GSEnterprise</class>
+	<class>com.domainjpa.securitymaster.GSEquity</class>
+	<class>com.domainjpa.securitymaster.GSEquityCharacteristics</class>
+	<class>com.domainjpa.securitymaster.GSEquityStatistics</class>
+	<class>com.domainjpa.securitymaster.GSExchange</class>
+	<!--  class>com.domainjpa.securitymaster.GSFinancialInstrumentDocument</class-->
+	<class>com.domainjpa.securitymaster.GSFnclInstrMrketCptlzn</class>
+	<class>com.domainjpa.securitymaster.GSFinancialMarketIdentifier</class>
+	<class>com.domainjpa.securitymaster.GSFnclInstrListingChars</class>
+	<class>com.domainjpa.securitymaster.GSFinancialMarketFinancialInstrumentComment</class>
+	<class>com.domainjpa.securitymaster.GSFutureCharacteristics</class>
+	<class>com.domainjpa.securitymaster.GSFutures</class>
+	<class>com.domainjpa.securitymaster.GSIndustryClassification</class>
+	<class>com.domainjpa.securitymaster.GSIndustryClassificationSet</class>
+	<class>com.domainjpa.securitymaster.GSInstitution</class>
+	<class>com.domainjpa.securitymaster.GSInstitutionIdentifier</class>
+	<class>com.domainjpa.securitymaster.GSInstitutionOtherRole</class>
+	<class>com.domainjpa.securitymaster.GSInstitutionRole</class>
+	<class>com.domainjpa.securitymaster.GSInstitutionDescription</class>
+	<class>com.domainjpa.securitymaster.GSFinancialInstrumentListingStatistics</class>
+	<class>com.domainjpa.securitymaster.GSInsititutionRoleStatistics</class>
+	<class>com.domainjpa.securitymaster.GSInstitutionRoleRating</class>
+	<class>com.domainjpa.securitymaster.GSInstRoleClsf</class>
+	<class>com.domainjpa.securitymaster.GSInstitutionRoleGroup</class>
+	<class>com.domainjpa.securitymaster.GSInstitutionRoleIdentifier</class>
+	<!-- <class>com.domainjpa.securitymaster.GSIssuer</class> -->
+	<!-- <class>com.domainjpa.securitymaster.GSIssuerDescription</class> -->
+	<!-- <class>com.domainjpa.securitymaster.GSIssuerGroupParticipant</class> -->
+	<class>com.domainjpa.securitymaster.GSInstitutionGeoUnitRelation</class>
+	<!-- <class>com.domainjpa.securitymaster.GSIssuerType</class> -->
+	<class>com.domainjpa.securitymaster.GSLoanMortgageBalancesByDate</class>
+	<class>com.domainjpa.securitymaster.GSLoanMortgageCharacteristics</class>
+	<class>com.domainjpa.securitymaster.GSLoanMortgageDelinquencyStatistics</class>
+	<class>com.domainjpa.securitymaster.GSLoanMortgageDistributionStatistics</class>
+	<class>com.domainjpa.securitymaster.GSLoanMortgageQuartileValues</class>
+	<class>com.domainjpa.securitymaster.GSLoanMortgageStatistics</class>
+	<class>com.domainjpa.securitymaster.GSMortgageBackedSecurity</class>
+	<class>com.domainjpa.securitymaster.GSMortgageCurrentAggregation</class>
+	<class>com.domainjpa.securitymaster.GSMortgagePoolPrefixInformation</class>
+	<class>com.domainjpa.securitymaster.GSMortgagePreviousAggregation</class>
+	<class>com.domainjpa.securitymaster.GSOptionCharacteristics</class>
+	<class>com.domainjpa.securitymaster.GSOptions</class>
+	<class>com.domainjpa.securitymaster.GSOtherFinancialMarket</class>
+	<class>com.domainjpa.securitymaster.GSFinancialMarket</class>
+	<class>com.domainjpa.securitymaster.GSPreferredStock</class>
+	<class>com.domainjpa.securitymaster.GSRatingValue</class>
+	<class>com.domainjpa.securitymaster.GSRatingSet</class>
+	<class>com.domainjpa.securitymaster.GSRedemptionExtensionInformation</class>
+	<class>com.domainjpa.securitymaster.GSRedemptionPrematureRepaymentDates</class>
+	<class>com.domainjpa.securitymaster.GSRedemptionPrematureRepaymentInfo</class>
+	<class>com.domainjpa.securitymaster.GSRights</class>
+	<class>com.domainjpa.securitymaster.GSSecuritization</class>
+	<class>com.domainjpa.securitymaster.GSShareholderStatistics</class>
+	<class>com.domainjpa.securitymaster.GSSubdivision</class>
+	<class>com.domainjpa.securitymaster.GSUnderwriting</class>
+	<class>com.domainjpa.securitymaster.GSUwritingStatsByGeogUnit</class>
+	<class>com.domainjpa.securitymaster.GSUnderwritingCharacteristics</class>
+	<class>com.domainjpa.securitymaster.GSUnderwritingCharge</class>
+	<class>com.domainjpa.securitymaster.GSUnderwritingStatistics</class>
+	<class>com.domainjpa.securitymaster.GSUwritingStatsByFnclInstrYr</class>
+	<class>com.domainjpa.securitymaster.GSWarrants</class>
+	<class>com.domainjpa.securitymaster.GSDebtInstrChars</class>
+	<class>com.domainjpa.securitymaster.GSDebtInstrumentStatistics</class>
+
+
+
+
+	
+		<class>com.domainjpa.securitymaster.GSCalendarDefinition</class>
+		<!-- <class>com.domainjpa.securitymaster.GSCertificateCouponSheet</class> -->
+		<!-- <class>com.domainjpa.securitymaster.GSDependentFinInstr</class>
+		<class>com.domainjpa.securitymaster.GSDependentFinInstrStatistics</class>
+		<class>com.domainjpa.securitymaster.GSDependentOnFinInstr</class> -->
+		<class>com.domainjpa.securitymaster.GSFinancialInstrument</class>
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrAmount</class> -->
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrCalendarDefinition</class> -->
+		<class>com.domainjpa.securitymaster.GSFinInstrCalendarDefinitionId</class>
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrCharge</class> -->
+		<class>com.domainjpa.securitymaster.GSFinInstrClassification</class>
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrComment</class> -->
+		<class>com.domainjpa.securitymaster.GSFinInstrDate</class>
+		<class>com.domainjpa.securitymaster.GSFinInstrDescription</class>
+		<class>com.domainjpa.securitymaster.GSFinInstrGeoUnitRelation</class>
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrGroup</class> -->
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrIdentifier</class> -->
+		<class>com.domainjpa.securitymaster.GSFinInstrRegulatory</class>
+		<class>com.domainjpa.securitymaster.GSFinInstrRegulatoryCharacteristics</class>
+		<class>com.domainjpa.securitymaster.GSFinInstrRegulatoryIdentifier</class>
+		<class>com.domainjpa.securitymaster.GSFinInstrRestriction</class>
+		<class>com.domainjpa.securitymaster.GSFinInstrStandardStatistics</class>
+		<class>com.domainjpa.securitymaster.GSFinInstrStatisticsByGeoUnit</class>
+		<class>com.domainjpa.securitymaster.GSFinInstrStatisticsByYear</class>
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrStatus</class> -->
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrTaxCollection</class> -->
+		<class>com.domainjpa.securitymaster.GSFinInstrType</class>
+		<!-- <class>com.domainjpa.securitymaster.GSFinInstrUnitOfDenomination</class> -->
+		<class>com.domainjpa.securitymaster.GSGeographicUnit</class>
+		<class>com.domainjpa.securitymaster.GSIncomeEvent</class>
+		<class>com.domainjpa.securitymaster.GSIncomeEventParticipant</class>
+		<class>com.domainjpa.securitymaster.GSIncomeEventPayment</class>
+		<class>com.domainjpa.securitymaster.GSIndividualLoanMortgage</class>
+		<class>com.domainjpa.securitymaster.GSNLSCodeDefinition</class>
+		<class>com.domainjpa.securitymaster.GSPrincipalEvent</class>
+		<class>com.domainjpa.securitymaster.GSPrincipalEventParticipant</class>
+		<class>com.domainjpa.securitymaster.GSPrincipalEventPayment</class>
+		<class>com.domainjpa.securitymaster.GSRegulatoryAmounts</class>
+		<class>com.domainjpa.securitymaster.GSRegulatoryPeriods</class>
+		<class>com.domainjpa.securitymaster.GSRegulatoryResidentDetails</class>
+		<class>com.domainjpa.securitymaster.GSRegulatoryRestrictions</class>
+		<class>com.domainjpa.securitymaster.GSRegRoundtripInfo</class>
+		<!-- <class>com.domainjpa.securitymaster.GSStoppingList</class>
+		<class>com.domainjpa.securitymaster.GSStoppingListAgent</class>
+		<class>com.domainjpa.securitymaster.GSStoppingListCertificate</class> -->
+		<class>com.domainjpa.securitymaster.GSSwap</class>
+		<class>com.domainjpa.securitymaster.GSSwapCharacteristics</class>
+		<class>com.domainjpa.securitymaster.GSTimeZoneDefinition</class>
+
+		<class>com.domainjpa.references.GSDomainValue</class>
+		
+		<class>com.domainjpa.securitymaster.GSExchange</class>
+		
+		<class>com.domainjpa.securitymaster.GSInstrumentActivityStatusDetails</class>
+		<class>com.domainjpa.securitymaster.GSFnclInstrListingChars</class>
+		
+		<class>com.domainjpa.securitymaster.GSInstrumentIdentifier</class>
+		<class>com.domainjpa.securitymaster.GSCntryLvlInstrId</class>
+		<class>com.domainjpa.securitymaster.GSExchLvlInstrId</class>
+		<class>com.domainjpa.securitymaster.GSGlobalNonUnqInstrId</class>
+		<class>com.domainjpa.securitymaster.GSGlobalUnqInstrId</class>
+		<class>com.domainjpa.entities.GSBusinessEntityElement</class>
+	
+		<class>com.template.entities.GSLbl</class>
+		<class>com.template.entities.GSTempl</class>
+		<class>com.template.entities.GSLblLcleSpecificTxt</class>
+		<class>com.template.entities.GSTemplCategorizer</class>
+		<!-- <class>com.domainjpa.securitymaster.GSInstitution</class> 
+			<class>com.domainjpa.securitymaster.GSIndustryClassification</class> 
+			<class>com.domainjpa.securitymaster.GSIndustryClassificationSet</class> 
+			<class>com.domainjpa.securitymaster.GSInstitutionIdentifier</class> 
+			<class>com.domainjpa.securitymaster.GSInstRoleClsf</class> 
+			<class>com.domainjpa.securitymaster.GSInstitutionRole</class> 
+			<class>com.domainjpa.securitymaster.GSBusinessEntityBase</class> -->
+
+
+
+
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.show_sql" value="true" />
+			<!-- For Hibernate search -->
+			<property name="hibernate.search.default.directory_provider"
+				value="org.hibernate.search.store.FSDirectoryProvider" />
+			<property name="hibernate.search.default.indexBase" value="C:\\del\\luceneIndexes" />
+			<!-- <property name="hibernate.search.autoregister_listeners" value="false"/> -->
+			<property name="hibernate.cache.use_second_level_cache"
+				value="false" />
+			<!-- Above Hibernate search -->
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

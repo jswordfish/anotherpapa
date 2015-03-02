@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/jee 
+             http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+        http://www.springframework.org/schema/util 
+             http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.springframework.org/schema/aop 
+             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/tx 
+             http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+       default-lazy-init="true">
+
+
+        
+    <tx:annotation-driven transaction-manager="transactionManager" />
+        
+<!--     <bean id="transactionManager" -->
+<!--             class="org.springframework.orm.hibernate3.HibernateTransactionManager"> -->
+<!--            <property name="sessionFactory" ref="sessionFactory" /> -->
+<!--     </bean> -->
+
+
+    <bean id="transactionManager"
+            class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+           <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    
+    <bean id="sessionFactory"
+              class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+<!--         <property name="annotatedClasses"> -->
+<!--             <list> -->
+<!--                 <value>com.coxandkings.travelERP.domainJPAModel.masterReference.SampleAirportCodeMasterReference</value> -->
+<!--             </list> -->
+<!--         </property> -->
+        <!--
+        <property name="dataSource" ref="datasource"/>
+        -->
+        <property name="packagesToScan" value="com.coxandkings.travelERP.domainJPAModel.masterReference" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
+                <prop key="hibernate.connection.pool_size">0</prop>
+<!--                 <prop key="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</prop> -->
+                <prop key="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</prop>
+                <prop key="hibernate.connection.url">jdbc:derby://localhost:1527/D:/db-derby-10.8.1.2-bin/travelERP;create=true</prop>
+<!--                 <prop key="hibernate.connection.url">jdbc:derby:D:/db-derby-10.8.1.2-bin/travelERP;create=true</prop> -->
+                <prop key="hibernate.connection.username">travelERP</prop>
+                <prop key="hibernate.connection.password">travelERP</prop>
+                <prop key="hibernate.connection.autocommit">true</prop>
+                <prop key="hibernate.jdbc.batch_size">0</prop>
+                
+                
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+				<!-- uncomment this for first time run-->
+<!-- 				<prop key="hibernate.hbm2ddl.auto">create</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+                
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sessionFactory_bak" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+
+<!--         <property name="annotatedClasses"> -->
+<!--             <list> -->
+<!--                 <value>com.coxandkings.travelERP.domainJPAModel.masterReference.SampleAirportCodeMasterReference</value> -->
+<!--             </list> -->
+<!--         </property> -->
+
+
+             <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+<!--              <property name="hibernateProperties" value="classpath:hibernate.properties"/> -->
+
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
+                <prop key="hibernate.connection.pool_size">0</prop>
+                <prop key="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</prop>
+                <prop key="hibernate.connection.url">jdbc:derby://localhost:1527/travelERP;shutdown=true</prop>
+                <prop key="hibernate.connection.username">travelERP</prop>
+                <prop key="hibernate.connection.password">travelERP</prop>
+                <prop key="hibernate.connection.autocommit">true</prop>
+                <prop key="hibernate.jdbc.batch_size">0</prop>
+            </props>
+        </property>
+
+    </bean>
+
+
+    <bean id="referenceMasterDAO" class="com.coxandkings.travelERP.dao.hibernate.masterReference.MasterReferenceDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+   
+</beans>

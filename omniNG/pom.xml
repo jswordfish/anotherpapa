@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.infrasofttech</groupId>
+	<artifactId>omniNG</artifactId>
+	<version>1.0.0</version>
+	<packaging>war</packaging>
+	<parent>
+		<artifactId>
+            OMNI_NG
+        </artifactId>
+		<groupId>
+            com.infrasofttech
+        </groupId>
+		<version>
+            1.0.0
+        </version>
+	</parent>
+	<name>omniNG</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+
+	<distributionManagement>
+		
+	</distributionManagement>
+
+	<!-- download artifacts from this repo -->
+	<repositories>
+		
+	</repositories>
+
+	<!-- download plugins from this repo -->
+	<pluginRepositories>
+		
+	</pluginRepositories>
+
+	<dependencies>
+			
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>businessService</artifactId>
+			<version>${project.version}</version>
+			
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>commons</artifactId>
+			 <version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+	</dependency>
+		
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.struts.xwork</groupId>
+			<artifactId>xwork-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-tiles-plugin</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-dojo-plugin</artifactId>
+		</dependency>
+			
+		
+		
+		
+	</dependencies>
+	<!--<repositories> <repository> <url>http://repo1.maven.org/maven2/</url> 
+		<id>junit_4</id> <layout>default</layout> <name>Repository for library Library[junit_4]</name> 
+		</repository> </repositories> -->
+
+</project>
