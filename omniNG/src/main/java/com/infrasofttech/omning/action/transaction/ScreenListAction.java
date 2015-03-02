@@ -11,7 +11,9 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.infrasofttech.domain.entities.transaction.ScreenElement;
 import com.infrasofttech.domain.entities.transaction.ScreenMapper;
+import com.infrasofttech.omning.transaction.services.ScreenElementService;
 import com.infrasofttech.omning.transaction.services.ScreenMapperService;
 import com.infrasofttech.omning.utils.SpringUtil;
 import com.infrasofttech.utils.ErrorCodes;
@@ -19,7 +21,7 @@ import com.infrasofttech.utils.OmniConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class SaveOrUpdateScreenMapper extends ActionSupport implements  ServletRequestAware { 
+public class ScreenListAction extends ActionSupport implements  ServletRequestAware { 
 
 	private static final long serialVersionUID = -5539422250920232971L;
 	private static final Logger logger = Logger.getLogger(TxnClientConfigCRUDAction.class);
@@ -55,33 +57,14 @@ public class SaveOrUpdateScreenMapper extends ActionSupport implements  ServletR
 				branchCode = (String)request.getSession().getAttribute("branchCode");
 				languageCode = (String)request.getSession().getAttribute("languageCode");
 				loginId = (String)request.getSession().getAttribute("loginID");
-				
-				ScreenMapper screenMapper = (ScreenMapper) request.getSession().getAttribute("screenMapper");
-				if(screenMapper != null){
-					screenMapper.setTenantId(tenantId);
-				}
-				
-				ScreenMapperService screenMapperService = (ScreenMapperService) SpringUtil.getSpringUtil().getService("screenMapperService");
+			
+				//Screen screenMapperService = (ScreenMapperService) SpringUtil.getSpringUtil().getService("screenMapperService");
 				String onlyList = request.getParameter("onlyList");
 				
-				try {
-					if(!(onlyList != null && onlyList.equalsIgnoreCase("yes"))){
-							if(screenMapper != null){
-								screenMapperService.saveOrUpdate(screenMapper);
-							}
-						
-					}
-					
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					logger.error("can not save screen mapper", e);
-					retVal = OmniConstants.FAILURE;
-					return retVal;
-				}
+				ScreenElementService screenElementService = (ScreenElementService) SpringUtil.getSpringUtil().getService("screenElementService");
 				// Action logic here...
-				List<ScreenMapper> mappers = screenMapperService.findAllByTenant(tenantId);
-				request.setAttribute("screenMappers", mappers);
+				List<ScreenElement> elements = screenElementService.findAllByTenant(tenantId);
+				request.setAttribute("screenElements", elements);
 				retVal = OmniConstants.SUCCESS;
 			}
 		}catch(Exception e){

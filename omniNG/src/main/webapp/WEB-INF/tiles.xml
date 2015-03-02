@@ -1145,5 +1145,14 @@
 	<definition name="txnScreenMappers.tiles" extends="baseLayout">
 		<put-attribute name="body" value="/views/transaction/TxnScreenMappers.jsp" />
 	</definition>
+	
+	<definition name="txnScreenList.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/transaction/TxnScreenList.jsp" />
+	</definition>
+	
+	<definition name="txnScreenAddUpdate.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/views/transaction/TxnScreenAddUpdate.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

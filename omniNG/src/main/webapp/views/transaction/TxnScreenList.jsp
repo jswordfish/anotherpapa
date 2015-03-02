@@ -55,16 +55,15 @@
 <body bgcolor="#F5F5F3" topmargin="0">
 
 <%
-List<ScreenMapper> screenMappers = (List<ScreenMapper>) request.getAttribute("screenMappers");
+List<ScreenElement> elements = (List<ScreenElement>) request.getAttribute("screenElements");
 
 %>
 <br>
 	<div id="result" class="container">
 	
-	<form name="topForm" action = "txn.action">
+	<form name="topForm" action = "screenElementAddUpdate.action">
 	<div class="btn-group">
-    <a class="btn btn-mini btn-success" href="txn.action">Add Transaction Screen Configuration</a>
-    <a class="btn btn-mini btn-success" href="screenElementList.action">Go To Screen Element Configuration</a>
+    <a class="btn btn-mini btn-success" href="txn.action">Add Screen Element Configuration</a>
    
 </div>
 		</form>
@@ -73,10 +72,10 @@ List<ScreenMapper> screenMappers = (List<ScreenMapper>) request.getAttribute("sc
         <thead>
             <tr>
 			   <th>Serial</th>
-			   <th>Branch Name</th>
-			   <th>Module Name</th>
-			   <th>Product Name</th>
-			   <th>Activity</th>
+			   <th>Name</th>
+			   <th>Display Name</th>
+			   <th>Data Type</th>
+			   <th>UI Type</th>
 			   <th>Update</th>
 			   <th>Delete</th>
 			   
@@ -89,7 +88,7 @@ List<ScreenMapper> screenMappers = (List<ScreenMapper>) request.getAttribute("sc
 		<%
 			
 		
-			if(null == screenMappers || screenMappers.size()==0){ %>
+			if(null == elements || elements.size()==0){ %>
         	<tr class="active"><td colspan="7">
 				No Records to display
 			</td></tr>
@@ -101,16 +100,16 @@ List<ScreenMapper> screenMappers = (List<ScreenMapper>) request.getAttribute("sc
 		
 			<%
 			int count = 0;
-				for(ScreenMapper mapper : screenMappers) {
+				for(ScreenElement element : elements) {
 			%>
         	<tr class="active">
                 <td><%= (++count) %></td>
-                <td><%= mapper.getBranchName() %></td>
-                <td><%= mapper.getModuleName() %></td>
-                <td><%= mapper.getProductName()%></td>
-				<td><%= mapper.getActivityName() %></td>
-				<td><a href="txnEditScreenMapper.action?id=<%= mapper.getId()%>&type=info">Update</a></td>
-				<td><a href="txnDeleteScreenMapper.action?id=<%= mapper.getId()%>&type=info">Delete</a></td>
+                <td><%= element.getName() %></td>
+                <td><%= element.getDisplayName() %></td>
+                <td><%= element.getScreenDataType().getVal()%></td>
+				<td><%= element.getScreenUIType().getVal() %></td>
+				<td><a href="txnEditScreenMapper.action?id=<%= element.getId()%>&type=info">Update</a></td>
+				<td><a href="txnDeleteScreenMapper.action?id=<%= element.getId()%>&type=info">Delete</a></td>
 				
             </tr>
             <%

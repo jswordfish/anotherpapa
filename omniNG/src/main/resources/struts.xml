@@ -1195,6 +1195,22 @@
 			<result name="login" type="tiles">loginPage.tiles</result>
 		</action>
 		
+		<action name="screenElementList"
+			class="com.infrasofttech.omning.action.transaction.ScreenListAction" method="execute">
+			<result name="success" type="tiles">txnScreenList.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
+		<action name="screenElementAddUpdate"
+			class="com.infrasofttech.omning.action.transaction.ScreenListAction" method="execute">
+			<result name="success" type="tiles">txnScreenAddUpdate.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
 		
 
 	
