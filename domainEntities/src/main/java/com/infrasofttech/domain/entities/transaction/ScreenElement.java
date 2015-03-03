@@ -6,26 +6,35 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import com.infrasofttech.domain.entities.Base;
 
+
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "ScreenElement.getScreenElement", query = "SELECT s FROM ScreenElement s WHERE s.tenantId=:tenantId "
+			+ "  AND s.name=:name") })
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "tenantId", "name"}))
 public class ScreenElement extends Base{
 	
 	
 
 	@Column(nullable = false, length = 60)
-	private String name;
+	private String name = "";
 	
 	@Column(nullable = false, length = 60)
-	private String displayName;
+	private String displayName = "";
 
 	@Column(nullable = true, length = 400)
 	private String value;
 	
 	@Column(nullable = true, length = 60)
-	private String lookupCode;
+	private String lookupCode = "";
 	
 	@Transient
 	private List<String> lookupValues;//look up values
@@ -37,6 +46,7 @@ public class ScreenElement extends Base{
 	private ScreenUIType screenUIType = ScreenUIType.TEXT;
 
 	public String getName() {
+		
 		return name;
 	}
 

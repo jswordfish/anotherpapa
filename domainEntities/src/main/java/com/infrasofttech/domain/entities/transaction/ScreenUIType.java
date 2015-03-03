@@ -15,4 +15,13 @@ TEXT("TEXT"), TEXTAREA("TEXTAREA"), CHECKBOX("CHECKBOX"), RADIO("RADIO"), SINGLE
 	public String getVal() {
 		return val;
 	}
+	
+	public static ScreenUIType getScreenUIType(String str){
+		for(ScreenUIType screenUIType : ScreenUIType.values()){
+			if(screenUIType.getVal().equalsIgnoreCase(str)){
+				return screenUIType;
+			}
+		}
+		return null;
+	}
 }

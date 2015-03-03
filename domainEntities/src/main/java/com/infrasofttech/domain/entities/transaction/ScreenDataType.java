@@ -16,7 +16,15 @@ public enum ScreenDataType {
 	}
 
 
-	
+	public static ScreenDataType getScreenDataType(String str){
+		for(ScreenDataType screenDataType: ScreenDataType.values()){
+			if(screenDataType.getVal().equalsIgnoreCase(str)){
+				return screenDataType;
+			}
+		}
+		
+		return null;
+	}
 	
 	
 }

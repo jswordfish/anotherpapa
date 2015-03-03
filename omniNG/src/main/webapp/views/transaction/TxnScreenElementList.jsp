@@ -63,7 +63,7 @@ List<ScreenElement> elements = (List<ScreenElement>) request.getAttribute("scree
 	
 	<form name="topForm" action = "screenElementAddUpdate.action">
 	<div class="btn-group">
-    <a class="btn btn-mini btn-success" href="txn.action">Add Screen Element Configuration</a>
+    <a class="btn btn-mini btn-success" href="screenElementAddUpdate.action">Add Screen Element Configuration</a>
    
 </div>
 		</form>

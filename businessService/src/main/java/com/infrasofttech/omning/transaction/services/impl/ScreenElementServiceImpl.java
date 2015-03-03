@@ -1,14 +1,21 @@
 package com.infrasofttech.omning.transaction.services.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 
 import org.apache.log4j.Logger;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import antlr.collections.List;
 
 import com.infrasofttech.dao.basic.JPADAO;
 import com.infrasofttech.domain.entities.transaction.ScreenElement;
@@ -42,7 +49,24 @@ implements ScreenElementService {
 	}
 
 	public ScreenElement saveOrUpdate(ScreenElement screenElement) throws OmniNGException {
-		return super.saveOrUpdate(screenElement);
+		//ScreenElement.getScreenElement
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("tenantId", screenElement.getTenantId());
+		params.put("name", screenElement.getName());
+		java.util.List<ScreenElement> elements = super.findByNamedQueryAndNamedParams("ScreenElement.getScreenElement", params);
+		if(elements.size() == 0){
+			//create
+			return super.saveOrUpdate(screenElement);
+		}
+		else{
+			//update
+			ScreenElement elementFromDb = elements.get(0);
+			screenElement.setId(elementFromDb.getId());
+			Mapper mapper = new DozerBeanMapper();
+			mapper.map(screenElement, elementFromDb);
+			return super.saveOrUpdate(elementFromDb);
+		}
+		//return super.saveOrUpdate(screenElement);
 	}
 }
 
