@@ -99,7 +99,7 @@
 <table class="table table-condensed" width="100%">
 <tr class="active">
 	<td class="col-md-1">Screen Element Name</td>
-	<td class="col-md-1"><input id="name" name="name" type="text" value="<%= screenElement.getName() %>" <% if(screenElement.getId() != null) { %> disabled <%} %>/>
+	<td class="col-md-1"><input id="name" name="name" type="text" value="<%= screenElement.getName() %>" <% if(screenElement.getId() != null) { %> readOnly <%} %>/>
 	&nbsp; 
 	<span class="el3" id="el3"> </span></td>
 	<td class="col-md-1">Display Name</td>

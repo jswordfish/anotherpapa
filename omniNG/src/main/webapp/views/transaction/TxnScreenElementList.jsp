@@ -108,8 +108,8 @@ List<ScreenElement> elements = (List<ScreenElement>) request.getAttribute("scree
                 <td><%= element.getDisplayName() %></td>
                 <td><%= element.getScreenDataType().getVal()%></td>
 				<td><%= element.getScreenUIType().getVal() %></td>
-				<td><a href="txnEditScreenMapper.action?id=<%= element.getId()%>&type=info">Update</a></td>
-				<td><a href="txnDeleteScreenMapper.action?id=<%= element.getId()%>&type=info">Delete</a></td>
+				<td><a href="screenElementAddUpdate.action?id=<%= element.getId()%>&type=info">Update</a></td>
+				<td><a href="screenElementDelete.action?id=<%= element.getId()%>&type=info">Delete</a></td>
 				
             </tr>
             <%

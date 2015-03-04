@@ -36,6 +36,8 @@ public class ScreenElement extends Base{
 	@Column(nullable = true, length = 60)
 	private String lookupCode = "";
 	
+	private Boolean isActive = true;
+	
 	@Transient
 	private List<String> lookupValues;//look up values
 	
@@ -102,6 +104,14 @@ public class ScreenElement extends Base{
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-	
 
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	
 }

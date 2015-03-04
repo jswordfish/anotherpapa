@@ -1,6 +1,8 @@
 package com.infrasofttech.omning.services.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.infrasofttech.dao.basic.JPADAO;
 import com.infrasofttech.domain.entities.BranchMst;
+import com.infrasofttech.domain.entities.ModuleMst;
 import com.infrasofttech.domain.entities.UserMst;
 import com.infrasofttech.exceptions.OmniNGException;
 import com.infrasofttech.omning.IBranchMstDAO;
 import com.infrasofttech.omning.IProductMstDAO;
 import com.infrasofttech.omning.services.BranchMstService;
+import com.infrasofttech.omning.services.ModuleMstService;
 
 @Service("branchMstService")
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = OmniNGException.class)
@@ -36,6 +40,9 @@ public class BranchMstServiceImpl extends OmniNGServiceImpl<Long, BranchMst>
 	
 	@Autowired
 	protected IProductMstDAO productMstDAO;
+	
+	@Autowired
+	ModuleMstService moduleMstService;
 
 	@PostConstruct
 	public void init() throws Exception {
@@ -85,6 +92,22 @@ public class BranchMstServiceImpl extends OmniNGServiceImpl<Long, BranchMst>
 			Mapper mapper = new DozerBeanMapper();
 			long id = branchMst2.getId();
 			mapper.map(branchMst, branchMst2);
+			List<ModuleMst> modules = branchMst2.getModules();
+			Iterator<ModuleMst> itr  = modules.iterator();
+			List<ModuleMst> modulesDb = new ArrayList<ModuleMst>();
+				while(itr.hasNext()){
+					ModuleMst moduleMst = itr.next();
+					//fire named qry to get module from db.
+					ModuleMst moduleMst2 = null;  //fromnamed qry;
+							if(moduleMst2 == null){
+								modulesDb.add(moduleMst);
+							}
+							else{
+								modulesDb.add(moduleMst2);
+							}
+					
+				}
+			branchMst2.setModules(modulesDb);
 			branchMst2.setId(id);
 			return super.saveOrUpdate(branchMst2);
 
