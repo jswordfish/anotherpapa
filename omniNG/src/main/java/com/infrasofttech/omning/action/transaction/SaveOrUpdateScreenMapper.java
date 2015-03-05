@@ -1,5 +1,6 @@
 package com.infrasofttech.omning.action.transaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,10 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.infrasofttech.domain.entities.transaction.Screen;
+import com.infrasofttech.domain.entities.transaction.ScreenElement;
 import com.infrasofttech.domain.entities.transaction.ScreenMapper;
+import com.infrasofttech.domain.entities.transaction.ScreenRow;
 import com.infrasofttech.omning.transaction.services.ScreenMapperService;
 import com.infrasofttech.omning.utils.SpringUtil;
 import com.infrasofttech.utils.ErrorCodes;
@@ -67,6 +71,8 @@ public class SaveOrUpdateScreenMapper extends ActionSupport implements  ServletR
 				try {
 					if(!(onlyList != null && onlyList.contains("yes"))){
 							if(screenMapper != null){
+								//update screen elements with right selections
+								screenMapper = setScreenMapperWithUserSelections(screenMapper);
 								screenMapperService.saveOrUpdate(screenMapper);
 							}
 						
@@ -92,6 +98,70 @@ public class SaveOrUpdateScreenMapper extends ActionSupport implements  ServletR
 
 		}
 		return retVal;
+	}
+	
+	private ScreenMapper setScreenMapperWithUserSelections(ScreenMapper screenMapper){
+		List<ScreenElement> fields = (List<ScreenElement>) request.getSession().getAttribute("fields");
+		Map<String, ScreenElement> params = new HashMap<String, ScreenElement>();
+			for(ScreenElement field : fields){
+				params.put(field.getName(), field);
+			}
+		
+		
+		Screen txScreen = screenMapper.getTransactionScreen();
+		Screen infoScreen = screenMapper.getInfoScreen();
+		Screen balScreen = screenMapper.getBalancesScreen();
+		int txRows = txScreen.getRows().size();
+		int infoRows = infoScreen.getRows().size();
+		int balRows = balScreen.getRows().size();
+		
+		List<ScreenRow> screenTxRows = new ArrayList<ScreenRow>();
+		for(int i=0;i<txRows;i++){
+			ScreenRow row = txScreen.getRows().get(i);
+			List<ScreenElement> elements = new ArrayList<ScreenElement>();
+			String firstCol = request.getParameter("firstTxn"+i);
+			String secondCol = request.getParameter("secondTxn"+i);
+			ScreenElement element1 = params.get(firstCol);
+			ScreenElement element2 = params.get(secondCol);
+			elements.add(element1);
+			elements.add(element2);
+			row.setScreenElements(elements);
+			screenTxRows.add(row);
+		}
+		
+		List<ScreenRow> screenInfoRows = new ArrayList<ScreenRow>();
+		for(int i=0;i<txRows;i++){
+			ScreenRow row = infoScreen.getRows().get(i);
+			List<ScreenElement> elements = new ArrayList<ScreenElement>();
+			String firstCol = request.getParameter("firstInfo"+i);
+			String secondCol = request.getParameter("secondInfo"+i);
+			ScreenElement element1 = params.get(firstCol);
+			ScreenElement element2 = params.get(secondCol);
+			elements.add(element1);
+			elements.add(element2);
+			row.setScreenElements(elements);
+			screenInfoRows.add(row);
+		}
+		
+		List<ScreenRow> screenBalRows = new ArrayList<ScreenRow>();
+		for(int i=0;i<balRows;i++){
+			ScreenRow row = infoScreen.getRows().get(i);
+			List<ScreenElement> elements = new ArrayList<ScreenElement>();
+			String firstCol = request.getParameter("firstBal"+i);
+			String secondCol = request.getParameter("secondBal"+i);
+			ScreenElement element1 = params.get(firstCol);
+			ScreenElement element2 = params.get(secondCol);
+			elements.add(element1);
+			elements.add(element2);
+			row.setScreenElements(elements);
+			screenBalRows.add(row);
+		}
+		
+		txScreen.setRows(screenTxRows);
+		infoScreen.setRows(screenInfoRows);
+		balScreen.setRows(screenBalRows);
+		return screenMapper;
+		
 	}
 	
 	

@@ -15,12 +15,14 @@ import com.infrasofttech.domain.entities.ActivityMst;
 import com.infrasofttech.domain.entities.BranchMst;
 import com.infrasofttech.domain.entities.ModuleMst;
 import com.infrasofttech.domain.entities.ProductMst;
+import com.infrasofttech.domain.entities.transaction.ScreenElement;
 import com.infrasofttech.domain.entities.transaction.ScreenMapper;
 import com.infrasofttech.omning.services.ActivityMstService;
 import com.infrasofttech.omning.services.BranchMstService;
 import com.infrasofttech.omning.services.LookupValueService;
 import com.infrasofttech.omning.services.ModuleMstService;
 import com.infrasofttech.omning.services.ProductMstService;
+import com.infrasofttech.omning.transaction.services.ScreenElementService;
 import com.infrasofttech.omning.transaction.services.ScreenMapperService;
 import com.infrasofttech.omning.utils.SpringUtil;
 import com.infrasofttech.utils.ErrorCodes;
@@ -71,6 +73,11 @@ public class EditScreenMapper extends ActionSupport implements  ServletRequestAw
 				try {
 					ScreenMapper screenMapper =  (ScreenMapper) screenMapperService.find(id);
 					request.getSession().setAttribute("screenMapper", screenMapper);
+					
+					ScreenElementService screenElementService = (ScreenElementService) SpringUtil.getSpringUtil().getService("screenElementService");
+					List<ScreenElement> elements = screenElementService.findAllByTenant(tenantId);
+					request.getSession().setAttribute("fields", elements);
+					
 					setLookupValues();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

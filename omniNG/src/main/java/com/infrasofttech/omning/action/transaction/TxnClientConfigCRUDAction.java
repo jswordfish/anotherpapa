@@ -16,6 +16,7 @@ import com.infrasofttech.domain.entities.BranchMst;
 import com.infrasofttech.domain.entities.ModuleMst;
 import com.infrasofttech.domain.entities.ProductMst;
 import com.infrasofttech.domain.entities.transaction.Screen;
+import com.infrasofttech.domain.entities.transaction.ScreenElement;
 import com.infrasofttech.domain.entities.transaction.ScreenMapper;
 import com.infrasofttech.domain.entities.transaction.ScreenType;
 import com.infrasofttech.omning.services.ActivityMstService;
@@ -23,6 +24,7 @@ import com.infrasofttech.omning.services.BranchMstService;
 import com.infrasofttech.omning.services.LookupValueService;
 import com.infrasofttech.omning.services.ModuleMstService;
 import com.infrasofttech.omning.services.ProductMstService;
+import com.infrasofttech.omning.transaction.services.ScreenElementService;
 import com.infrasofttech.omning.utils.SpringUtil;
 import com.infrasofttech.utils.ErrorCodes;
 import com.infrasofttech.utils.OmniConstants;
@@ -82,6 +84,10 @@ public class TxnClientConfigCRUDAction extends ActionSupport implements  Servlet
 				screenMapper.setInfoScreen(iScreen);
 				screenMapper.setBalancesScreen(bScreen);
 				request.getSession().setAttribute("screenMapper", screenMapper);
+				
+				ScreenElementService screenElementService = (ScreenElementService) SpringUtil.getSpringUtil().getService("screenElementService");
+				List<ScreenElement> elements = screenElementService.findAllByTenant(tenantId);
+				request.getSession().setAttribute("fields", elements);
 				// Action logic here...
 
 				retVal = OmniConstants.SUCCESS;
