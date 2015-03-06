@@ -18,7 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.infrasofttech.dao.basic.JPADAO;
 import com.infrasofttech.domain.entities.transaction.Screen;
+import com.infrasofttech.domain.entities.transaction.ScreenElement;
 import com.infrasofttech.domain.entities.transaction.ScreenMapper;
+import com.infrasofttech.domain.entities.transaction.ScreenRow;
 import com.infrasofttech.exceptions.OmniNGException;
 import com.infrasofttech.omning.services.impl.OmniNGServiceImpl;
 import com.infrasofttech.omning.transaction.IScreenMapperDAO;
@@ -64,6 +66,12 @@ public ScreenMapper saveOrUpdate(ScreenMapper screenMapper)
 	List<ScreenMapper> screenMappers = super.findByNamedQueryAndNamedParams(qryName, params);
 	if(screenMappers.size() == 0) {
 		//create
+		//
+		//List<ScreenElement>
+		screenMapper.getTransactionScreen().setScreenName("TxScreen-"+screenMapper.getActivityCode()+"-"+screenMapper.getBranchCode()+"-"+screenMapper.getModuleCode()+"-"+screenMapper.getProductCode());
+		screenMapper.getBalancesScreen().setScreenName("BalScreen-"+screenMapper.getActivityCode()+"-"+screenMapper.getBranchCode()+"-"+screenMapper.getModuleCode()+"-"+screenMapper.getProductCode());
+		screenMapper.getInfoScreen().setScreenName("TxnfoScreen-"+screenMapper.getActivityCode()+"-"+screenMapper.getBranchCode()+"-"+screenMapper.getModuleCode()+"-"+screenMapper.getProductCode());
+		
 		return super.saveOrUpdate(screenMapper);
 	}
 	else if(screenMappers.size() > 1){
@@ -72,19 +80,16 @@ public ScreenMapper saveOrUpdate(ScreenMapper screenMapper)
 	else {
 		//update
 		ScreenMapper screenMapperDB = screenMappers.get(0);
-		long id = screenMapperDB.getId();
-		Screen tS = screenMapper.getTransactionScreen();
-		screenMapper.setTransactionScreen(null);
-		Screen bS = screenMapper.getBalancesScreen();
-		screenMapper.setBalancesScreen(null);
-		Screen iS = screenMapper.getInfoScreen();
-		screenMapper.setInfoScreen(null);
-		Mapper mapper = new DozerBeanMapper();
-		mapper.map(screenMapper, screenMapperDB);
-		screenMapperDB.setId(id);
-		screenMapperDB.setTransactionScreen(tS);
-		screenMapperDB.setBalancesScreen(bS);
-		screenMapperDB.setInfoScreen(iS);
+
+		List<ScreenRow> rowsT = screenMapper.getTransactionScreen().getRows();
+		List<ScreenRow> rowsI = screenMapper.getInfoScreen().getRows();
+		List<ScreenRow> rowsB = screenMapper.getBalancesScreen().getRows();
+
+		screenMapperDB.getTransactionScreen().setRows(rowsT);
+		screenMapperDB.getInfoScreen().setRows(rowsI);
+		screenMapperDB.getBalancesScreen().setRows(rowsB);
+		//screenMapperDB.getsc
+
 		screenMapper = super.saveOrUpdate(screenMapperDB);
 		return screenMapper;
 	}

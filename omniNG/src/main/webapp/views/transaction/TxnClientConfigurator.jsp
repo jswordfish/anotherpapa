@@ -58,6 +58,11 @@
 		document.getElementById("mainId").style.display = "block";
 	}
 	
+	function callTxnList(){
+	var action = "txnSaveOrUpdateScreenMapper?onlyList=yes";
+	document.location.href=action;
+	}
+	
 	function addRow(type){
 		
 		var modules = document.getElementById("modules");
@@ -158,15 +163,14 @@
 			List<ScreenElement> fields = (List<ScreenElement>) session.getAttribute("fields");
 				if(fields == null){
 					fields = new ArrayList<ScreenElement>();
-					ScreenElement e1 = new ScreenElement();
-					e1.setName("InstrumentNumber");
-					e1.setDisplayName("Instrument Number");
-					ScreenElement e2 = new ScreenElement();
-					e2.setDisplayName("Instrument Type");
-					e2.setName("InstrumentType");
-					fields.add(e1);
-					fields.add(e2);
+					
 				}
+				
+			String edit = (String)request.getAttribute("edit");
+			boolean edt = false;
+			if(edit != null && edit.equals("yes")){
+				edt = true;
+			}
 		%>
 		
 			
@@ -174,7 +178,7 @@
 				<tr valign="top">
 					<td width="10%"><font face=Calibri size="3"><b>Module:</b></font></td>
 					<td width="23%">
-						<select id="modules" name="modules">
+						<select id="modules" name="modules" <% if(edt) {%> disabled <% } %>>
 							<% for(Map.Entry<String, String> entry : modules.entrySet()) { %>
 								<option value="<%=entry.getKey() %>" <% if(screenMapper.getModuleCode().equals(entry.getKey())) {%> selected <%} %> ><%=entry.getValue() %></option>
 							<% } %>
@@ -185,7 +189,7 @@
 				<tr valign="top">
 					<td width="10%"><font face=Calibri size="3"><b>Branches:</b></font></td>
 					<td width="23%">
-						<select id="branches" name="branches"  size=4>
+						<select id="branches" name="branches" <% if(edt) {%> disabled <% } %> size=4>
 							<% for(Map.Entry<String, String> entry : branches.entrySet()) { %>
 								<option value="<%=entry.getKey() %>" <% if(screenMapper.getBranchCode().equals(entry.getKey())) {%> selected <%} %> ><%=entry.getValue() %>  </option>
 							<% } %>
@@ -193,7 +197,7 @@
 					</td>
 					<td width="10%"><font face=Calibri size="3"><b>Products:</b></font></td>
 					<td width="23%">
-						<select id="products" name="products"  size=4>
+						<select id="products" name="products" <% if(edt) {%> disabled <% } %> size=4>
 							<% for(Map.Entry<String, String> entry : products.entrySet()) { %>
 								<option value="<%=entry.getKey() %>" <% if(screenMapper.getProductCode().equals(entry.getKey())) {%> selected <%} %> > <%=entry.getValue() %>  </option>
 							<% } %>
@@ -201,7 +205,7 @@
 					</td>
 					<td width="10%"><font face=Calibri size="3"><b>Activities:</b></font></td>
 					<td width="24%">
-						<select id="activities" name="activities"  size=4>
+						<select id="activities" name="activities" <% if(edt) {%> disabled <% } %> size=4>
 							<% for(Map.Entry<String, String> entry : activities.entrySet()) { %>
 								<option value="<%=entry.getKey() %>" <% if(screenMapper.getActivityCode().equals(entry.getKey())) {%> selected <%} %> > <%=entry.getValue() %> </option>
 							<% } %>

@@ -130,7 +130,7 @@ public class SaveOrUpdateScreenMapper extends ActionSupport implements  ServletR
 		}
 		
 		List<ScreenRow> screenInfoRows = new ArrayList<ScreenRow>();
-		for(int i=0;i<txRows;i++){
+		for(int i=0;i<infoRows;i++){
 			ScreenRow row = infoScreen.getRows().get(i);
 			List<ScreenElement> elements = new ArrayList<ScreenElement>();
 			String firstCol = request.getParameter("firstInfo"+i);
@@ -145,7 +145,7 @@ public class SaveOrUpdateScreenMapper extends ActionSupport implements  ServletR
 		
 		List<ScreenRow> screenBalRows = new ArrayList<ScreenRow>();
 		for(int i=0;i<balRows;i++){
-			ScreenRow row = infoScreen.getRows().get(i);
+			ScreenRow row = balScreen.getRows().get(i);
 			List<ScreenElement> elements = new ArrayList<ScreenElement>();
 			String firstCol = request.getParameter("firstBal"+i);
 			String secondCol = request.getParameter("secondBal"+i);

@@ -21,7 +21,9 @@ import com.infrasofttech.domain.entities.transaction.ScreenMapper;
 import com.infrasofttech.domain.entities.transaction.ScreenRow;
 import com.infrasofttech.domain.entities.transaction.ScreenType;
 import com.infrasofttech.exceptions.OmniNGException;
+import com.infrasofttech.omning.transaction.services.ScreenElementService;
 import com.infrasofttech.omning.transaction.services.ScreenMapperService;
+import com.infrasofttech.omning.transaction.services.ScreenRowService;
 import com.infrasofttech.omning.transaction.services.ScreenService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,6 +35,80 @@ public class ScreenTest {
 	
 	@Autowired
 	ScreenMapperService screenMapperService;
+	
+	@Autowired
+	ScreenElementService screenElementService;
+	
+	@Autowired
+	ScreenRowService screenRowService;
+	
+	@Test
+	@Rollback(value = false)
+	public void testScreenWithScreenElements(){
+		try {
+			List<ScreenElement> els = screenElementService.findAllByTenant("001");
+			ScreenRow screenRow = new ScreenRow();
+			screenRow.setScreenElements(els);
+			//screenRowService.saveOrUpdate(screenRow);
+			Screen screen = new Screen();
+			screen.setActive(true);
+			screen.setScreenName("abcdefddd");
+			List<ScreenRow> rows = new ArrayList<ScreenRow>();
+			rows.add(screenRow);
+			screen.setRows(rows);
+			screenService.saveOrUpdate(screen);
+			System.out.println("screen");
+		} catch (OmniNGException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Assert.assertEquals(true, false);
+		}
+	}
+	
+	private Screen getScreen(ScreenType type, String name){
+		List<ScreenElement> els = screenElementService.findAllByTenant("001");
+		ScreenRow screenRow = new ScreenRow();
+		screenRow.setScreenElements(els);
+		//screenRowService.saveOrUpdate(screenRow);
+		Screen screen = new Screen();
+		screen.setActive(true);
+		screen.setScreenName(name);
+		List<ScreenRow> rows = new ArrayList<ScreenRow>();
+		rows.add(screenRow);
+		screen.setRows(rows);
+		screen.setScreenType(type);
+		return screen;
+	}
+	
+	@Test
+	@Rollback(value = false)
+	public void testScreenMapper(){
+		try {
+			Screen txScreen = getScreen(ScreenType.TRANSACTION, "tScreen");
+			Screen iScreen = getScreen(ScreenType.BALANCE, "iScreen");
+			Screen bScreen = getScreen(ScreenType.INFO, "bScreen");
+			ScreenMapper screenMapper = new ScreenMapper();
+			screenMapper.setTenantId("01");
+			screenMapper.setActivityCode("a01");
+			screenMapper.setBranchCode("b01");
+			screenMapper.setProductCode("p01");
+			screenMapper.setModuleCode("m01");
+			screenMapper.setActivityName("a01");
+			screenMapper.setBranchName("Bhandup West");
+			screenMapper.setModuleName("modulename");
+			screenMapper.setProductName("pname");
+			screenMapper.setBalancesScreen(bScreen);
+			screenMapper.setInfoScreen(iScreen);
+			screenMapper.setTransactionScreen(txScreen);
+			screenMapper = screenMapperService.saveOrUpdate(screenMapper);
+			Assert.assertEquals(true, true);
+		} catch (OmniNGException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Assert.assertEquals(true, false);
+		}
+	}
+	
 	
 	@Test
 	@Rollback(value = false)

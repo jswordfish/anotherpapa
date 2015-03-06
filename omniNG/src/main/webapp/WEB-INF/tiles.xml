@@ -14,6 +14,18 @@
 		<put-attribute name="auditInfo" value="/views/tiles_tmpl/auditInfo1.jsp" />
 		<put-attribute name="footer" value="/views/tiles_tmpl/footer.jsp" />
 	</definition>
+	
+	<definition name="baseLayoutTransactions" template="/views/tiles_tmpl/BaseLayoutTransaction.jsp">
+		<put-attribute name="title"
+			value="PACS - Primary Agriculture Credit Society" />
+		<put-attribute name="header" value="/views/tiles_tmpl/header.jsp" />
+		<put-attribute name="mainmenu"
+			value="/views/tiles_tmpl/MenuHome_Blank.jsp" />
+		<put-attribute name="maininfo" value="/views/tiles_tmpl/MainInfo.jsp" />
+		<put-attribute name="body" value="/views/tiles_tmpl/body.jsp" />
+		<put-attribute name="auditInfo" value="/views/tiles_tmpl/auditInfo1.jsp" />
+		<put-attribute name="footer" value="/views/tiles_tmpl/footer.jsp" />
+	</definition>
 
 	<!-- Generic definitions ::Start -->
 	<definition name="loginPage.tiles" extends="baseLayout">
@@ -1153,6 +1165,12 @@
 	<definition name="txnScreenElementAddUpdate.tiles" extends="baseLayout">
 		<put-attribute name="body" value="/views/transaction/TxnScreenElementAddUpdate.jsp" />
 	</definition>
+	
+	<definition name="txnRuntimeTransaction.tiles" extends="baseLayoutTransactions">
+		<put-attribute name="body" value="/views/transaction/RuntimeTransaction.jsp" />
+	</definition>
+	
+	
 	
 
 </tiles-definitions>

@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -16,7 +20,13 @@ import com.infrasofttech.domain.entities.Base;
 @Entity
 public class ScreenRow extends Base{
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany
+    @JoinTable(name="ScreenRow_Element",
+        joinColumns=
+            @JoinColumn(name="row_ID", referencedColumnName="id"),
+        inverseJoinColumns=
+            @JoinColumn(name="ele_ID", referencedColumnName="id")
+        )
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ScreenElement> screenElements = new ArrayList<ScreenElement>();
 	

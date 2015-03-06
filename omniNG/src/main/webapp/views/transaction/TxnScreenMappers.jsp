@@ -63,9 +63,11 @@ List<ScreenMapper> screenMappers = (List<ScreenMapper>) request.getAttribute("sc
 	
 	<form name="topForm" action = "txn.action">
 	<div class="btn-group">
-    <a class="btn btn-mini btn-success" href="txn.action">Add Transaction Screen Configuration</a>
-    <a class="btn btn-mini btn-success" href="screenElementList.action">Go To Screen Element Configuration</a>
+    <a class="btn btn-mini btn-success" href="txn.action">Add Transaction Screen Configuration</a>&nbsp;&nbsp;
+	
+    <a class="btn btn-mini btn-success" href="screenElementList.action">Go To Screen Element Configuration</a>&nbsp;&nbsp;
    
+    
 </div>
 		</form>
 	
@@ -79,6 +81,7 @@ List<ScreenMapper> screenMappers = (List<ScreenMapper>) request.getAttribute("sc
 			   <th>Activity</th>
 			   <th>Update</th>
 			   <th>Delete</th>
+			   <th>Fill Form</th>
 			   
 			   
             </tr>
@@ -111,7 +114,7 @@ List<ScreenMapper> screenMappers = (List<ScreenMapper>) request.getAttribute("sc
 				<td><%= mapper.getActivityName() %></td>
 				<td><a href="txnEditScreenMapper.action?id=<%= mapper.getId()%>&type=info">Update</a></td>
 				<td><a href="txnDeleteScreenMapper.action?id=<%= mapper.getId()%>&type=info">Delete</a></td>
-				
+				<td><a href="transaction.action?id=<%= mapper.getId()%>&type=info">Fill Form</a></td>
             </tr>
             <%
 				}  // END OF FOR LOOP - users

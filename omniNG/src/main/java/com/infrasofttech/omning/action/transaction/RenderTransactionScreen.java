@@ -30,7 +30,7 @@ import com.infrasofttech.utils.OmniConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class EditScreenMapper extends ActionSupport implements  ServletRequestAware { 
+public class RenderTransactionScreen extends ActionSupport implements  ServletRequestAware { 
 
 	private static final long serialVersionUID = -5539422250920232971L;
 	private static final Logger logger = Logger.getLogger(TxnClientConfigCRUDAction.class);
@@ -70,21 +70,8 @@ public class EditScreenMapper extends ActionSupport implements  ServletRequestAw
 				long id = new Long(request.getParameter("id"));
 				
 				ScreenMapperService screenMapperService = (ScreenMapperService) SpringUtil.getSpringUtil().getService("screenMapperService");
-				try {
-					ScreenMapper screenMapper =  (ScreenMapper) screenMapperService.find(id);
-					request.getSession().setAttribute("screenMapper", screenMapper);
-					
-					ScreenElementService screenElementService = (ScreenElementService) SpringUtil.getSpringUtil().getService("screenElementService");
-					List<ScreenElement> elements = screenElementService.findAllByTenant(tenantId);
-					request.getSession().setAttribute("fields", elements);
-					request.setAttribute("edit", "yes");
-					setLookupValues();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					retVal = OmniConstants.FAILURE;
-				}
-				// Action logic here...
+				ScreenMapper screenMapper = (ScreenMapper) screenMapperService.find(id);
+				request.setAttribute("screenMapper", screenMapper);
 
 				retVal = OmniConstants.SUCCESS;
 			}
