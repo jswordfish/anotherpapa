@@ -1170,6 +1170,10 @@
 		<put-attribute name="body" value="/views/transaction/RuntimeTransaction.jsp" />
 	</definition>
 	
+	<definition name="txntransactions.tiles" extends="baseLayoutTransactions">
+		<put-attribute name="body" value="/views/transaction/Transactions.jsp" />
+	</definition>
+	
 	
 	
 

@@ -1,7 +1,7 @@
 <%@page import="com.infrasofttech.domain.entities.transaction.Screen"%>
 <%@page import="com.infrasofttech.domain.entities.transaction.ScreenRow"%>
 <%@page import="com.infrasofttech.domain.entities.transaction.ScreenElement"%>
-<%@page import="com.infrasofttech.domain.entities.transaction.ScreenMapper"%>
+<%@page import="com.infrasofttech.domain.entities.transaction.*"%>
 
 <%@page import="com.infrasofttech.domain.entities.transaction.*"%>
 
@@ -13,6 +13,8 @@
 <%@page import="com.infrasofttech.domain.entities.ModuleMst"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+<%@page import="com.infrasofttech.omning.action.transaction.*"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
@@ -57,75 +59,166 @@
 </script>
 
 </head>
+<%
+ScreenMapper screenMapper = (ScreenMapper)session.getAttribute("screenMapper");
+Screen txScreen = screenMapper.getTransactionScreen();
+Screen infoScreen = screenMapper.getInfoScreen();
+Screen balScreen = screenMapper.getBalancesScreen();
 
+String tenantId = (String)request.getSession().getAttribute("tenantCode");
+String	languageCode = (String)request.getSession().getAttribute("languageCode");
+
+%>
 <body>
-	<form id="idForm" method="POST" action="txnSaveOrUpdateScreenMapper.action">
-
+	<form id="idForm" method="POST" action="saveTransaction.action">
+	<div class="row">
 	<div class="col-xs-8">
-<h2 class="sub-header">Transactions</h2>
+		<div class="page-header">
+		   <h3>Transaction</h3>
+		</div>
+
   <div class="table-responsive">
             <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th class="col-md-2">#</th>
-                  <th class="col-md-2">Header</th>
-                  <th class="col-md-2">Header</th>
-				  <th class="col-md-2">Header</th>
-                </tr>
-              </thead>
+              
               <tbody>
-                <tr>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-2">1,001</td>
-				  <td class="col-md-2">1,001</td>
-                </tr>
+			 <% for(ScreenRow row: txScreen.getRows()){
+			 %>
+				<tr>
+				<%
+					int count = 0;
+					for(ScreenElement ele: row.getScreenElements()){
+				%>	
+			
+			  
                 
+                  <td class="col-md-2"><%= ele.getName() %></td>
+                  <td class="col-md-2">
+				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
+				  <input type="text" size="5" class="smallTxtLeftAlign" value="" id="Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
+				  <% } else if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXTAREA.getVal())){ %>
+				  <textarea class="form-control" rows="3" id="Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"></textarea>
+				  <% } else { 
+				  String code = ele.getLookupCode();
+				  List<String> values = new ArrayList<String>();
+					if(code != null && code.trim().length() > 0){
+						values = TransctionUtil.getLookupValues(tenantId, languageCode, code);
+					}
+				  %>
+				  
+				  <select class="form-control" id="Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
+				  <% for(String value : values){ %>
+					<option value="<%= value %>" > <%= value %> </option>
+				  <% } %>	
+				  </select>
+				  <%count ++;
+				  } %>
+				  </td>
+                <% } %>  
+                </tr>
+              <% } %>
+			  <tr>
+			  <td class="col-md-2"><button type="submit" class="btn btn-default">Create Record</button></td>
+			  </tr>
               </tbody>
             </table>
           </div>
 </div>
-  <div class="col-xs-2">
-          <h2 class="sub-header">Information</h2>
+</div>
+<div class="row">
+  <div class="col-xs-4">
+		<div class="page-header">
+		   <h3>Information</h3>
+		</div>
           <div class="table-responsive">
             <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th class="col-md-1">#</th>
-                  <th class="col-md-1">Header</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="col-md-1">1,001</td>
-                  <td class="col-md-1">1,001</td>
-                  
-                </tr>
+             <tbody>
+			 <% for(ScreenRow row: infoScreen.getRows()){
+			 %>
+				<tr>
+				<%
+					int count = 0;
+					for(ScreenElement ele: row.getScreenElements()){
+				%>	
+			
+			  
                 
+                  <td class="col-md-2"><%= ele.getName() %></td>
+                  <td class="col-md-2">
+				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
+				  <input type="text" size="5" class="smallTxtLeftAlign" value="">
+				  <% } else if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXTAREA.getVal())){ %>
+				  <textarea class="form-control" rows="3" id="comment"></textarea>
+				  <% } else { 
+				  String code = ele.getLookupCode();
+				  List<String> values = new ArrayList<String>();
+					if(code != null && code.trim().length() > 0){
+						values = TransctionUtil.getLookupValues(tenantId, languageCode, code);
+					}
+				  %>
+				  
+				  <select class="form-control" id="Info<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
+				  <% for(String value : values){ %>
+					<option value="<%= value %>" > <%= value %> </option>
+				  <% } %>	
+				  </select>
+				  <%count ++;
+				  } %>
+				  </td>
+                <% } %>  
+                </tr>
+              <% } %>
+              </tbody>
+            </table></div>
+	</div>
+
+  <div class="col-xs-4">
+         <div class="page-header">
+		   <h3>Balance</h3>
+		</div>
+
+          <div class="table-responsive">
+	<table class="table">
+				
+				<tbody>
+			 <% for(ScreenRow row: balScreen.getRows()){
+			 %>
+				<tr>
+				<%
+					int count = 0;
+					for(ScreenElement ele: row.getScreenElements()){
+				%>	
+			
+			  
+                
+                  <td class="col-md-2"><%= ele.getName() %></td>
+                  <td class="col-md-2">
+				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
+				  <input type="text" size="5" class="smallTxtLeftAlign" value="">
+				  <% } else if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXTAREA.getVal())){ %>
+				  <textarea class="form-control" rows="3" id="comment"></textarea>
+				  <% } else { 
+				  String code = ele.getLookupCode();
+				  List<String> values = new ArrayList<String>();
+					if(code != null && code.trim().length() > 0){
+						values = TransctionUtil.getLookupValues(tenantId, languageCode, code);
+					}
+				  %>
+				  
+				  <select class="form-control" id="Bal<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
+				  <% for(String value : values){ %>
+					<option value="<%= value %>" > <%= value %> </option>
+				  <% } %>	
+				  </select>
+				  <%count ++;
+				  } %>
+				  </td>
+                <% } %>  
+                </tr>
+              <% } %>
               </tbody>
             </table></div>
 	</div>
 			
-			<table class="table">
-				<thead>
-					<tr>
-					   <th>Bal1</th>
-					   <th>Bal2</th>
-					   <th>Bal3</th>
-					   <th>Bal4</th>
-					</tr>
-				</thead>
-				<tbody>
-                <tr>
-                  <td class="col-md-1">1,001</td>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-3">1,001</td>
-				  <td class="col-md-3">1,001</td>
-                </tr>
-                
-              </tbody>
-            </table>
 	
 	</form>
 	

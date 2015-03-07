@@ -38,7 +38,7 @@ a {
 					<tiles:insertAttribute name="maininfo" ignore="false" />
 				</td>
 			</tr>
-			<tr id="idBodyRow" height="700" valign="top">
+			<tr id="idBodyRow" height="700" width="500" valign="top">
 				<td bgcolor="#FFFFFF"
 					style="border-left: 1px solid #808080; border-right: 1px solid #808080">
 					<tiles:insertAttribute name="body" ignore="false" />

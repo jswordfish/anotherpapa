@@ -50,7 +50,7 @@ public class ScreenListAction extends ActionSupport implements  ServletRequestAw
 				//Session expired 
 				logger.info("Session Expired");
 				errMsg = ErrorCodes.SESSIONEXPIRE;	
-				session.invalidate(); 
+				request.getSession().invalidate(); 
 				retVal =  OmniConstants.LOGIN;	  
 			} else {
 				tenantId = (String)request.getSession().getAttribute("tenantCode");

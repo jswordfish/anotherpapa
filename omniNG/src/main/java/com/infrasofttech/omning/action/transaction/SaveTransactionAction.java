@@ -1,5 +1,7 @@
 package com.infrasofttech.omning.action.transaction;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,20 +17,28 @@ import com.infrasofttech.domain.entities.ActivityMst;
 import com.infrasofttech.domain.entities.BranchMst;
 import com.infrasofttech.domain.entities.ModuleMst;
 import com.infrasofttech.domain.entities.ProductMst;
+import com.infrasofttech.domain.entities.transaction.Screen;
+import com.infrasofttech.domain.entities.transaction.ScreenDataType;
+import com.infrasofttech.domain.entities.transaction.ScreenElement;
 import com.infrasofttech.domain.entities.transaction.ScreenMapper;
+import com.infrasofttech.domain.entities.transaction.ScreenRow;
+import com.infrasofttech.domain.entities.transaction.ScreenUIType;
+import com.infrasofttech.domain.entities.transaction.runtime.ScreenElementTransaction;
+import com.infrasofttech.domain.entities.transaction.runtime.ScreenRowTransaction;
+import com.infrasofttech.domain.entities.transaction.runtime.ScreenTransaction;
 import com.infrasofttech.omning.services.ActivityMstService;
 import com.infrasofttech.omning.services.BranchMstService;
 import com.infrasofttech.omning.services.LookupValueService;
 import com.infrasofttech.omning.services.ModuleMstService;
 import com.infrasofttech.omning.services.ProductMstService;
-import com.infrasofttech.omning.transaction.services.ScreenMapperService;
+import com.infrasofttech.omning.transaction.services.ScreenTransactionService;
 import com.infrasofttech.omning.utils.SpringUtil;
 import com.infrasofttech.utils.ErrorCodes;
 import com.infrasofttech.utils.OmniConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class RenderTransactionScreen extends ActionSupport implements  ServletRequestAware { 
+public class SaveTransactionAction extends ActionSupport implements  ServletRequestAware { 
 
 	private static final long serialVersionUID = -5539422250920232971L;
 	private static final Logger logger = Logger.getLogger(TxnClientConfigCRUDAction.class);
@@ -64,13 +74,62 @@ public class RenderTransactionScreen extends ActionSupport implements  ServletRe
 				branchCode = (String)request.getSession().getAttribute("branchCode");
 				languageCode = (String)request.getSession().getAttribute("languageCode");
 				loginId = (String)request.getSession().getAttribute("loginID");
-				
-				long id = new Long(request.getParameter("id"));
-				
-				ScreenMapperService screenMapperService = (ScreenMapperService) SpringUtil.getSpringUtil().getService("screenMapperService");
-				ScreenMapper screenMapper = (ScreenMapper) screenMapperService.find(id);
-				request.getSession().setAttribute("screenMapper", screenMapper);
 
+				
+				ScreenMapper screenMapper = (ScreenMapper)request.getSession().getAttribute("screenMapper");
+				ScreenTransaction screenTransaction = new ScreenTransaction();
+				screenTransaction.setTenantId(tenantId);
+				screenTransaction.setActivityCode(screenMapper.getActivityCode());
+				screenTransaction.setBranchCode(screenMapper.getBranchCode());
+				screenTransaction.setModuleCode(screenMapper.getModuleCode());
+				screenTransaction.setProductCode(screenMapper.getProductCode());
+				
+				screenTransaction.setActivityName(screenMapper.getActivityName());
+				screenTransaction.setBranchName(screenMapper.getBranchName());
+				screenTransaction.setProductName(screenMapper.getProductName());
+				screenTransaction.setModuleName(screenMapper.getModuleName());
+				
+				//screenTransaction.set
+				Screen txScreen = screenMapper.getTransactionScreen();
+				 
+				List<ScreenRowTransaction> screenRowTransactions = new ArrayList<ScreenRowTransaction>();
+				for(ScreenRow row: txScreen.getRows()){
+					ScreenRowTransaction rowTransaction = new ScreenRowTransaction();
+					rowTransaction.setScreenRow(row);
+					int count = 0;
+					List<ScreenElementTransaction> elementTransactions = new ArrayList<ScreenElementTransaction>();
+					for(ScreenElement screenElement: row.getScreenElements()){
+						ScreenElementTransaction elementTransaction = new ScreenElementTransaction();
+						elementTransaction.setScreenElement(screenElement);
+						String value = request.getParameter("Txn"+screenElement.getName()+"Row"+row.getId()+"Col"+count);
+						count++;
+						if(screenElement.getScreenDataType().getVal().equals(ScreenDataType.String)){
+							elementTransaction.setTextValue(value);
+						}
+						else if(screenElement.getScreenDataType().getVal().equals(ScreenDataType.Number)){
+							elementTransaction.setLongValue(new Long(value));
+						}
+						else if(screenElement.getScreenDataType().getVal().equals(ScreenDataType.Decimal)){
+							elementTransaction.setDecimalValue(new BigDecimal(value));
+						}
+						else{
+							elementTransaction.setTextValue(value);
+						}
+						elementTransactions.add(elementTransaction);
+					}
+					rowTransaction.setElementTransactions(elementTransactions);
+					screenRowTransactions.add(rowTransaction);
+					
+				}
+				screenTransaction.setRowTransactions(screenRowTransactions);
+				String transactionId = "txnNo-"+System.currentTimeMillis();
+				screenTransaction.setTransactionNumber(transactionId);
+				screenTransaction.setScreen(txScreen);
+				ScreenTransactionService screenTransactionService = (ScreenTransactionService)SpringUtil.getSpringUtil().getService("screenTransactionService");
+				screenTransactionService.saveOrUpdate(screenTransaction);
+				
+				List<ScreenTransaction> transactions = screenTransactionService.findAllByTenant(tenantId);
+				request.setAttribute("transactions", transactions);
 				retVal = OmniConstants.SUCCESS;
 			}
 		}catch(Exception e){
@@ -80,8 +139,8 @@ public class RenderTransactionScreen extends ActionSupport implements  ServletRe
 		}
 		return retVal;
 	}
-	
-private void setLookupValues() {
+
+	private void setLookupValues() {
 		
 		LookupValueService obj = (LookupValueService)SpringUtil.getSpringUtil().getService("lookupValueService");
 		obj.getLookupValues("CURRENCY", languageCode, tenantId);
@@ -129,7 +188,6 @@ private void setLookupValues() {
 		request.setAttribute("products", products);
 		request.setAttribute("activities", activities);
 	}
-	
 	
 	public void setServletRequest(HttpServletRequest arg0) {
 		request = arg0;

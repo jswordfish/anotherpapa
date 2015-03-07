@@ -1235,6 +1235,14 @@
 			<result name="login" type="tiles">loginPage.tiles</result>
 		</action>
 		
+		<action name="saveTransaction"
+			class="com.infrasofttech.omning.action.transaction.SaveTransactionAction" method="execute">
+			<result name="success" type="tiles">txntransactions.tiles</result>
+			<result name="input" type="tiles">GLMstList.tiles</result>
+			<result name="failure" type="tiles">errPage.tiles</result>
+			<result name="login" type="tiles">loginPage.tiles</result>
+		</action>
+		
 		
 
 	

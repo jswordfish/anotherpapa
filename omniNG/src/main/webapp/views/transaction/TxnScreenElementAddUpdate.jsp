@@ -2,10 +2,14 @@
 <%@page import="com.infrasofttech.domain.entities.transaction.ScreenUIType"%>
 <%@page import="com.infrasofttech.domain.entities.transaction.ScreenDataType"%>
 <%@page import="com.infrasofttech.domain.entities.transaction.ScreenElement"%>
-<%@page import="com.infrasofttech.domain.entities.RoleMst"%>
+<%@page import="com.infrasofttech.domain.entities.*"%>
 <%@page import="com.infrasofttech.domain.entities.Address"%>
 <%@page import="com.infrasofttech.domain.entities.UserMst"%>
 <%@page import="java.util.*"%>
+<%@page import="com.infrasofttech.omning.services.*"%>
+<%@page import="com.infrasofttech.omning.utils.SpringUtil"%>
+
+
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html lang="en">
  <head>
@@ -92,8 +96,9 @@
 <form id="omniScreenElementForm" method="POST" action="screenElementSave">
 <%
 	ScreenElement screenElement = (ScreenElement) session.getAttribute("screenElement");
-	
-	
+	LookupCodeService lookupService = (LookupCodeService)SpringUtil.getSpringUtil().getService("lookupCodeService");
+	String tenantId = (String)request.getSession().getAttribute("tenantCode");
+	List<LookupCode> codes = lookupService.getLookupCodeList(tenantId);
 %>
 <div id="result" class="container">
 <table class="table table-condensed" width="100%">
@@ -108,8 +113,12 @@
 <tr class="active">
 	<td class="col-md-1">Look Up Code</td>
 	<td class="col-md-3" >
-		<input id="lookupCode" name="lookupCode" type="text" value="<%= screenElement.getLookupCode() %>" />&nbsp;
 		
+		<select id="lookupCode" name="lookupCode">
+			<% for(LookupCode code : codes) { %>
+				<option value="<%=code.getLookupCode() %>" <%if(code.getLookupCode().equals(screenElement.getLookupCode())) {%> selected <%} %>  >  <%=code.getLookupCode() %> </option>
+			<% } %>
+		</select>
 	</td>	
 	<td class="col-md-1">Data Type</td>
 	<td class="col-md-1">
