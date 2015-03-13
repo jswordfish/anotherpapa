@@ -1,3 +1,4 @@
+<%@page import="com.infrasofttech.domain.entities.transaction.runtime.ScreenTransaction"%>
 <%@page import="com.infrasofttech.utils.MENUACTIONSTATUS"%>
 <%@page import="com.infrasofttech.domain.entities.transaction.*"%>
 

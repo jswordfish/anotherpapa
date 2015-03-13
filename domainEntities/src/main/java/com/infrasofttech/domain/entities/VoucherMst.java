@@ -2,125 +2,189 @@ package com.infrasofttech.domain.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = 
+	{ "tenantId", "branchCode", "entryDate", "batchCode", "setNo", "scrollNo" }))
 public class VoucherMst extends Base {
 
 	private static final long serialVersionUID = 1701926931204630606L;
 
-	private String bookTypeCode = "";
+	@Column(nullable=true, length=20)
+	private String branchCode = "";					// integer
+	
+	@Column(nullable=true, length=20)
+	private String entryDate;						// datetime
 
-	private String voucherTypeCode = ""; // from VoucherTypeMst
+	@Column(nullable=true, length=20)
+	private String batchCode = "";					// integer
 
-	private String voucherNumber = "";
+	@Column(nullable=true)
+	private Integer setNo = 1;						
 
-	private String branchCode = "";
+	@Column(nullable=true)
+	private Integer scrollNo = 1;
 
-	private String moduleCode = "";
-
-	private String productCode = "";
-
-	private String activityCode = "";
-
-	private String currencyCode = "";
-
-	private String txnCode = "";
-
-	@ManyToOne
-	@JoinColumn(name = "fkTxnHeaderPK")
-	private TxnHeader txnHeader;
-
-	private String prdAcNo = "";
-
-	private String batchCode = "";
-
-	private Integer setNo = 0;
-
-	private Integer scrollNo = 0;
-
+	@Column(nullable=true)
 	private Integer mainScrollNo = 0;
 
-	private Date entryDateTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date postDate;
 
-	private Date postDateTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fundEffDate;
 
-	private Date authorizeDateTime;
+	@Column(nullable=true, length=20)
+	private String activityCode;						// max. 8
+	
+	@Column(nullable=true, length=20)
+	private String cashFlowType;						// max. 8
 
-	private Date fundingDateTime;
-
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date valueDate;
 
-	private String DrCr = "";
+	@Column(nullable=true, length=10)
+	private String bookType;							// max. 2
+	
+	@Column(nullable=true, length=1)
+	private String drCr;								// max. 1
+	
+	@Column(nullable=true, length=50)
+	private String vcrAcctId;							// max. 32
+	
+	@Column(nullable=true, length=50)
+	private String mainAcctId;
+	
+	@Column(nullable=true, length=10)
+	private String mainModule;							// integer
+	
+	@Column(nullable=true, length=10)
+	private String vcrModule;							// integer
+	
+	@Column(nullable=true, length=5)
+	private String trnCurrCode;							// max. 3
 
-	private String vcrAcNo = "";
+	@Column(nullable=true)
+	private Double fcyTrnAmt=0d;
+	
+	@Column(nullable=true)
+	private Double lcyConvRate=1d;
+	
+	@Column(nullable=true)
+	private Double lcyTrnAmt=0d;
+	
+	@Column(nullable=true, length=10)
+	private String instrBankCd="";						// integer
+	
+	@Column(nullable=true, length=10)
+	private String instrBranchCd="";					// integer
+	
+	@Column(nullable=true, length=10)
+	private String instrType="";						// integer
+	
+	@Column(nullable=true, length=20)
+	private String instrNo="";							// max. 12
 
-	private String mainAcNo = "";
-
-	private Integer vcrModType = 0;
-
-	private Integer mainModType = 0;
-
-	private Double fcyTxnAmount = 0D;
-
-	private Double lcyConvRate = 0D;
-
-	private Double lcyTxnAmt = 0D;
-
-	private String instrBankCode = "";
-
-	private String instrBranchCode = "";
-
-	private String instrTypeCode = "";
-
-	private String instrNumber = "";
-
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date instrDate;
+	
+	@Column(nullable=true)
+	private Integer tokenNo;
+	
+	@Column(nullable=true, length=70)
+	private String narration="";
+	
+	@Column(nullable=true, length=70)
+	private String particulars="";
+	
+	@Column(nullable=true)
+	private Integer sysGenVcr=0;;
+	
+	@Column(nullable=true, length=2)
+	private String shTotFlag="";
+	
+	@Column(nullable=true, length=2)
+	private String shClrFlag="";
+	
+	@Column(nullable=true, length=2)
+	private String acTotFlag="";
+	
+	@Column(nullable=true, length=2)
+	private String acClrFlag="";
+	
+	@Column(nullable=true)
+	private Integer fkMakerPK=0;							// user pk
 
-	private String tokenNumber = "";
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date makerDate;
+	
+	@Column(nullable=true, length=20)
+	private String makerTime="0";							// integer
+	
+	@Column(nullable=true)
+	private Integer checker1=0;
+	
+	@Column(nullable=true)
+	private Integer checker2=0;
 
-	private String particulars = "";
+	@Column(nullable=true)
+	private Integer checker3=0;
+	
+	@Column(nullable=true)
+	private Integer checker4=0;
 
-	private Integer sysGenVcr = 0;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date checkDate;
+	
+	@Column(nullable=true, length=20)
+	private String checkerTime;								// integer
+	
+	@Column(nullable=true)
+	private Integer noAuthPending=0;
+	
+	@Column(nullable=true)
+	private Integer noAuthOver=0;
+	
+	@Column(nullable=true, length=1)
+	private String postFlag="P";
+	
+	@Column(nullable=true, length=1)
+	private String authFlag="A";
+	
+	@Column(nullable=true, length=1)
+	private String fundEffFlag="F";
+	
+	@Column(nullable=true, length=1)
+	private String canceledFlag="";
+	
+	@Column(nullable=true)
+	private Integer postAuthFeffCncl;
+	
+	@Column(nullable=true)
+	private Integer updtChkId;
+	
+	@Column(nullable=true)
+	private Double partClearAmt=0d;
+	
+	@Column(nullable=true)
+	private String postTime="0";									// integer
 
-	private Integer postFlag = 0;
-
-	private Integer authFlag = 0;
-
-	private Integer feffFlag = 0;
-
-	private Integer cancelledFlag;
-
-	private String postAuthfeffCncl = "";
-
-	private String updateChkId = "";
-
-	private Double partClearAmount = 0D;
-
-	public String getBookTypeCode() {
-		return bookTypeCode;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date entryDateTime;
+	
+	
+	public Date getEntryDateTime() {
+		return entryDateTime;
 	}
 
-	public void setBookTypeCode(String bookTypeCode) {
-		this.bookTypeCode = bookTypeCode;
-	}
-
-	public String getVoucherTypeCode() {
-		return voucherTypeCode;
-	}
-
-	public void setVoucherTypeCode(String voucherTypeCode) {
-		this.voucherTypeCode = voucherTypeCode;
-	}
-
-	public String getVoucherNumber() {
-		return voucherNumber;
-	}
-
-	public void setVoucherNumber(String voucherNumber) {
-		this.voucherNumber = voucherNumber;
+	public void setEntryDateTime(Date entryDateTime) {
+		this.entryDateTime = entryDateTime;
 	}
 
 	public String getBranchCode() {
@@ -131,60 +195,12 @@ public class VoucherMst extends Base {
 		this.branchCode = branchCode;
 	}
 
-	public String getModuleCode() {
-		return moduleCode;
+	public String getEntryDate() {
+		return entryDate;
 	}
 
-	public void setModuleCode(String moduleCode) {
-		this.moduleCode = moduleCode;
-	}
-
-	public String getProductCode() {
-		return productCode;
-	}
-
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
-	}
-
-	public String getActivityCode() {
-		return activityCode;
-	}
-
-	public void setActivityCode(String activityCode) {
-		this.activityCode = activityCode;
-	}
-
-	public String getCurrencyCode() {
-		return currencyCode;
-	}
-
-	public void setCurrencyCode(String currencyCode) {
-		this.currencyCode = currencyCode;
-	}
-
-	public String getTxnCode() {
-		return txnCode;
-	}
-
-	public void setTxnCode(String txnCode) {
-		this.txnCode = txnCode;
-	}
-
-	public TxnHeader getTxnHeader() {
-		return txnHeader;
-	}
-
-	public void setTxnHeader(TxnHeader txnHeader) {
-		this.txnHeader = txnHeader;
-	}
-
-	public String getPrdAcNo() {
-		return prdAcNo;
-	}
-
-	public void setPrdAcNo(String prdAcNo) {
-		this.prdAcNo = prdAcNo;
+	public void setEntryDate(String entryDate) {
+		this.entryDate = entryDate;
 	}
 
 	public String getBatchCode() {
@@ -219,36 +235,36 @@ public class VoucherMst extends Base {
 		this.mainScrollNo = mainScrollNo;
 	}
 
-	public Date getEntryDateTime() {
-		return entryDateTime;
+	public Date getPostDate() {
+		return postDate;
 	}
 
-	public void setEntryDateTime(Date entryDateTime) {
-		this.entryDateTime = entryDateTime;
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
 	}
 
-	public Date getPostDateTime() {
-		return postDateTime;
+	public Date getFundEffDate() {
+		return fundEffDate;
 	}
 
-	public void setPostDateTime(Date postDateTime) {
-		this.postDateTime = postDateTime;
+	public void setFundEffDate(Date fundEffDate) {
+		this.fundEffDate = fundEffDate;
 	}
 
-	public Date getAuthorizeDateTime() {
-		return authorizeDateTime;
+	public String getActivityCode() {
+		return activityCode;
 	}
 
-	public void setAuthorizeDateTime(Date authorizeDateTime) {
-		this.authorizeDateTime = authorizeDateTime;
+	public void setActivityCode(String activityCode) {
+		this.activityCode = activityCode;
 	}
 
-	public Date getFundingDateTime() {
-		return fundingDateTime;
+	public String getCashFlowType() {
+		return cashFlowType;
 	}
 
-	public void setFundingDateTime(Date fundingDateTime) {
-		this.fundingDateTime = fundingDateTime;
+	public void setCashFlowType(String cashFlowType) {
+		this.cashFlowType = cashFlowType;
 	}
 
 	public Date getValueDate() {
@@ -259,52 +275,68 @@ public class VoucherMst extends Base {
 		this.valueDate = valueDate;
 	}
 
+	public String getBookType() {
+		return bookType;
+	}
+
+	public void setBookType(String bookType) {
+		this.bookType = bookType;
+	}
+
 	public String getDrCr() {
-		return DrCr;
+		return drCr;
 	}
 
 	public void setDrCr(String drCr) {
-		DrCr = drCr;
+		this.drCr = drCr;
 	}
 
-	public String getVcrAcNo() {
-		return vcrAcNo;
+	public String getVcrAcctId() {
+		return vcrAcctId;
 	}
 
-	public void setVcrAcNo(String vcrAcNo) {
-		this.vcrAcNo = vcrAcNo;
+	public void setVcrAcctId(String vcrAcctId) {
+		this.vcrAcctId = vcrAcctId;
 	}
 
-	public String getMainAcNo() {
-		return mainAcNo;
+	public String getMainAcctId() {
+		return mainAcctId;
 	}
 
-	public void setMainAcNo(String mainAcNo) {
-		this.mainAcNo = mainAcNo;
+	public void setMainAcctId(String mainAcctId) {
+		this.mainAcctId = mainAcctId;
 	}
 
-	public Integer getVcrModType() {
-		return vcrModType;
+	public String getMainModule() {
+		return mainModule;
 	}
 
-	public void setVcrModType(Integer vcrModType) {
-		this.vcrModType = vcrModType;
+	public void setMainModule(String mainModule) {
+		this.mainModule = mainModule;
 	}
 
-	public Integer getMainModType() {
-		return mainModType;
+	public String getVcrModule() {
+		return vcrModule;
 	}
 
-	public void setMainModType(Integer mainModType) {
-		this.mainModType = mainModType;
+	public void setVcrModule(String vcrModule) {
+		this.vcrModule = vcrModule;
 	}
 
-	public Double getFcyTxnAmount() {
-		return fcyTxnAmount;
+	public String getTrnCurrCode() {
+		return trnCurrCode;
 	}
 
-	public void setFcyTxnAmount(Double fcyTxnAmount) {
-		this.fcyTxnAmount = fcyTxnAmount;
+	public void setTrnCurrCode(String trnCurrCode) {
+		this.trnCurrCode = trnCurrCode;
+	}
+
+	public Double getFcyTrnAmt() {
+		return fcyTrnAmt;
+	}
+
+	public void setFcyTrnAmt(Double fcyTrnAmt) {
+		this.fcyTrnAmt = fcyTrnAmt;
 	}
 
 	public Double getLcyConvRate() {
@@ -315,44 +347,44 @@ public class VoucherMst extends Base {
 		this.lcyConvRate = lcyConvRate;
 	}
 
-	public Double getLcyTxnAmt() {
-		return lcyTxnAmt;
+	public Double getLcyTrnAmt() {
+		return lcyTrnAmt;
 	}
 
-	public void setLcyTxnAmt(Double lcyTxnAmt) {
-		this.lcyTxnAmt = lcyTxnAmt;
+	public void setLcyTrnAmt(Double lcyTrnAmt) {
+		this.lcyTrnAmt = lcyTrnAmt;
 	}
 
-	public String getInstrBankCode() {
-		return instrBankCode;
+	public String getInstrBankCd() {
+		return instrBankCd;
 	}
 
-	public void setInstrBankCode(String instrBankCode) {
-		this.instrBankCode = instrBankCode;
+	public void setInstrBankCd(String instrBankCd) {
+		this.instrBankCd = instrBankCd;
 	}
 
-	public String getInstrBranchCode() {
-		return instrBranchCode;
+	public String getInstrBranchCd() {
+		return instrBranchCd;
 	}
 
-	public void setInstrBranchCode(String instrBranchCode) {
-		this.instrBranchCode = instrBranchCode;
+	public void setInstrBranchCd(String instrBranchCd) {
+		this.instrBranchCd = instrBranchCd;
 	}
 
-	public String getInstrTypeCode() {
-		return instrTypeCode;
+	public String getInstrType() {
+		return instrType;
 	}
 
-	public void setInstrTypeCode(String instrTypeCode) {
-		this.instrTypeCode = instrTypeCode;
+	public void setInstrType(String instrType) {
+		this.instrType = instrType;
 	}
 
-	public String getInstrNumber() {
-		return instrNumber;
+	public String getInstrNo() {
+		return instrNo;
 	}
 
-	public void setInstrNumber(String instrNumber) {
-		this.instrNumber = instrNumber;
+	public void setInstrNo(String instrNo) {
+		this.instrNo = instrNo;
 	}
 
 	public Date getInstrDate() {
@@ -363,12 +395,20 @@ public class VoucherMst extends Base {
 		this.instrDate = instrDate;
 	}
 
-	public String getTokenNumber() {
-		return tokenNumber;
+	public Integer getTokenNo() {
+		return tokenNo;
 	}
 
-	public void setTokenNumber(String tokenNumber) {
-		this.tokenNumber = tokenNumber;
+	public void setTokenNo(Integer tokenNo) {
+		this.tokenNo = tokenNo;
+	}
+
+	public String getNarration() {
+		return narration;
+	}
+
+	public void setNarration(String narration) {
+		this.narration = narration;
 	}
 
 	public String getParticulars() {
@@ -387,60 +427,188 @@ public class VoucherMst extends Base {
 		this.sysGenVcr = sysGenVcr;
 	}
 
-	public Integer getPostFlag() {
+	public String getShTotFlag() {
+		return shTotFlag;
+	}
+
+	public void setShTotFlag(String shTotFlag) {
+		this.shTotFlag = shTotFlag;
+	}
+
+	public String getShClrFlag() {
+		return shClrFlag;
+	}
+
+	public void setShClrFlag(String shClrFlag) {
+		this.shClrFlag = shClrFlag;
+	}
+
+	public String getAcTotFlag() {
+		return acTotFlag;
+	}
+
+	public void setAcTotFlag(String acTotFlag) {
+		this.acTotFlag = acTotFlag;
+	}
+
+	public String getAcClrFlag() {
+		return acClrFlag;
+	}
+
+	public void setAcClrFlag(String acClrFlag) {
+		this.acClrFlag = acClrFlag;
+	}
+
+	public Integer getFkMakerPK() {
+		return fkMakerPK;
+	}
+
+	public void setFkMakerPK(Integer fkMakerPK) {
+		this.fkMakerPK = fkMakerPK;
+	}
+
+	public Date getMakerDate() {
+		return makerDate;
+	}
+
+	public void setMakerDate(Date makerDate) {
+		this.makerDate = makerDate;
+	}
+
+	public String getMakerTime() {
+		return makerTime;
+	}
+
+	public void setMakerTime(String makerTime) {
+		this.makerTime = makerTime;
+	}
+
+	public Integer getChecker1() {
+		return checker1;
+	}
+
+	public void setChecker1(Integer checker1) {
+		this.checker1 = checker1;
+	}
+
+	public Integer getChecker2() {
+		return checker2;
+	}
+
+	public void setChecker2(Integer checker2) {
+		this.checker2 = checker2;
+	}
+
+	public Integer getChecker3() {
+		return checker3;
+	}
+
+	public void setChecker3(Integer checker3) {
+		this.checker3 = checker3;
+	}
+
+	public Integer getChecker4() {
+		return checker4;
+	}
+
+	public void setChecker4(Integer checker4) {
+		this.checker4 = checker4;
+	}
+
+	public Date getCheckDate() {
+		return checkDate;
+	}
+
+	public void setCheckDate(Date checkDate) {
+		this.checkDate = checkDate;
+	}
+
+	public String getCheckerTime() {
+		return checkerTime;
+	}
+
+	public void setCheckerTime(String checkerTime) {
+		this.checkerTime = checkerTime;
+	}
+
+	public Integer getNoAuthPending() {
+		return noAuthPending;
+	}
+
+	public void setNoAuthPending(Integer noAuthPending) {
+		this.noAuthPending = noAuthPending;
+	}
+
+	public Integer getNoAuthOver() {
+		return noAuthOver;
+	}
+
+	public void setNoAuthOver(Integer noAuthOver) {
+		this.noAuthOver = noAuthOver;
+	}
+
+	public String getPostFlag() {
 		return postFlag;
 	}
 
-	public void setPostFlag(Integer postFlag) {
+	public void setPostFlag(String postFlag) {
 		this.postFlag = postFlag;
 	}
 
-	public Integer getAuthFlag() {
+	public String getAuthFlag() {
 		return authFlag;
 	}
 
-	public void setAuthFlag(Integer authFlag) {
+	public void setAuthFlag(String authFlag) {
 		this.authFlag = authFlag;
 	}
 
-	public Integer getFeffFlag() {
-		return feffFlag;
+	public String getFundEffFlag() {
+		return fundEffFlag;
 	}
 
-	public void setFeffFlag(Integer feffFlag) {
-		this.feffFlag = feffFlag;
+	public void setFundEffFlag(String fundEffFlag) {
+		this.fundEffFlag = fundEffFlag;
 	}
 
-	public Integer getCancelledFlag() {
-		return cancelledFlag;
+	public String getCanceledFlag() {
+		return canceledFlag;
 	}
 
-	public void setCancelledFlag(Integer cancelledFlag) {
-		this.cancelledFlag = cancelledFlag;
+	public void setCanceledFlag(String canceledFlag) {
+		this.canceledFlag = canceledFlag;
 	}
 
-	public String getPostAuthfeffCncl() {
-		return postAuthfeffCncl;
+	public Integer getPostAuthFeffCncl() {
+		return postAuthFeffCncl;
 	}
 
-	public void setPostAuthfeffCncl(String postAuthfeffCncl) {
-		this.postAuthfeffCncl = postAuthfeffCncl;
+	public void setPostAuthFeffCncl(Integer postAuthFeffCncl) {
+		this.postAuthFeffCncl = postAuthFeffCncl;
 	}
 
-	public String getUpdateChkId() {
-		return updateChkId;
+	public Integer getUpdtChkId() {
+		return updtChkId;
 	}
 
-	public void setUpdateChkId(String updateChkId) {
-		this.updateChkId = updateChkId;
+	public void setUpdtChkId(Integer updtChkId) {
+		this.updtChkId = updtChkId;
 	}
 
-	public Double getPartClearAmount() {
-		return partClearAmount;
+	public Double getPartClearAmt() {
+		return partClearAmt;
 	}
 
-	public void setPartClearAmount(Double partClearAmount) {
-		this.partClearAmount = partClearAmount;
+	public void setPartClearAmt(Double partClearAmt) {
+		this.partClearAmt = partClearAmt;
 	}
 
+	public String getPostTime() {
+		return postTime;
+	}
+
+	public void setPostTime(String postTime) {
+		this.postTime = postTime;
+	}
+	
 }
