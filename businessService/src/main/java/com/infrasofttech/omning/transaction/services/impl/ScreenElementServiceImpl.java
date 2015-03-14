@@ -1,5 +1,6 @@
 package com.infrasofttech.omning.transaction.services.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,8 @@ import com.infrasofttech.domain.entities.transaction.ScreenElement;
 import com.infrasofttech.exceptions.OmniNGException;
 import com.infrasofttech.omning.services.impl.OmniNGServiceImpl;
 import com.infrasofttech.omning.transaction.IScreenElementDAO;
+import com.infrasofttech.omning.transaction.services.D009622Service;
+import com.infrasofttech.omning.transaction.services.D030003Service;
 import com.infrasofttech.omning.transaction.services.ScreenElementService;
 
 @Service("screenElementService")
@@ -33,6 +36,12 @@ implements ScreenElementService {
 		.getLogger(ScreenElementServiceImpl.class);
 	@Autowired
 	protected IScreenElementDAO screenElementDAO;
+	
+	@Autowired
+	D009622Service d009622Service;
+	
+	@Autowired
+	D030003Service d030003Service;
 	
 	@PostConstruct
 	public void init() throws Exception {
@@ -68,5 +77,7 @@ implements ScreenElementService {
 		}
 		//return super.saveOrUpdate(screenElement);
 	}
+	
+	
 }
 

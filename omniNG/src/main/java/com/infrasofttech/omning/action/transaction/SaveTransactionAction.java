@@ -1,7 +1,12 @@
 package com.infrasofttech.omning.action.transaction;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +22,12 @@ import com.infrasofttech.domain.entities.ActivityMst;
 import com.infrasofttech.domain.entities.BranchMst;
 import com.infrasofttech.domain.entities.ModuleMst;
 import com.infrasofttech.domain.entities.ProductMst;
+import com.infrasofttech.domain.entities.VoucherMst;
 import com.infrasofttech.domain.entities.transaction.Screen;
 import com.infrasofttech.domain.entities.transaction.ScreenDataType;
 import com.infrasofttech.domain.entities.transaction.ScreenElement;
 import com.infrasofttech.domain.entities.transaction.ScreenMapper;
 import com.infrasofttech.domain.entities.transaction.ScreenRow;
-import com.infrasofttech.domain.entities.transaction.ScreenUIType;
 import com.infrasofttech.domain.entities.transaction.runtime.ScreenElementTransaction;
 import com.infrasofttech.domain.entities.transaction.runtime.ScreenRowTransaction;
 import com.infrasofttech.domain.entities.transaction.runtime.ScreenTransaction;
@@ -77,20 +82,70 @@ public class SaveTransactionAction extends ActionSupport implements  ServletRequ
 
 				
 				ScreenMapper screenMapper = (ScreenMapper)request.getSession().getAttribute("screenMapper");
+				Screen txScreen = screenMapper.getTransactionScreen();
+				String transId = request.getParameter("transId");
+				ScreenTransactionService screenTransactionService = (ScreenTransactionService)SpringUtil.getSpringUtil().getService("screenTransactionService");
 				ScreenTransaction screenTransaction = new ScreenTransaction();
-				screenTransaction.setTenantId(tenantId);
-				screenTransaction.setActivityCode(screenMapper.getActivityCode());
-				screenTransaction.setBranchCode(screenMapper.getBranchCode());
-				screenTransaction.setModuleCode(screenMapper.getModuleCode());
-				screenTransaction.setProductCode(screenMapper.getProductCode());
+				boolean isFound = false;
+				if(transId != null && transId.trim().length() > 0){
+					screenTransaction = screenTransactionService.findUniqueScreenTransaction(tenantId, transId);
+					if(screenTransaction != null){
+						isFound = true;
+					}
+					
+				}
+				if(screenTransaction == null){
+					screenTransaction = new ScreenTransaction();
+				}
+			//	ScreenTransaction screenTransaction = new ScreenTransaction();
+				if(!isFound){
+					screenTransaction.setTenantId(tenantId);
+					screenTransaction.setActivityCode(screenMapper.getActivityCode());
+					screenTransaction.setBranchCode(screenMapper.getBranchCode());
+					screenTransaction.setModuleCode(screenMapper.getModuleCode());
+					screenTransaction.setProductCode(screenMapper.getProductCode());
+					
+					screenTransaction.setActivityName(screenMapper.getActivityName());
+					screenTransaction.setBranchName(screenMapper.getBranchName());
+					screenTransaction.setProductName(screenMapper.getProductName());
+					screenTransaction.setModuleName(screenMapper.getModuleName());
+					Long setNo = System.currentTimeMillis();
+					screenTransaction.setTransactionNumber(""+setNo);
+					screenTransaction.setTransactionNumber(""+setNo);
+					screenTransaction.setScreen(txScreen);
+				}
 				
-				screenTransaction.setActivityName(screenMapper.getActivityName());
-				screenTransaction.setBranchName(screenMapper.getBranchName());
-				screenTransaction.setProductName(screenMapper.getProductName());
-				screenTransaction.setModuleName(screenMapper.getModuleName());
+				
+				String bookedType = (String) request.getSession().getAttribute("bookedType");
+				String prodAccId = (String)request.getSession().getAttribute("productAccId");//check voucher mapping
+				String custAccId = (String) request.getSession().getAttribute("custAccId");
 				
 				//screenTransaction.set
-				Screen txScreen = screenMapper.getTransactionScreen();
+				
+				
+				VoucherMst voucherMst = new VoucherMst();
+				voucherMst.setTenantId(tenantId);
+				voucherMst.setBatchCode("Batch_NA");
+				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SS");
+				Calendar cal = Calendar.getInstance();
+				String dt = dateFormat.format(cal.getTime());
+				voucherMst.setEntryDate(dt);
+				voucherMst.setBranchCode(screenMapper.getBranchCode());
+				voucherMst.setSetNo(new Long(screenTransaction.getTransactionNumber()));
+				Long scrollNo = System.currentTimeMillis();
+				voucherMst.setScrollNo(scrollNo);
+				voucherMst.setBookType(bookedType);//check voucher mapping
+				voucherMst.setCashFlowType(bookedType);//check voucher mapping
+				voucherMst.setMainAcctId(prodAccId);//check voucher mapping
+				voucherMst.setVcrAcctId(custAccId);//check voucher mapping
+				
+//				if(bookedType != null && bookedType.equalsIgnoreCase("Transfer")){
+//					request.setAttribute("showAdd", "true");
+//				}
+						
+				//voucherMst.setCashFlowType(cashFlowType);
+				
+				//String transactionId = request
 				 
 				List<ScreenRowTransaction> screenRowTransactions = new ArrayList<ScreenRowTransaction>();
 				for(ScreenRow row: txScreen.getRows()){
@@ -102,6 +157,48 @@ public class SaveTransactionAction extends ActionSupport implements  ServletRequ
 						ScreenElementTransaction elementTransaction = new ScreenElementTransaction();
 						elementTransaction.setScreenElement(screenElement);
 						String value = request.getParameter("Txn"+screenElement.getName()+"Row"+row.getId()+"Col"+count);
+						String voucherAttr = screenElement.getVoucherAttr();
+						Character ch = voucherAttr.charAt(0);
+						ch = Character.toUpperCase(ch);
+						voucherAttr = ch + voucherAttr.substring(1, voucherAttr.length());
+						if(screenElement.getScreenDataType().getVal().contains("Integer") ){
+							Method method = VoucherMst.class.getMethod("set"+voucherAttr, Integer.class);
+							Integer res = new Integer(value);
+							method.invoke(voucherMst, res);
+						}
+						else if(screenElement.getScreenDataType().getVal().contains("Long")){
+							Method method = VoucherMst.class.getMethod("set"+voucherAttr, Long.class);
+							Long res = new Long(value);
+							method.invoke(voucherMst, res);
+						}
+						else if(screenElement.getScreenDataType().getVal().contains("Float")){
+							Method method = VoucherMst.class.getMethod("set"+voucherAttr, Float.class);
+							Float res = new Float(value);
+							method.invoke(voucherMst, res);
+						}
+						else if(screenElement.getScreenDataType().getVal().contains("Double")){
+							Method method = VoucherMst.class.getMethod("set"+voucherAttr, Double.class);
+							Double res = new Double(value);
+							method.invoke(voucherMst, res);
+						}
+						else if(screenElement.getScreenDataType().getVal().contains("Date")){
+							SimpleDateFormat sdf1 = new SimpleDateFormat();
+						    sdf1.applyPattern("dd/MM/yyyy");
+						    Date date = sdf1.parse(value);
+						    Method method = VoucherMst.class.getMethod("set"+voucherAttr, Date.class);
+						    method.invoke(voucherMst, date);
+						}
+						else if(screenElement.getScreenDataType().getVal().contains("Number")){
+							Method method = VoucherMst.class.getMethod("set"+voucherAttr, Integer.class);
+							Integer res = new Integer(value);
+							method.invoke(voucherMst, res);
+						}
+						else{
+							//string
+							Method method = VoucherMst.class.getMethod("set"+voucherAttr, String.class);
+							//Integer res = new Integer(value);
+							method.invoke(voucherMst, value);
+						}
 						count++;
 						if(screenElement.getScreenDataType().getVal().equals(ScreenDataType.String)){
 							elementTransaction.setTextValue(value);
@@ -121,15 +218,16 @@ public class SaveTransactionAction extends ActionSupport implements  ServletRequ
 					screenRowTransactions.add(rowTransaction);
 					
 				}
-				screenTransaction.setRowTransactions(screenRowTransactions);
-				String transactionId = "txnNo-"+System.currentTimeMillis();
-				screenTransaction.setTransactionNumber(transactionId);
-				screenTransaction.setScreen(txScreen);
-				ScreenTransactionService screenTransactionService = (ScreenTransactionService)SpringUtil.getSpringUtil().getService("screenTransactionService");
-				screenTransactionService.saveOrUpdate(screenTransaction);
+				//screenTransaction.getVouchers().add(voucherMst);
+				//screenTransaction.setRowTransactions(screenRowTransactions);
+				//String transactionId = "txnNo-"+System.currentTimeMillis();
+				
+			//	ScreenTransactionService screenTransactionService = (ScreenTransactionService)SpringUtil.getSpringUtil().getService("screenTransactionService");
+				screenTransaction = screenTransactionService.saveOrUpdate(screenTransaction, voucherMst);
 				
 				List<ScreenTransaction> transactions = screenTransactionService.findAllByTenant(tenantId);
-				request.setAttribute("transactions", transactions);
+				request.setAttribute("screenTransaction", screenTransaction);
+				request.setAttribute("screenMapper" , screenMapper);
 				retVal = OmniConstants.SUCCESS;
 			}
 		}catch(Exception e){

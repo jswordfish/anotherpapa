@@ -204,4 +204,12 @@ public class JpaDAOImpl<K, E> implements JPADAO<E, K> {
 		}
 		return ((Long) query.getSingleResult()).intValue();
 	}
+
+	public E findUniqueByDynamicKey(String qry, String identifierKey,
+			String identifierValue) {
+		Query query = getEntityManager().createQuery(qry);
+		E res = (E) query.getSingleResult();
+		return res;
+		
+	}
 }

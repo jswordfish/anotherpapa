@@ -1,35 +1,47 @@
 package com.infrasofttech.domain.entities;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+
+
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "VoucherMst.getUniqueVoucherMst", query = "SELECT v FROM VoucherMst v "
+			+ "WHERE v.tenantId=:tenantId AND v.branchCode=:branchCode AND v.entryDate=:entryDate AND v.batchCode=:batchCode AND "
+			+ " v.setNo=:setNo AND v.scrollNo=:scrollNo")
+})
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = 
 	{ "tenantId", "branchCode", "entryDate", "batchCode", "setNo", "scrollNo" }))
 public class VoucherMst extends Base {
 
 	private static final long serialVersionUID = 1701926931204630606L;
 
-	@Column(nullable=true, length=20)
+	@Column(nullable=true, length=100)
 	private String branchCode = "";					// integer
 	
-	@Column(nullable=true, length=20)
+	@Column(nullable=true, length=100)
 	private String entryDate;						// datetime
 
-	@Column(nullable=true, length=20)
+	@Column(nullable=true, length=100)
 	private String batchCode = "";					// integer
 
 	@Column(nullable=true)
-	private Integer setNo = 1;						
+	private Long setNo = 0l;						
 
 	@Column(nullable=true)
-	private Integer scrollNo = 1;
+	private Long scrollNo = 0l;
 
 	@Column(nullable=true)
 	private Integer mainScrollNo = 0;
@@ -211,22 +223,9 @@ public class VoucherMst extends Base {
 		this.batchCode = batchCode;
 	}
 
-	public Integer getSetNo() {
-		return setNo;
-	}
+	
 
-	public void setSetNo(Integer setNo) {
-		this.setNo = setNo;
-	}
-
-	public Integer getScrollNo() {
-		return scrollNo;
-	}
-
-	public void setScrollNo(Integer scrollNo) {
-		this.scrollNo = scrollNo;
-	}
-
+	
 	public Integer getMainScrollNo() {
 		return mainScrollNo;
 	}
@@ -609,6 +608,32 @@ public class VoucherMst extends Base {
 
 	public void setPostTime(String postTime) {
 		this.postTime = postTime;
+	}
+
+	public Long getSetNo() {
+		return setNo;
+	}
+
+	public void setSetNo(Long setNo) {
+		this.setNo = setNo;
+	}
+
+	public Long getScrollNo() {
+		return scrollNo;
+	}
+
+	public void setScrollNo(Long scrollNo) {
+		this.scrollNo = scrollNo;
+	}
+	
+	public static List<String> getAttrNames(){
+		Field fields[] = VoucherMst.class.getDeclaredFields();
+		List<String> fieldNames = new ArrayList<String>();
+		for(Field field : fields){
+			String name = field.getName();
+			fieldNames.add(name);
+		}
+		return fieldNames;
 	}
 	
 }

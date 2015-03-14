@@ -70,6 +70,14 @@ public class ScreenElementSaveMergeAction extends ActionSupport implements  Serv
 				String lookupCode = request.getParameter("lookupCode");
 				String dataType = request.getParameter("dataType");
 				String uiType = request.getParameter("uiType");
+				
+				String trans = request.getParameter("isTransactional");
+				String voucherAttr = request.getParameter("voucherAttr");
+				String derivdSource = request.getParameter("derivdSource");
+				String derivedFieldIdentifier = request.getParameter("derivedFieldIdentifier");
+				
+				
+				
 				ScreenElement screenElement = (ScreenElement) request.getSession().getAttribute("screenElement");
 				screenElement.setName(name);
 				screenElement.setTenantId(tenantId);
@@ -78,6 +86,18 @@ public class ScreenElementSaveMergeAction extends ActionSupport implements  Serv
 				screenElement.setScreenDataType(ScreenDataType.getScreenDataType(dataType));
 				
 				screenElement.setScreenUIType(ScreenUIType.getScreenUIType(uiType));
+				
+				if(trans != null && trans.equals("Transactional")){
+					screenElement.setIsDerived(false);
+				}
+				else if(trans != null && trans.equals("Derived")){
+					screenElement.setIsDerived(true);
+				}
+				screenElement.setVoucherAttr(voucherAttr);
+				screenElement.setSourceDerivedField(derivdSource);
+				screenElement.setDerivedFieldIdentifier(derivedFieldIdentifier);
+				
+				
 				screenElementService.saveOrUpdate(screenElement);
 				
 				List<ScreenElement> elements = screenElementService.findAllByTenant(tenantId);

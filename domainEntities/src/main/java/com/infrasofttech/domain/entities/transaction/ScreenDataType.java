@@ -1,7 +1,7 @@
 package com.infrasofttech.domain.entities.transaction;
 
 public enum ScreenDataType {
-	String("String"), Number("Number"), Decimal("Decimal"), Date("Date"), Attachment("Attachment");
+	String("String"), Number("Number"), Decimal("Decimal"), Date("Date"), Attachment("Attachment"), Float("Float"), Double("Double"), Long("Long"), Integer("Integer");
 	
 	private String val;
 	

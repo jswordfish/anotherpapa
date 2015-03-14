@@ -6,17 +6,29 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.infrasofttech.domain.entities.Base;
+import com.infrasofttech.domain.entities.VoucherMst;
 import com.infrasofttech.domain.entities.transaction.Screen;
 import com.infrasofttech.domain.entities.transaction.ScreenMapper;
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "ScreenTransaction.getScreenTransaction", query = "SELECT t FROM ScreenTransaction t "
+			+ "WHERE t.tenantId=:tenantId AND t.transactionNumber=:transactionNumber")
+})
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = 
+{ "tenantId", "transactionNumber" }))
 public class ScreenTransaction extends Base{
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
 	@JoinColumn(name = "screenId")
 	private Screen screen;
 	
@@ -54,6 +66,10 @@ public class ScreenTransaction extends Base{
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<ScreenRowTransaction>  rowTransactions = new ArrayList<ScreenRowTransaction>();
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<VoucherMst> vouchers = new ArrayList<VoucherMst>();
+	
+	
 	public List<ScreenRowTransaction> getRowTransactions() {
 		return rowTransactions;
 	}
@@ -156,6 +172,14 @@ public class ScreenTransaction extends Base{
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public List<VoucherMst> getVouchers() {
+		return vouchers;
+	}
+
+	public void setVouchers(List<VoucherMst> vouchers) {
+		this.vouchers = vouchers;
 	}
 
 	

@@ -1,27 +1,41 @@
 package com.infrasofttech.domain.entities.transaction.runtime;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.infrasofttech.domain.entities.Base;
 //for savings balances
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = 
+{ "PrdAcctId"}))
+@NamedQueries({
+	@NamedQuery(name = "D009622.getUniqueD009622", query = "SELECT d FROM D009622 d "
+			+ "WHERE d.PrdAcctId=:PrdAcctId ")
+})
 public class D009622 extends Base{
 	
-	private Integer LBrCode;
+	public Integer LBrCode = 0;
 	
-	private String PrdAcctId;
+	public String PrdAcctId = "";
 	
-	private String CurCd;
+	public String CurCd = "";
 	
-	private Float ShdClrBalFcy;
+	public Float ShdClrBalFcy= 0.0f;
 	
-	private Float ShdTotBalFcy;
+	public Float ShdTotBalFcy= 0.0f;
 	
-	private Float ActClrBalFcy;
+	public Float ActClrBalFcy= 0.0f;
 	
-	private Float InClearBalFcy;
+	public Float InClearBalFcy= 0.0f;
 	
-	private Float UnClearBalFcy;
+	public Float UnClearBalFcy= 0.0f;
 
 	public Integer getLBrCode() {
 		return LBrCode;
@@ -88,7 +102,15 @@ public class D009622 extends Base{
 	}
 	
 	
-	
+	public static List<String> getAttrNames(){
+		Field fields[] = D009622.class.getDeclaredFields();
+		List<String> fieldNames = new ArrayList<String>();
+		for(Field field : fields){
+			String name = field.getName();
+			fieldNames.add(name);
+		}
+		return fieldNames;
+	}
 	
 
 }

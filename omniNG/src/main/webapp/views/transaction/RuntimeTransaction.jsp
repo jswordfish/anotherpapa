@@ -67,21 +67,60 @@ Screen balScreen = screenMapper.getBalancesScreen();
 
 String tenantId = (String)request.getSession().getAttribute("tenantCode");
 String	languageCode = (String)request.getSession().getAttribute("languageCode");
+String accountIdentifier = (String)request.getSession().getAttribute("accountIdentifier");
+	if(accountIdentifier == null){
+		accountIdentifier = "";
+	}
 
+List<ScreenRow> rows= balScreen.getRows();
+	for(ScreenRow row : rows){
+		List<ScreenElement> elements = row.getScreenElements();
+		elements = TransactionUtil.populateDerivedFieldsFromSource(elements,accountIdentifier);
+		row.setScreenElements(elements);
+	}
+
+	String transId = (String) request.getAttribute("transId");
+		
 %>
 <body>
-	<form id="idForm" method="POST" action="saveTransaction.action">
+<table class="table table-striped">
+              
+              <tbody>
+			  <tr>
+  <div class="col-xs-2 col-md-2"><b>Branch: <%= screenMapper.getBranchName() %></b></div>
+  <div class="col-xs-2 col-md-2"> <b>Module:<%= screenMapper.getModuleName() %></b></div>
+  <div class="col-xs-2 col-md-2"><b>Product: <%= screenMapper.getProductName() %></b></div>
+  <div class="col-xs-2 col-md-2"> <b>Activity: <%= screenMapper.getActivityName() %></b></div>
+  <div class="col-xs-2 col-md-2"><b> Acc: <%= ((String)request.getAttribute("productAccId")) %></b></div>
+  <div class="col-xs-2 col-md-2"> <b>Cust Acc:<%= ((String)request.getAttribute("custAccId")) %></b></div>
+	<% if(transId != null ) {%>
+  <div class="col-xs-2 col-md-2"> <b>Set No:<%= transId %></b></div>
+	<% } %>
+  </tr>
+  </tbody>
+  </table>
+  
+<% if(transId != null){%>
+
+	<form id="idForm" method="POST" action="saveTransaction.action?transId=<%= transId %>">
+<% }  else {%>
+<form id="idForm" method="POST" action="saveTransaction.action">
+<% } %>
 	<div class="row">
 	<div class="col-xs-8">
 		<div class="page-header">
-		   <h3>Transaction</h3>
+		<h3><span class="label label-primary">Transaction</span></h3>
+		   
 		</div>
 
   <div class="table-responsive">
             <table class="table table-striped">
               
               <tbody>
-			 <% for(ScreenRow row: txScreen.getRows()){
+			 <% 
+			 
+			 for(ScreenRow row: txScreen.getRows()){
+			 
 			 %>
 				<tr>
 				<%
@@ -89,14 +128,14 @@ String	languageCode = (String)request.getSession().getAttribute("languageCode");
 					for(ScreenElement ele: row.getScreenElements()){
 				%>	
 			
-			  
-                
-                  <td class="col-md-2"><%= ele.getName() %></td>
+                  <td class="col-md-2"><%= ele.getDisplayName() %> col <%= count %></td>
                   <td class="col-md-2">
 				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
-				  <input type="text" size="5" class="smallTxtLeftAlign" value="" id="Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
+				  <input type="text" size="5" class="smallTxtLeftAlign" value="" name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
+				   <% } else if(ele.getScreenUIType().getVal().equals(ScreenUIType.DATE.getVal())) { %>
+				  <input type="text" size="10" class="smallTxtLeftAlign" value="" placeholder="DD/MM/YYYY" id="Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
 				  <% } else if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXTAREA.getVal())){ %>
-				  <textarea class="form-control" rows="3" id="Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"></textarea>
+				  <textarea class="form-control" rows="3" id="comment" name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"></textarea>
 				  <% } else { 
 				  String code = ele.getLookupCode();
 				  List<String> values = new ArrayList<String>();
@@ -105,19 +144,22 @@ String	languageCode = (String)request.getSession().getAttribute("languageCode");
 					}
 				  %>
 				  
-				  <select class="form-control" id="Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
+				  <select class="form-control" id="Info<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
 				  <% for(String value : values){ %>
-					<option value="<%= value %>" > <%= value %> </option>
+					<option value=<%= value %> > <%= value %> </option>
 				  <% } %>	
 				  </select>
-				  <%count ++;
+				  <%
 				  } %>
 				  </td>
-                <% } %>  
+				  
+				  <% count = count + 1;
+					} %>
+              
                 </tr>
               <% } %>
 			  <tr>
-			  <td class="col-md-2"><button type="submit" class="btn btn-default">Create Record</button></td>
+			  <td class="col-md-4"><button type="submit" class="btn btn-primary btn-large">Create Transaction</button></td>
 			  </tr>
               </tbody>
             </table>
@@ -127,7 +169,7 @@ String	languageCode = (String)request.getSession().getAttribute("languageCode");
 <div class="row">
   <div class="col-xs-4">
 		<div class="page-header">
-		   <h3>Information</h3>
+		   <h3><span class="label label-info">Information</span></h3>
 		</div>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -145,9 +187,9 @@ String	languageCode = (String)request.getSession().getAttribute("languageCode");
                   <td class="col-md-2"><%= ele.getName() %></td>
                   <td class="col-md-2">
 				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
-				  <input type="text" size="5" class="smallTxtLeftAlign" value="">
+				  <input type="text" size="5" class="smallTxtLeftAlign" value="" name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>" id= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
 				  <% } else if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXTAREA.getVal())){ %>
-				  <textarea class="form-control" rows="3" id="comment"></textarea>
+				  <textarea class="form-control" rows="3" id="comment" name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>" id= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"></textarea>
 				  <% } else { 
 				  String code = ele.getLookupCode();
 				  List<String> values = new ArrayList<String>();
@@ -158,7 +200,7 @@ String	languageCode = (String)request.getSession().getAttribute("languageCode");
 				  
 				  <select class="form-control" id="Info<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
 				  <% for(String value : values){ %>
-					<option value="<%= value %>" > <%= value %> </option>
+					<option value=<%= value %> > <%= value %> </option>
 				  <% } %>	
 				  </select>
 				  <%count ++;
@@ -173,7 +215,7 @@ String	languageCode = (String)request.getSession().getAttribute("languageCode");
 
   <div class="col-xs-4">
          <div class="page-header">
-		   <h3>Balance</h3>
+		   <h3><span class="label label-success">Balance</span></h3>
 		</div>
 
           <div class="table-responsive">
@@ -193,7 +235,7 @@ String	languageCode = (String)request.getSession().getAttribute("languageCode");
                   <td class="col-md-2"><%= ele.getName() %></td>
                   <td class="col-md-2">
 				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
-				  <input type="text" size="5" class="smallTxtLeftAlign" value="">
+				  <input type="text" size="5" class="smallTxtLeftAlign" value="<%= ele.getValue() %>" readOnly>
 				  <% } else if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXTAREA.getVal())){ %>
 				  <textarea class="form-control" rows="3" id="comment"></textarea>
 				  <% } else { 
@@ -206,7 +248,7 @@ String	languageCode = (String)request.getSession().getAttribute("languageCode");
 				  
 				  <select class="form-control" id="Bal<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>"  name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
 				  <% for(String value : values){ %>
-					<option value="<%= value %>" > <%= value %> </option>
+					<option value=<%= value %> > <%= value %> </option>
 				  <% } %>	
 				  </select>
 				  <%count ++;

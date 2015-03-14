@@ -52,10 +52,12 @@ public class ScreenTest {
 			//screenRowService.saveOrUpdate(screenRow);
 			Screen screen = new Screen();
 			screen.setActive(true);
-			screen.setScreenName("abcdefddd");
+			screen.setScreenName("tScreen1");
 			List<ScreenRow> rows = new ArrayList<ScreenRow>();
 			rows.add(screenRow);
 			screen.setRows(rows);
+			screen.setTenantId("01");
+			screen.setActive(true);
 			screenService.saveOrUpdate(screen);
 			System.out.println("screen");
 		} catch (OmniNGException e) {

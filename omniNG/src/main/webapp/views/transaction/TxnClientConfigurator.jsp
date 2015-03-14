@@ -180,7 +180,7 @@
 					<td width="23%">
 						<select id="modules" name="modules" <% if(edt) {%> disabled <% } %>>
 							<% for(Map.Entry<String, String> entry : modules.entrySet()) { %>
-								<option value="<%=entry.getKey() %>" <% if(screenMapper.getModuleCode().equals(entry.getKey())) {%> selected <%} %> ><%=entry.getValue() %></option>
+								<option value=<%=entry.getKey() %> <% if(screenMapper.getModuleCode().equals(entry.getKey())) {%> selected <%} %> ><%=entry.getValue() %></option>
 							<% } %>
 						</select>&nbsp;
 					</td>
@@ -191,7 +191,7 @@
 					<td width="23%">
 						<select id="branches" name="branches" <% if(edt) {%> disabled <% } %> size=4>
 							<% for(Map.Entry<String, String> entry : branches.entrySet()) { %>
-								<option value="<%=entry.getKey() %>" <% if(screenMapper.getBranchCode().equals(entry.getKey())) {%> selected <%} %> ><%=entry.getValue() %>  </option>
+								<option value=<%=entry.getKey() %> <% if(screenMapper.getBranchCode().equals(entry.getKey())) {%> selected <%} %> ><%=entry.getValue() %>  </option>
 							<% } %>
 						</select>&nbsp;
 					</td>
@@ -207,7 +207,7 @@
 					<td width="24%">
 						<select id="activities" name="activities" <% if(edt) {%> disabled <% } %> size=4>
 							<% for(Map.Entry<String, String> entry : activities.entrySet()) { %>
-								<option value="<%=entry.getKey() %>" <% if(screenMapper.getActivityCode().equals(entry.getKey())) {%> selected <%} %> > <%=entry.getValue() %> </option>
+								<option value=<%=entry.getKey() %> <% if(screenMapper.getActivityCode().equals(entry.getKey())) {%> selected <%} %> > <%=entry.getValue() %> </option>
 							<% } %>
 						</select>&nbsp;
 					</td>
@@ -251,13 +251,13 @@
 					<% for(ScreenElement field: fields) {
 						
 					%>
-							<option value="<%= field.getName() %>" <% if(ele1.getName().equals(field.getName())) { %> selected <%} %>> "<%=field.getDisplayName() %>" </option>
+							<option value=<%= field.getName() %> <% if(ele1.getName().equals(field.getName())) { %> selected <%} %>> <%=field.getDisplayName() %> </option>
 							<%} %>
 						</select>
 					</td>
 					<td><select id="secondTxn<%= count%>"  name="secondTxn<%= count%>">
 							<% for(ScreenElement field: fields) {%>
-							<option value="<%= field.getName() %>"  <% if(ele2.getName().equals(field.getName())) { %> selected <% } %>> "<%=field.getDisplayName() %>" </option>
+							<option value=<%= field.getName() %>  <% if(ele2.getName().equals(field.getName())) { %> selected <% } %>> <%=field.getDisplayName() %> </option>
 							<%} %>
 						</select>
 						
@@ -308,13 +308,13 @@
 					<td><input type="text" size="5" class="smallTxtLeftAlign" value="<%= row.getRownum() %>" disabled></td>
 					<td><select id="firstInfo<%= c1%>"  name="firstInfo<%= c1%>">
 					<% for(ScreenElement field: fields) {%>
-							<option value="<%= field.getName() %>" <% if(ele1.getName().equals(field.getName())) { %> selected <%} %>> "<%=field.getDisplayName() %>" </option>
+							<option value=<%= field.getName() %> <% if(ele1.getName().equals(field.getName())) { %> selected <%} %>> <%=field.getDisplayName() %> </option>
 							<%} %>
 						</select>
 					</td>
 					<td><select id="secondInfo<%= c1%>"  name="secondInfo<%= c1%>">
 							<% for(ScreenElement field: fields) {%>
-							<option value="<%= field.getName() %>" <% if(ele2.getName().equals(field.getName())) { %> selected <%} %>> "<%=field.getDisplayName() %>" </option>
+							<option value=<%= field.getName() %> <% if(ele2.getName().equals(field.getName())) { %> selected <%} %>> <%=field.getDisplayName() %> </option>
 							<%} %>
 						</select>
 						
@@ -365,13 +365,13 @@
 					<td><input type="text" size="5" class="smallTxtLeftAlign" value="<%= row.getRownum() %>" disabled></td>
 					<td><select id="firstBal<%= c2%>"  name="firstBal<%= c2%>">
 					<% for(ScreenElement field: fields) {%>
-							<option value="<%= field.getName() %>" <% if(ele1.getName().equals(field.getName())) { %> selected <%} %>> "<%=field.getDisplayName() %>" </option>
+							<option value=<%= field.getName() %> <% if(ele1.getName().equals(field.getName())) { %> selected <%} %>> <%=field.getDisplayName() %> </option>
 							<%} %>
 						</select>
 					</td>
 					<td><select id="secondBal<%= c2%>"  name="secondBal<%= c2%>">
 							<% for(ScreenElement field: fields) {%>
-							<option value="<%= field.getName() %>" <% if(ele2.getName().equals(field.getName())) { %> selected <%} %>> "<%=field.getDisplayName() %>" </option>
+							<option value=<%= field.getName() %> <% if(ele2.getName().equals(field.getName())) { %> selected <%} %>> <%=field.getDisplayName() %> </option>
 							<%} %>
 						</select>
 						

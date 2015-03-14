@@ -3,6 +3,8 @@
 <%@page import="com.infrasofttech.domain.entities.transaction.*"%>
 
 <%@page import="java.util.List"%>
+<%@page import="com.infrasofttech.domain.entities.*"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -56,21 +58,21 @@
 <body bgcolor="#F5F5F3" topmargin="0">
 
 <%
-List<ScreenTransaction> transactions  = (List<ScreenTransaction>) request.getAttribute("transactions");
-
+//List<ScreenTransaction> transactions  = (List<ScreenTransaction>) request.getAttribute("transactions");
+ScreenTransaction screenTransaction = (ScreenTransaction) request.getAttribute("screenTransaction");
+ScreenMapper screenMapper = (ScreenMapper) request.getAttribute("screenMapper");
+String url1 = "transaction.action?id="+screenMapper.getId()+"&transId="+screenTransaction.getTransactionNumber();
+String url2 = "transaction.action?id="+screenMapper.getId();
 %>
 <br>
 	<div id="result" class="container">
 	
-	<form name="topForm" action = "txn.action">
 	<div class="btn-group">
-    <a class="btn btn-mini btn-success" href="txn.action">Add Transaction Screen Configuration</a>&nbsp;&nbsp;
+    <a class="btn btn-mini btn-success" href=<%= url1%> >Add New Voucher to existing Transaction SetNo</a>&nbsp;&nbsp;
 	
-    <a class="btn btn-mini btn-success" href="screenElementList.action">Go To Screen Element Configuration</a>&nbsp;&nbsp;
-   
-    
+    <a class="btn btn-mini btn-success" href=<%= url2%> >Add New Voucher to New Transaction</a>&nbsp;&nbsp;
 </div>
-		</form>
+		
 	
     <table class="table">
         <thead>
@@ -80,8 +82,9 @@ List<ScreenTransaction> transactions  = (List<ScreenTransaction>) request.getAtt
 			   <th>Module Name</th>
 			   <th>Product Name</th>
 			   <th>Activity Name</th>
-			   <th>Transaction Number</th>
-			   <th>View (Read Only)</th>
+			   <th>Transaction/Set Number</th>
+			   <th>Voucher/Scroll Number</th>
+			   <th>Voucher Book Type </th>
 			   
 			   
 			   
@@ -93,7 +96,7 @@ List<ScreenTransaction> transactions  = (List<ScreenTransaction>) request.getAtt
 		<%
 			
 		
-			if(null == transactions || transactions.size()==0){ %>
+			if(null == screenTransaction.getVouchers() || screenTransaction.getVouchers().size()==0){ %>
         	<tr class="active"><td colspan="7">
 				No Records to display
 			</td></tr>
@@ -105,16 +108,17 @@ List<ScreenTransaction> transactions  = (List<ScreenTransaction>) request.getAtt
 		
 			<%
 			int count = 0;
-				for(ScreenTransaction transaction : transactions) {
+				for(VoucherMst voucher : screenTransaction.getVouchers()) {
 			%>
         	<tr class="active">
                 <td><%= (++count) %></td>
-                <td><%= transaction.getBranchName() %></td>
-                <td><%= transaction.getModuleName() %></td>
-                <td><%= transaction.getProductName()%></td>
-				<td><%= transaction.getActivityName() %></td>
-				<td><%= transaction.getTransactionNumber()%></td>
-				<td><a href="#">View (Not yet)</a></td>
+                <td><%= screenTransaction.getBranchName() %></td>
+                <td><%= screenTransaction.getModuleName() %></td>
+                <td><%= screenTransaction.getProductName()%></td>
+				<td><%= screenTransaction.getActivityName() %></td>
+				<td><%= screenTransaction.getTransactionNumber()%></td>
+				<td><%= voucher.getScrollNo()%> </td>
+				<td><%= voucher.getBookType()%></td>
 				
             </tr>
             <%

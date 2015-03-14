@@ -76,6 +76,10 @@
 			<class>com.infrasofttech.domain.entities.transaction.runtime.ScreenElementTransaction</class>
 			<class>com.infrasofttech.domain.entities.transaction.runtime.ScreenRowTransaction</class>
 			<class>com.infrasofttech.domain.entities.transaction.runtime.ScreenTransaction</class>
+			<class>com.infrasofttech.domain.entities.VoucherMst</class>
+			<class>com.infrasofttech.domain.entities.transaction.runtime.D030003</class>
+			<class>com.infrasofttech.domain.entities.transaction.runtime.D009622</class>
+			
 			
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>

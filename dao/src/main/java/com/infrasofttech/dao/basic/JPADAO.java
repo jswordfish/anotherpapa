@@ -18,6 +18,8 @@ public interface JPADAO<E, K> {
 	public E findById(K id);
 
 	public E flush(E entity);
+	
+	public E findUniqueByDynamicKey(String qry, String identifierKey, String identifierValue);
 
 	public List<E> findAll();
 	public List<E> find(int startFrom, int maxResults);

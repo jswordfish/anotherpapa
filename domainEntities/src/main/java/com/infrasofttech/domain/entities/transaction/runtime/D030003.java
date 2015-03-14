@@ -1,57 +1,72 @@
 package com.infrasofttech.domain.entities.transaction.runtime;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.infrasofttech.domain.entities.Base;
+import com.infrasofttech.domain.entities.VoucherMst;
 //for loan balances
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = 
+{ "PrdAcctId"}))
+@NamedQueries({
+	@NamedQuery(name = "D030003.getUniqueD030003", query = "SELECT d FROM D009622 d "
+			+ "WHERE d.PrdAcctId=:PrdAcctId ")
+})
 public class D030003 extends Base{
 
 	Integer LBrCode;
 	
 	String PrdAcctId;
 	
-	Float InClrgFcy;
+	Float InClrgFcy = 0.0f;
 	
-	Float UnClearFcy;
+	Float UnClearFcy= 0.0f;
 	
-	Float MainBalFcy;
+	Float MainBalFcy= 0.0f;
 	
-	Float IntPrvdFcy;
+	Float IntPrvdFcy= 0.0f;
 	
-	Float IntPaidFcy;
+	Float IntPaidFcy= 0.0f;
 	
-	Float OthChgPrvdFcy;
+	Float OthChgPrvdFcy= 0.0f;
 	
-	Float OthChgPaidFcy;
+	Float OthChgPaidFcy= 0.0f;
 	
-	Float PenalPrvdFcy;
+	Float PenalPrvdFcy= 0.0f;
 	
-	Float PenalPaidFcy;
+	Float PenalPaidFcy= 0.0f;
 	
-	Float TaxPrvdFcy;
+	Float TaxPrvdFcy= 0.0f;
 	
-	Float TaxPaidFcy;
+	Float TaxPaidFcy= 0.0f;
 	
-	Float DisbursedAmtFcy;
+	Float DisbursedAmtFcy= 0.0f;
 	
-	Float MainBalLcy;
+	Float MainBalLcy= 0.0f;
 	
-	Float IntLcy;
+	Float IntLcy= 0.0f;
 	
-	Float OthChgLcy;
+	Float OthChgLcy= 0.0f;
 	
-	Float PenalLcy;
+	Float PenalLcy= 0.0f;
 	
-	Float TaxLcy;
+	Float TaxLcy= 0.0f;
 	
-	Float DisbursedAmtLcy;
+	Float DisbursedAmtLcy= 0.0f;
 	
-	Integer DbtrAddMk;
+	Integer DbtrAddMk = 0;
 	
-	Integer DbtrAddMb;
+	Integer DbtrAddMb = 0;
 	
-	Integer DbtrAddMs;
+	Integer DbtrAddMs = 0;
 	
 	//datetime
 	java.util.Date DbtrAddMd;
@@ -60,11 +75,11 @@ public class D030003 extends Base{
 	java.util.Date DbtrAddMt;
 	
 	
-	Integer DbtrAddCk;
+	Integer DbtrAddCk = 0;
 	
-	Integer DbtrAddCb;
+	Integer DbtrAddCb = 0;
 	
-	Integer DbtrAddCs;
+	Integer DbtrAddCs = 0;
 	
 	
 	//datetime
@@ -72,43 +87,43 @@ public class D030003 extends Base{
 	
 	java.util.Date DbtrAddCt;
 	
-	Integer DbtrLupdMk;
+	Integer DbtrLupdMk = 0;
 	
-	Integer DbtrLupdMb;
+	Integer DbtrLupdMb = 0;
 	
-	Integer DbtrLupdMs;
+	Integer DbtrLupdMs = 0;
 	
 	java.util.Date DbtrLupdMd;
 	
 	java.util.Date DbtrLupdMt;
 	
-	Integer DbtrLupdCk;
+	Integer DbtrLupdCk = 0;
 	
-	Integer DbtrLupdCb;
+	Integer DbtrLupdCb = 0;
 	
-	Integer DbtrLupdCs;
+	Integer DbtrLupdCs = 0 ;
 	
 	java.util.Date DbtrLupdCd;
 	
 	java.util.Date DbtrLupdCt;
 	
-	Integer DbtrTAuthDone;
+	Integer DbtrTAuthDone = 0;
 	
-	Integer DbtrRecStat;
+	Integer DbtrRecStat = 0;
 	
-	Integer DbtrAuthDone;
+	Integer DbtrAuthDone = 0;
 	
-	Integer DbtrAuthNeeded;
+	Integer DbtrAuthNeeded = 0;
 	
-	Integer DbtrUpdtChkId;
+	Integer DbtrUpdtChkId = 0;
 	
-	Integer DbtrLHisTrnNo;
+	Integer DbtrLHisTrnNo = 0;
 	
-	Float TotalCredit;
+	Float TotalCredit = 0.0f;
 	
-	Float ExcessCredit;
+	Float ExcessCredit= 0.0f;
 	
-	Float Reserve2;
+	Float Reserve2 = 0.0f;
 	
 	java.util.Date LastPaydate;
 	
@@ -522,7 +537,15 @@ public class D030003 extends Base{
 		LastAccrdate = lastAccrdate;
 	}
 	
-	
+	public static List<String> getAttrNames(){
+		Field fields[] = D030003.class.getDeclaredFields();
+		List<String> fieldNames = new ArrayList<String>();
+		for(Field field : fields){
+			String name = field.getName();
+			fieldNames.add(name);
+		}
+		return fieldNames;
+	}
 	
 	
 }

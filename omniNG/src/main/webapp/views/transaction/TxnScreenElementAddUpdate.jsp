@@ -8,6 +8,9 @@
 <%@page import="java.util.*"%>
 <%@page import="com.infrasofttech.omning.services.*"%>
 <%@page import="com.infrasofttech.omning.utils.SpringUtil"%>
+<%@page import="com.infrasofttech.domain.entities.transaction.runtime.*"%>
+<%@page import="com.infrasofttech.omning.action.transaction.*"%>
+
 
 
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -99,6 +102,11 @@
 	LookupCodeService lookupService = (LookupCodeService)SpringUtil.getSpringUtil().getService("lookupCodeService");
 	String tenantId = (String)request.getSession().getAttribute("tenantCode");
 	List<LookupCode> codes = lookupService.getLookupCodeList(tenantId);
+	
+	List<String> voucherAttrs = VoucherMst.getAttrNames();
+	List<String> D009622Attrs = D009622.getAttrNames();
+	List<String> D030003Attrs = D030003.getAttrNames();
+	
 %>
 <div id="result" class="container">
 <table class="table table-condensed" width="100%">
@@ -137,6 +145,48 @@
 				<option value="<%=screenUIType.getVal() %>" <%if(screenElement.getScreenUIType().getVal().equals(screenUIType.getVal())) {%> selected <%} %>  ><%=screenUIType.getVal() %></option>
 			<% } %>
 		</select>
+	</td>
+	
+	<td class="col-md-1">Is Transactional or Derived Field</td>
+	<td class="col-md-1">
+		<select id="isTransactional" name="isTransactional">
+			<option value="Transactional" <% if(!screenElement.getIsDerived() ) {%> selected <% } %>> Transactional </option>
+			<option value="Derived" <% if(screenElement.getIsDerived() ) {%> selected <% } %>> Derived </option>
+		</select>
+	</td>
+	
+	
+</tr>
+
+<tr class="active">
+	<td class="col-md-1">If transactional, Map to Voucher Attr</td>
+	<td class="col-md-1">
+		<select id="voucherAttr" name="voucherAttr">
+			<% for(String  attr: voucherAttrs) { %>
+				<option value="<%= attr %>" <%if(screenElement.getVoucherAttr().equals(attr)) {%> selected <%} %>  ><%=attr %></option>
+			<% } %>
+		</select>
+	</td>
+	
+	<td class="col-md-1">Is Derived read from Source</td>
+	<td class="col-md-1">
+		<select id="derivdSource" name="derivdSource">
+			<% for(String  attr: D009622Attrs) { %>
+				<option value="D009622.<%= attr %>" <%if(screenElement.getSourceDerivedField().equals("D009622."+attr)) {%> selected <%} %>  >D009622.<%=attr %></option>
+			<% } %>
+			<% for(String  attr: D030003Attrs) { %>
+				<option value="D030003.<%= attr %>" <%if(screenElement.getSourceDerivedField().equals("D030003."+attr)) {%> selected <%} %>  >D030003Attrs.<%=attr %></option>
+			<% } %>
+		</select>
+	</td>
+	
+	
+</tr>
+
+<tr class="active">
+	<td class="col-md-1">Derived Field Identifier</td>
+	<td class="col-md-1">
+	<input id="derivedFieldIdentifier" name="derivedFieldIdentifier" type="text" value="<%= screenElement.getDerivedFieldIdentifier() %>" >
 	</td>
 	
 	

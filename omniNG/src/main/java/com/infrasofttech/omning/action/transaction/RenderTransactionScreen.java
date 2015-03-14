@@ -65,6 +65,20 @@ public class RenderTransactionScreen extends ActionSupport implements  ServletRe
 				languageCode = (String)request.getSession().getAttribute("languageCode");
 				loginId = (String)request.getSession().getAttribute("loginID");
 				
+				String bookedType = request.getParameter("bookedType");
+				String productAccId = request.getParameter("productAccId");
+				String custAccId = request.getParameter("custAccId");
+				
+				String transId = request.getParameter("transId");
+					if(transId != null){
+						request.setAttribute("transId", transId);
+					}
+				
+				request.getSession().setAttribute("bookedType", bookedType);
+				request.getSession().setAttribute("productAccId", productAccId);
+				request.getSession().setAttribute("custAccId", custAccId);
+				
+				
 				long id = new Long(request.getParameter("id"));
 				
 				ScreenMapperService screenMapperService = (ScreenMapperService) SpringUtil.getSpringUtil().getService("screenMapperService");
