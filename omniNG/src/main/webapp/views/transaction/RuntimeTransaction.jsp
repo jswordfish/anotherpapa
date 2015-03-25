@@ -128,7 +128,7 @@ List<ScreenRow> rows= balScreen.getRows();
 					for(ScreenElement ele: row.getScreenElements()){
 				%>	
 			
-                  <td class="col-md-2"><%= ele.getDisplayName() %> col <%= count %></td>
+                  <td class="col-md-2"><%= ele.getDisplayName() %> </td>
                   <td class="col-md-2">
 				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
 				  <input type="text" size="5" class="smallTxtLeftAlign" value="" name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
@@ -184,7 +184,7 @@ List<ScreenRow> rows= balScreen.getRows();
 			
 			  
                 
-                  <td class="col-md-2"><%= ele.getName() %></td>
+                  <td class="col-md-2"><%= ele.getDisplayName() %></td>
                   <td class="col-md-2">
 				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
 				  <input type="text" size="5" class="smallTxtLeftAlign" value="" name= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>" id= "Txn<%= ele.getName() %>Row<%= row.getId() %>Col<%= count %>">
@@ -232,7 +232,7 @@ List<ScreenRow> rows= balScreen.getRows();
 			
 			  
                 
-                  <td class="col-md-2"><%= ele.getName() %></td>
+                  <td class="col-md-2"><%= ele.getDisplayName() %></td>
                   <td class="col-md-2">
 				  <% if(ele.getScreenUIType().getVal().equals(ScreenUIType.TEXT.getVal())){  %>
 				  <input type="text" size="5" class="smallTxtLeftAlign" value="<%= ele.getValue() %>" readOnly>

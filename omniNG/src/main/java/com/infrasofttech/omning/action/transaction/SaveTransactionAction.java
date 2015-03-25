@@ -126,7 +126,7 @@ public class SaveTransactionAction extends ActionSupport implements  ServletRequ
 				VoucherMst voucherMst = new VoucherMst();
 				voucherMst.setTenantId(tenantId);
 				voucherMst.setBatchCode("Batch_NA");
-				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SS");
+				DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
 				Calendar cal = Calendar.getInstance();
 				String dt = dateFormat.format(cal.getTime());
 				voucherMst.setEntryDate(dt);

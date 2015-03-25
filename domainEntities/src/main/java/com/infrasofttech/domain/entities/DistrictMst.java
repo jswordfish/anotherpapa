@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class DistrictMst extends Base {
 
@@ -22,13 +25,16 @@ public class DistrictMst extends Base {
 	@Column(nullable = true, length = 50)
 	private String districtName = "";
 
-	@OneToMany(mappedBy = "districtMst", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "districtMst", cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<MunicipalityMst> municipalities = new ArrayList<MunicipalityMst>();
 
-	@OneToMany(mappedBy = "districtMst", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "districtMst", cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<VillageMst> villages = new ArrayList<VillageMst>();
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne( cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "fkStateMstPk")
 	private StateMst stateMst;
 

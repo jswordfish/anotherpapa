@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -15,10 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.infrasofttech.domain.entities.Base;
 import com.infrasofttech.domain.entities.VoucherMst;
 import com.infrasofttech.domain.entities.transaction.Screen;
-import com.infrasofttech.domain.entities.transaction.ScreenMapper;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "ScreenTransaction.getScreenTransaction", query = "SELECT t FROM ScreenTransaction t "
@@ -64,9 +65,11 @@ public class ScreenTransaction extends Base{
 	private String productName;
 	
 	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ScreenRowTransaction>  rowTransactions = new ArrayList<ScreenRowTransaction>();
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<VoucherMst> vouchers = new ArrayList<VoucherMst>();
 	
 	

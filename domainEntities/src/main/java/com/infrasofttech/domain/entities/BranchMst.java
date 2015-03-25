@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -64,27 +66,32 @@ public class BranchMst extends Base {
 	@Column(length = 10, nullable = true)
 	private String postalCode = "";
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Branch_Product", joinColumns = { @JoinColumn(name = "branchId") }, inverseJoinColumns = { @JoinColumn(name = "productId") })
 	private List<ProductMst> products = new ArrayList<ProductMst>();
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Branch_Module", joinColumns = { @JoinColumn(name = "branchId") }, inverseJoinColumns = { @JoinColumn(name = "moduleId") })
 	private List<ModuleMst> modules = new ArrayList<ModuleMst>();
 
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "branchMst")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "branchMst")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<BatchMst> batches = new ArrayList<BatchMst>();
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "branches")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "branches")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<AuthMatrix> authMatrix = new ArrayList<AuthMatrix>();
 
 	@Column(length = 30, nullable = true)
 	private String branchRefCode = "";
 
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection
 	@JoinTable(name = "BRANCH_ADDRESS", joinColumns = @JoinColumn(name = "BRANCH_ID"))
 	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
 	@CollectionId(columns = { @Column(name = "Id") }, generator = "hilo-gen", type = @Type(type = "long"))
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Address> branchAddresses = new ArrayList<Address>();
 
 	@Column(length = 100, nullable = true)

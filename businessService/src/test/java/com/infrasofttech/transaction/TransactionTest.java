@@ -65,8 +65,8 @@ public class TransactionTest {
 			VoucherMst mst = new VoucherMst();
 			mst.setTenantId(tenantId);
 			mst.setBranchCode(branchCode);
-			
-			DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		//	sdf1.applyPattern("dd/MM/yyyy");
+			DateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
 
 			// Get the date today using Calendar object.
 			Date today = Calendar.getInstance().getTime();        
@@ -80,7 +80,7 @@ public class TransactionTest {
 			mst.setScrollNo(scrollNo);
 			mst.setActivityCode("a01");
 			mst.setCashFlowType("CR");
-			mst.setFcyTrnAmt(234.56);
+			mst.setFcyTrnAmt(234.56f);
 			//txn.getVouchers().add(mst);
 			txn = screenTransactionService.saveOrUpdate(txn, mst);
 			Assert.assertEquals(true, true);
@@ -121,7 +121,7 @@ public class TransactionTest {
 			mst.setScrollNo(scrollNo);
 			mst.setActivityCode("a01");
 			mst.setCashFlowType("CR");
-			mst.setFcyTrnAmt(884.56);
+			mst.setFcyTrnAmt(884.56f);
 			//transaction.getVouchers().add(mst);
 			
 			transaction= screenTransactionService.saveOrUpdate(transaction, mst);
@@ -146,6 +146,7 @@ public class TransactionTest {
 				return s1;
 			}
 			else {
+
 				Assert.assertEquals(true, false);
 				throw new OmniNGException("bo screen present");
 			}

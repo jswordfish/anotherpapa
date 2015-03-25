@@ -6,9 +6,11 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class CountryMst extends Base {
@@ -21,10 +23,12 @@ public class CountryMst extends Base {
 	@Column(nullable = true, length = 50)
 	private String countryName = "";
 
-	@OneToMany(mappedBy = "countryMst", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "countryMst",  cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<StateMst> states = new ArrayList<StateMst>();
 
-	@OneToOne(mappedBy = "countryMst", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "countryMst", cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private CurrencyMst currency;
 
 	@Column(nullable = true, length = 10)

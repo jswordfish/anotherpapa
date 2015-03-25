@@ -26,8 +26,9 @@ public class ActivityTest {
 	public void testActivityCreation(){
 		ActivityMst activityMst = new ActivityMst();
 		activityMst.setTenantId("001");
-		activityMst.setActivityCode("RECOVERY");
-		activityMst.setModuleCode("LOANS");
+		activityMst.setActivityCode("Recovery");
+		activityMst.setActivityDesc("Recovery");
+		activityMst.setModuleCode("Loans");
 		activityMst.setIsActive(true);
 		activityMst = (ActivityMst) activityMstService.saveOrUpdate(activityMst);
 		Assert.assertEquals(true, true);

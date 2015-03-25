@@ -53,43 +53,43 @@ public class VoucherMst extends Base {
 	private Date fundEffDate;
 
 	@Column(nullable=true, length=20)
-	private String activityCode;						// max. 8
+	private String activityCode = "";						// max. 8
 	
 	@Column(nullable=true, length=20)
-	private String cashFlowType;						// max. 8
+	private String cashFlowType = "";						// max. 8
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date valueDate;
 
 	@Column(nullable=true, length=10)
-	private String bookType;							// max. 2
+	private String bookType = "";							// max. 2
 	
 	@Column(nullable=true, length=1)
-	private String drCr;								// max. 1
+	private String drCr = "";								// max. 1
 	
 	@Column(nullable=true, length=50)
-	private String vcrAcctId;							// max. 32
+	private String vcrAcctId = "";							// max. 32
 	
 	@Column(nullable=true, length=50)
-	private String mainAcctId;
+	private String mainAcctId = "";
 	
 	@Column(nullable=true, length=10)
-	private String mainModule;							// integer
+	private String mainModule = "";							// integer
 	
 	@Column(nullable=true, length=10)
-	private String vcrModule;							// integer
+	private String vcrModule = "";							// integer
 	
 	@Column(nullable=true, length=5)
-	private String trnCurrCode;							// max. 3
+	private String trnCurrCode = "";							// max. 3
 
 	@Column(nullable=true)
-	private Double fcyTrnAmt=0d;
+	private Float fcyTrnAmt=0f;
 	
 	@Column(nullable=true)
-	private Double lcyConvRate=1d;
+	private Float lcyConvRate=1f;
 	
 	@Column(nullable=true)
-	private Double lcyTrnAmt=0d;
+	private Float lcyTrnAmt=0f;
 	
 	@Column(nullable=true, length=10)
 	private String instrBankCd="";						// integer
@@ -103,11 +103,11 @@ public class VoucherMst extends Base {
 	@Column(nullable=true, length=20)
 	private String instrNo="";							// max. 12
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date instrDate;
 	
 	@Column(nullable=true)
-	private Integer tokenNo;
+	private Integer tokenNo = 0;
 	
 	@Column(nullable=true, length=70)
 	private String narration="";
@@ -133,7 +133,7 @@ public class VoucherMst extends Base {
 	@Column(nullable=true)
 	private Integer fkMakerPK=0;							// user pk
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date makerDate;
 	
 	@Column(nullable=true, length=20)
@@ -155,7 +155,7 @@ public class VoucherMst extends Base {
 	private Date checkDate;
 	
 	@Column(nullable=true, length=20)
-	private String checkerTime;								// integer
+	private String checkerTime = "";								// integer
 	
 	@Column(nullable=true)
 	private Integer noAuthPending=0;
@@ -176,13 +176,13 @@ public class VoucherMst extends Base {
 	private String canceledFlag="";
 	
 	@Column(nullable=true)
-	private Integer postAuthFeffCncl;
+	private Integer postAuthFeffCncl = 0;
 	
 	@Column(nullable=true)
-	private Integer updtChkId;
+	private Integer updtChkId = 0;
 	
 	@Column(nullable=true)
-	private Double partClearAmt=0d;
+	private Float partClearAmt=0f;
 	
 	@Column(nullable=true)
 	private String postTime="0";									// integer
@@ -330,27 +330,27 @@ public class VoucherMst extends Base {
 		this.trnCurrCode = trnCurrCode;
 	}
 
-	public Double getFcyTrnAmt() {
+	public Float getFcyTrnAmt() {
 		return fcyTrnAmt;
 	}
 
-	public void setFcyTrnAmt(Double fcyTrnAmt) {
+	public void setFcyTrnAmt(Float fcyTrnAmt) {
 		this.fcyTrnAmt = fcyTrnAmt;
 	}
 
-	public Double getLcyConvRate() {
+	public Float getLcyConvRate() {
 		return lcyConvRate;
 	}
 
-	public void setLcyConvRate(Double lcyConvRate) {
+	public void setLcyConvRate(Float lcyConvRate) {
 		this.lcyConvRate = lcyConvRate;
 	}
 
-	public Double getLcyTrnAmt() {
+	public Float getLcyTrnAmt() {
 		return lcyTrnAmt;
 	}
 
-	public void setLcyTrnAmt(Double lcyTrnAmt) {
+	public void setLcyTrnAmt(Float lcyTrnAmt) {
 		this.lcyTrnAmt = lcyTrnAmt;
 	}
 
@@ -594,11 +594,11 @@ public class VoucherMst extends Base {
 		this.updtChkId = updtChkId;
 	}
 
-	public Double getPartClearAmt() {
+	public Float getPartClearAmt() {
 		return partClearAmt;
 	}
 
-	public void setPartClearAmt(Double partClearAmt) {
+	public void setPartClearAmt(Float partClearAmt) {
 		this.partClearAmt = partClearAmt;
 	}
 

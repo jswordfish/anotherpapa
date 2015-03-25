@@ -6,10 +6,12 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class MunicipalityMst extends Base {
@@ -22,10 +24,12 @@ public class MunicipalityMst extends Base {
 	@Column(nullable = true, length = 100)
 	private String municipalityName = "";
 
-	@OneToMany(mappedBy = "municipalityMst", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "municipalityMst", cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<VillageMst> villages = new ArrayList<VillageMst>();
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "fkDistrictPk")
 	private DistrictMst districtMst;
 
